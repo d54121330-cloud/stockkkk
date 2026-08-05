@@ -15,7 +15,6 @@
 
   <!-- Standalone Nordic Minimalist CSS Styles -->
   <style>
-/* Nordic Minimalist Scandinavian Design System */
 :root {
   --bg-dark: #f4f6f5;
   --bg-subtle: #ebf0ee;
@@ -235,6 +234,8 @@ body {
   background: var(--bg-subtle);
   padding: 3px;
   border-radius: var(--radius-md);
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
 .filter-btn {
@@ -680,13 +681,15 @@ body {
         <div class="filter-bar">
           <div class="filter-controls">
             <div class="filter-group">
-              <label>族群:</label>
+              <label>產業概念分類:</label>
               <div id="filter-theme-btns" class="filter-btn-group">
-                <button class="filter-btn active" data-value="all">全部 (9)</button>
-                <button class="filter-btn" data-value="spacex">SpaceX (5)</button>
-                <button class="filter-btn" data-value="fopol">FOPOL (2)</button>
-                <button class="filter-btn" data-value="dpu">DPU (1)</button>
-                <button class="filter-btn" data-value="cpo">光通訊 (1)</button>
+                <button class="filter-btn active" data-value="all">全部 (13)</button>
+                <button class="filter-btn" data-value="leo_sat">低軌衛星與衛星通訊 (4)</button>
+                <button class="filter-btn" data-value="adv_pkg">先進封裝與半導體轉型 (3)</button>
+                <button class="filter-btn" data-value="cpo_photonics">矽光子與 CPO 共封裝 (2)</button>
+                <button class="filter-btn" data-value="liquid_cooling">AI 伺服器水冷散熱 (2)</button>
+                <button class="filter-btn" data-value="ai_dpu">AI 網通與次世代 DPU (1)</button>
+                <button class="filter-btn" data-value="socamm2">SOCAMM2 次世代記憶體 (1)</button>
               </div>
             </div>
 
@@ -694,7 +697,7 @@ body {
               <label>決策方向:</label>
               <div id="filter-action-btns" class="filter-btn-group">
                 <button class="filter-btn active" data-value="all">全部</button>
-                <button class="filter-btn text-green" data-value="LONG">做多 LONG (8)</button>
+                <button class="filter-btn text-green" data-value="LONG">做多 LONG (12)</button>
                 <button class="filter-btn text-amber" data-value="HOLD">觀望 HOLD (1)</button>
               </div>
             </div>
@@ -712,7 +715,7 @@ body {
           <thead>
             <tr>
               <th>股票標的</th>
-              <th>產業族群</th>
+              <th>產業概念分類</th>
               <th>當前股價</th>
               <th>解釋員決策</th>
               <th>建議進場點</th>
@@ -732,7 +735,7 @@ body {
 
     <section id="deep-dive-workspace" class="deep-dive-section">
       <div class="section-title-bar">
-        <h2>🔍 標的深度分析與互動圖表 (<span id="selected-stock-title" class="text-cyan">2313 華通</span>)</h2>
+        <h2>🔍 標的深度分析與互動圖表 (<span id="selected-stock-title" class="text-cyan">6451 訊芯-KY</span>)</h2>
         <span class="text-muted text-xs">切換不同股票自動更新指標圖表與能力雷達圖</span>
       </div>
 
@@ -768,9 +771,9 @@ body {
     <div class="modal-container">
       <div class="modal-header">
         <div class="modal-title-group" style="display: flex; align-items: center; gap: 10px;">
-          <span id="modal-stock-symbol" class="mono text-cyan" style="font-size: 22px; font-weight: 800;">2313</span>
-          <span id="modal-stock-name" style="font-size: 18px; font-weight: 700;">華通</span>
-          <span id="modal-stock-category" class="sub-tag">SpaceX / 低軌衛星</span>
+          <span id="modal-stock-symbol" class="mono text-cyan" style="font-size: 22px; font-weight: 800;">6451</span>
+          <span id="modal-stock-name" style="font-size: 18px; font-weight: 700;">訊芯-KY</span>
+          <span id="modal-stock-category" class="sub-tag">矽光子與 CPO 共封裝</span>
         </div>
         <button id="close-modal-btn" class="close-modal-btn">&times;</button>
       </div>
@@ -795,137 +798,90 @@ body {
   <script>
     window.EMBEDDED_STOCK_DATA = {
       "metadata": {
-        "generatedAt": "2026-08-05 14:09:03",
+        "generatedAt": "2026-08-05 14:48:14",
         "advisorName": "投信資深策略分析師 (Institutional Senior Analyst)",
+        "qaInspectorName": "即時功能檢查員 (QA Inspector)",
         "systemTitle": "Taiwan Stock Institutional Research Terminal",
-        "totalStocks": 9
+        "totalStocks": 13
       },
       "recommendations": [
         {
-          "symbol": "2313",
-          "name": "華通",
-          "category": "SpaceX / 低軌衛星",
-          "actionTag": "LONG",
-          "currentPrice": 218.0,
-          "changePercent": 9.82,
-          "targetPrice": 260.0,
-          "stopLoss": 188.0,
-          "entryRange": "210.0 - 215.0 元",
-          "upsidePercent": "+19.27%",
+          "symbol": "2313", "name": "華通", "category": "低軌衛星與衛星通訊", "categoryKey": "leo_sat", "actionTag": "LONG",
+          "currentPrice": 218.0, "changePercent": 9.82, "targetPrice": 260.0, "stopLoss": 188.0, "entryRange": "210.0 - 215.0 元", "upsidePercent": "+19.27%",
           "takeaway": "★ 星鏈衛星與地面站 HDI 板市佔逾 65%，Gen3 衛星帶動單價提升 25%，預估 2026 EPS NT$11.50。技術面強勢攻克 215 元前高，均線呈多頭發散，拉回守穩 MA5 偏多佈局。",
           "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 11.50, "peRatio2026": 18.96 }
         },
         {
-          "symbol": "6285",
-          "name": "啟碁",
-          "category": "SpaceX / 低軌衛星",
-          "actionTag": "LONG",
-          "currentPrice": 260.0,
-          "changePercent": 2.97,
-          "targetPrice": 298.0,
-          "stopLoss": 232.0,
-          "entryRange": "248.0 - 253.0 元",
-          "upsidePercent": "+14.62%",
+          "symbol": "6285", "name": "啟碁", "category": "低軌衛星與衛星通訊", "categoryKey": "leo_sat", "actionTag": "LONG",
+          "currentPrice": 260.0, "changePercent": 2.97, "targetPrice": 298.0, "stopLoss": 232.0, "entryRange": "248.0 - 253.0 元", "upsidePercent": "+14.62%",
           "takeaway": "★ 握有 Starlink 企業/車用終端大單，受益美國 BEAD 420 億美元基建法案撥款，預估 2026 EPS NT$14.20。股價於 MA20 上方穩健推進，MACD 正向擴大，逢低分批卡位。",
           "fundamentalHighlights": { "rating": "Buy", "eps2026": 14.20, "peRatio2026": 18.10 }
         },
         {
-          "symbol": "6271",
-          "name": "同欣電",
-          "category": "SpaceX / 低軌衛星",
-          "actionTag": "LONG",
-          "currentPrice": 190.0,
-          "changePercent": 5.85,
-          "targetPrice": 225.0,
-          "stopLoss": 168.0,
-          "entryRange": "180.0 - 185.0 元",
-          "upsidePercent": "+18.42%",
+          "symbol": "6271", "name": "同欣電", "category": "低軌衛星與衛星通訊", "categoryKey": "leo_sat", "actionTag": "LONG",
+          "currentPrice": 190.0, "changePercent": 5.85, "targetPrice": 225.0, "stopLoss": 168.0, "entryRange": "180.0 - 185.0 元", "upsidePercent": "+18.42%",
           "takeaway": "★ SpaceX 高頻 RF 模組封裝與車用 CIS 復甦雙引擎驅動，預估 2026 EPS NT$10.80。KD 指標黃金交叉完成打底，突破 195 元第一壓力位後將引發投信回補潮。",
           "fundamentalHighlights": { "rating": "Buy", "eps2026": 10.80, "peRatio2026": 17.45 }
         },
         {
-          "symbol": "3491",
-          "name": "昇達科",
-          "category": "SpaceX / 低軌衛星",
-          "actionTag": "LONG",
-          "currentPrice": 1285.0,
-          "changePercent": 9.83,
-          "targetPrice": 1540.0,
-          "stopLoss": 1080.0,
-          "entryRange": "1,220 - 1,260 元",
-          "upsidePercent": "+19.84%",
+          "symbol": "3491", "name": "昇達科", "category": "低軌衛星與衛星通訊", "categoryKey": "leo_sat", "actionTag": "LONG",
+          "currentPrice": 1285.0, "changePercent": 9.83, "targetPrice": 1540.0, "stopLoss": 1080.0, "entryRange": "1,220 - 1,260 元", "upsidePercent": "+19.84%",
           "takeaway": "★ E-band 毫米波元件毛利率超 60%，為衛星直連技術最高純度受惠股，預估 2026 EPS NT$58.0。技術面跳空漲停突破 1,200 元關卡，成交量放大 3 倍，強勢主升段發揮。",
           "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 58.00, "peRatio2026": 22.15 }
         },
         {
-          "symbol": "2330",
-          "name": "台積電",
-          "category": "SpaceX / 低軌衛星",
-          "actionTag": "LONG",
-          "currentPrice": 2405.0,
-          "changePercent": 3.66,
-          "targetPrice": 2800.0,
-          "stopLoss": 2180.0,
-          "entryRange": "2,330 - 2,370 元",
-          "upsidePercent": "+16.42%",
+          "symbol": "2330", "name": "台積電", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "LONG",
+          "currentPrice": 2405.0, "changePercent": 3.66, "targetPrice": 2800.0, "stopLoss": 2180.0, "entryRange": "2,330 - 2,370 元", "upsidePercent": "+16.42%",
           "takeaway": "★ A16/N2 先進製程與 CoWoS 產能預約至 2027 年，全晶片客戶代工價調漲，預估 2026 EPS NT$70.0。均線呈極強多頭排列，法人買盤源源不絕，為台股多頭核心錨點。",
           "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 70.00, "peRatio2026": 34.28 }
         },
         {
-          "symbol": "6239",
-          "name": "力成",
-          "category": "FOPOL 封裝",
-          "actionTag": "HOLD",
-          "currentPrice": 256.5,
-          "changePercent": 0.0,
-          "targetPrice": 302.0,
-          "stopLoss": 235.0,
-          "entryRange": "250.0 - 254.0 元",
-          "upsidePercent": "+17.74%",
+          "symbol": "6239", "name": "力成", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "HOLD",
+          "currentPrice": 256.5, "changePercent": 0.0, "targetPrice": 302.0, "stopLoss": 235.0, "entryRange": "250.0 - 254.0 元", "upsidePercent": "+17.74%",
           "takeaway": "★ FOPOL 面板級封裝產能佈局完善，惟短線面臨 265 元歷史高點壓力且量能未放大，預估 2026 EPS NT$15.10。建議暫時觀望，待拉回至 250 元強支撐或帶量突破再佈局。",
           "fundamentalHighlights": { "rating": "Hold", "eps2026": 15.10, "peRatio2026": 17.25 }
         },
         {
-          "symbol": "3481",
-          "name": "群創",
-          "category": "FOPOL 封裝",
-          "actionTag": "LONG",
-          "currentPrice": 47.8,
-          "changePercent": 0.0,
-          "targetPrice": 62.0,
-          "stopLoss": 42.0,
-          "entryRange": "46.0 - 47.5 元",
-          "upsidePercent": "+29.71%",
+          "symbol": "3481", "name": "群創", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "LONG",
+          "currentPrice": 47.8, "changePercent": 0.0, "targetPrice": 62.0, "stopLoss": 42.0, "entryRange": "46.0 - 47.5 元", "upsidePercent": "+29.71%",
           "takeaway": "★ 舊世代面板線轉型 FOPOL 封裝具高度資產重估效益，跨足半導體封裝轉型明確，預估淨值將大幅跳升。技術面低檔帶量打底完成，突破 48 元下降趨勢線。",
           "fundamentalHighlights": { "rating": "Buy", "eps2026": 2.80, "peRatio2026": 17.37 }
         },
         {
-          "symbol": "2345",
-          "name": "智邦",
-          "category": "DPU 處理器",
-          "actionTag": "LONG",
-          "currentPrice": 2385.0,
-          "changePercent": 2.8,
-          "targetPrice": 2850.0,
-          "stopLoss": 2150.0,
-          "entryRange": "2,320 - 2,370 元",
-          "upsidePercent": "+19.5%",
+          "symbol": "2345", "name": "智邦", "category": "AI 網通與次世代 DPU", "categoryKey": "ai_dpu", "actionTag": "LONG",
+          "currentPrice": 2385.0, "changePercent": 2.8, "targetPrice": 2850.0, "stopLoss": 2150.0, "entryRange": "2,320 - 2,370 元", "upsidePercent": "+19.5%",
           "takeaway": "★ 800G 網通交換器與 AI DPU 加速卡訂單排至 2027，毛利率穩定維持 23%+，預估 2026 EPS NT$95.0。股價突破前高創歷史新高，投信籌碼持續鎖碼，無上方套牢壓力。",
           "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 95.00, "peRatio2026": 25.31 }
         },
         {
-          "symbol": "3363",
-          "name": "上詮",
-          "category": "光通訊 / CPO",
-          "actionTag": "LONG",
-          "currentPrice": 598.0,
-          "changePercent": 6.22,
-          "targetPrice": 720.0,
-          "stopLoss": 495.0,
-          "entryRange": "560.0 - 585.0 元",
-          "upsidePercent": "+20.40%",
+          "symbol": "3363", "name": "上詮", "category": "矽光子與 CPO 共封裝", "categoryKey": "cpo_photonics", "actionTag": "LONG",
+          "currentPrice": 600.0, "changePercent": 6.57, "targetPrice": 720.0, "stopLoss": 495.0, "entryRange": "560.0 - 585.0 元", "upsidePercent": "+20.00%",
           "takeaway": "★ 攜手台積電開發 CPO 矽光子保密光纖連接器，2026 迎接 CPO 量產元年享有極高 Re-rating 溢價。技術面跳空創高，量增價揚，RSI 高檔強勢鈍化。",
           "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 18.00, "peRatio2026": 33.22 }
+        },
+        {
+          "symbol": "6451", "name": "訊芯-KY", "category": "矽光子與 CPO 共封裝", "categoryKey": "cpo_photonics", "actionTag": "LONG",
+          "currentPrice": 430.0, "changePercent": 9.97, "targetPrice": 530.0, "stopLoss": 365.0, "entryRange": "405.0 - 420.0 元", "upsidePercent": "+23.26%",
+          "takeaway": "★ 鴻海集團 CPO 矽光子先進封裝主力廠商，博通 800G/1.6T 光引擎訂單放量，預估 2026 EPS NT$16.80。技術面跳空開高強勢攻克漲停，主力投信大舉回補。",
+          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 16.80, "peRatio2026": 25.60 }
+        },
+        {
+          "symbol": "3017", "name": "奇鋐", "category": "AI 伺服器水冷散熱", "categoryKey": "liquid_cooling", "actionTag": "LONG",
+          "currentPrice": 2730.0, "changePercent": 5.00, "targetPrice": 3300.0, "stopLoss": 2350.0, "entryRange": "2,600 - 2,680 元", "upsidePercent": "+20.88%",
+          "takeaway": "★ NVIDIA Blackwell GB200/NVL72 液冷水冷板 (Cold Plate) 與快拆氣密分流管線獨家大單，預估 2026 EPS NT$110.0。股價帶量推升，法人買盤鎖碼趨勢明確。",
+          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 110.00, "peRatio2026": 24.82 }
+        },
+        {
+          "symbol": "3324", "name": "雙鴻", "category": "AI 伺服器水冷散熱", "categoryKey": "liquid_cooling", "actionTag": "LONG",
+          "currentPrice": 965.0, "changePercent": 2.22, "targetPrice": 1180.0, "stopLoss": 840.0, "entryRange": "920.0 - 950.0 元", "upsidePercent": "+22.28%",
+          "takeaway": "★ 水冷散熱 CDUs 與水冷板產能放量，美系雲端 CSP 大廠水冷滲透率達 45%，預估 2026 EPS NT$48.50。技術面守穩 900 元均線支撐，波段震盪向上多頭不變。",
+          "fundamentalHighlights": { "rating": "Buy", "eps2026": 48.50, "peRatio2026": 19.90 }
+        },
+        {
+          "symbol": "3217", "name": "廣宇", "category": "SOCAMM2 次世代記憶體", "categoryKey": "socamm2", "actionTag": "LONG",
+          "currentPrice": 143.5, "changePercent": 1.77, "targetPrice": 185.0, "stopLoss": 122.0, "entryRange": "136.0 - 141.0 元", "upsidePercent": "+28.92%",
+          "takeaway": "★ AI NB 與伺服器 SOCAMM2 新型高頻記憶體模組卡槽連接元件大升級，鴻海集團作動能強，預估 2026 EPS NT$7.20。技術面帶量築底完成，性價比極高。",
+          "fundamentalHighlights": { "rating": "Buy", "eps2026": 7.20, "peRatio2026": 19.93 }
         }
       ]
     };
@@ -947,7 +903,7 @@ body {
             symbol: symbol,
             name: aStock.name || '',
             category: aStock.category || '',
-            categoryKey: getCategoryKey(aStock.category || ''),
+            categoryKey: aStock.categoryKey || getCategoryKey(aStock.category || ''),
             price: aStock.currentPrice ?? 0,
             changePercent: aStock.changePercent ?? 0,
             rating: (aStock.fundamentalHighlights && aStock.fundamentalHighlights.rating) || 'Strong Buy',
@@ -973,10 +929,12 @@ body {
       }
 
       function getCategoryKey(categoryStr = '') {
-        if (categoryStr.includes('SpaceX') || categoryStr.includes('低軌衛星')) return 'spacex';
-        if (categoryStr.includes('FOPOL') || categoryStr.includes('面板')) return 'fopol';
-        if (categoryStr.includes('DPU') || categoryStr.includes('資料處理器')) return 'dpu';
-        if (categoryStr.includes('CPO') || categoryStr.includes('光通訊')) return 'cpo';
+        if (categoryStr.includes('低軌衛星') || categoryStr.includes('SpaceX')) return 'leo_sat';
+        if (categoryStr.includes('先進封裝') || categoryStr.includes('FOPOL')) return 'adv_pkg';
+        if (categoryStr.includes('水冷') || categoryStr.includes('散熱')) return 'liquid_cooling';
+        if (categoryStr.includes('SOCAMM2') || categoryStr.includes('記憶體')) return 'socamm2';
+        if (categoryStr.includes('AI') || categoryStr.includes('DPU')) return 'ai_dpu';
+        if (categoryStr.includes('矽光子') || categoryStr.includes('CPO')) return 'cpo_photonics';
         return 'other';
       }
 
@@ -1052,14 +1010,14 @@ body {
   <script>
     (function () {
       'use strict';
-      let allStocks = [], filteredStocks = [], activeStock = null, activeIndicator = 'rsi', activeModalTab = 'advisor';
+      let allStocks = [], filteredStocks = [], activeStock = null, activeIndicator = 'rsi';
       let filters = { categoryKey: 'all', actionTag: 'all', search: '' };
 
       async function init() {
         const data = await DataLoader.loadAllData();
         allStocks = data.stocks;
         filteredStocks = [...allStocks];
-        activeStock = allStocks[0];
+        activeStock = allStocks.find(s => s.symbol === '6451') || allStocks[0];
 
         renderMasterTable();
         renderDeepDivePanel(activeStock);
@@ -1192,8 +1150,7 @@ body {
       function applyFilters() {
         filteredStocks = allStocks.filter(stock => {
           if (filters.categoryKey !== 'all') {
-            const catMap = { 'spacex': 'SpaceX / 低軌衛星', 'fopol': 'FOPOL 封裝', 'dpu': 'DPU 處理器', 'cpo': '光通訊 / CPO' };
-            if (stock.category !== catMap[filters.categoryKey]) return false;
+            if (stock.categoryKey !== filters.categoryKey) return false;
           }
           if (filters.actionTag !== 'all' && stock.actionTag !== filters.actionTag) return false;
           if (filters.search) {
