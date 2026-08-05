@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台股投信機構精準研究與視覺化決策終端 | Institutional Analytics</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk, Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ECharts 5.x CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+  <!-- Dark Institutional Terminal CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       Terminal Header & Real-Time Stock Ticker Bar
+       ========================================================================= -->
+  <header class="terminal-header">
+    <div class="header-top">
+      <div class="terminal-title">
+        <div class="terminal-logo">⚡</div>
+        <h1>TAIWAN STOCK INSTITUTIONAL DECISION TERMINAL</h1>
+        <span class="sub-tag">EXECUTIVE 2.0</span>
+      </div>
+      <div class="system-status">
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>LIVE MARKET DATA</span>
+        </div>
+        <span class="mono text-muted">2026-08-05 TAIEX</span>
+      </div>
+    </div>
+
+    <!-- Ticker Bar Removed -->
+  </header>
+
+  <!-- =========================================================================
+       Main Executive Dashboard Container
+       ========================================================================= -->
+  <main class="dashboard-container">
+
+    <!-- Section 1: Master Institutional Executive Matrix Table -->
+    <section class="master-matrix-section">
+      
+      <div class="section-title-bar">
+        <h2>📊 投信機構精準決策矩陣 (Master Institutional Decision Matrix)</h2>
+        <span class="text-muted text-xs">點擊任意欄位切換下方圖表與深度研報</span>
+      </div>
+
+      <!-- Compact Unified Filter Bar -->
+      <div class="filter-section">
+        <div class="filter-bar">
+          <div class="filter-controls">
+            <!-- Theme Filter -->
+            <div class="filter-group">
+              <label>族群:</label>
+              <div id="filter-theme-btns" class="filter-btn-group">
+                <button class="filter-btn active" data-value="all">全部 (9)</button>
+                <button class="filter-btn" data-value="spacex">SpaceX (5)</button>
+                <button class="filter-btn" data-value="fopol">FOPOL (2)</button>
+                <button class="filter-btn" data-value="dpu">DPU (1)</button>
+                <button class="filter-btn" data-value="cpo">光通訊 (1)</button>
+              </div>
+            </div>
+
+            <!-- Action Tag Filter -->
+            <div class="filter-group">
+              <label>決策方向:</label>
+              <div id="filter-action-btns" class="filter-btn-group">
+                <button class="filter-btn active" data-value="all">全部</button>
+                <button class="filter-btn text-green" data-value="LONG">做多 LONG (8)</button>
+                <button class="filter-btn text-amber" data-value="HOLD">觀望 HOLD (1)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Box -->
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="stock-search-input" class="search-input" placeholder="搜尋股票代號或名稱...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Master Decision Table -->
+      <div class="table-wrapper">
+        <table class="master-table">
+          <thead>
+            <tr>
+              <th>股票標的</th>
+              <th>產業族群</th>
+              <th>當前股價</th>
+              <th>解釋員決策</th>
+              <th>建議進場點</th>
+              <th>目標價 (潛在空間)</th>
+              <th>停損價</th>
+              <th>精準核心邏輯 (Key Rationale)</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="master-table-body">
+            <!-- Dynamically populated by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- Section 2: Focused Analytical Deep-Dive Workspace -->
+    <section id="deep-dive-workspace" class="deep-dive-section">
+      
+      <div class="section-title-bar">
+        <h2>🔍 標的深度分析與互動圖表 (<span id="selected-stock-title" class="text-cyan">2313 華通</span>)</h2>
+        <span class="text-muted text-xs">切換不同股票自動更新指標圖表與能力雷達圖</span>
+      </div>
+
+      <div class="deep-dive-grid">
+        
+        <!-- Left: Advisor Recommendation Focus Card -->
+        <div id="advisor-focus-card" class="advisor-focus-card">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+        <!-- Middle: Radar Chart Panel -->
+        <div class="radar-panel">
+          <div class="panel-header">
+            <h3>投信 5 維度能力評級</h3>
+          </div>
+          <div id="radar-chart" class="radar-canvas"></div>
+        </div>
+
+        <!-- Right: Technical Chart Workspace -->
+        <div class="technical-panel">
+          <div class="panel-header">
+            <h3>價格均線與技術指標</h3>
+            <div id="indicator-tab-group" class="indicator-tab-group">
+              <button class="indicator-tab active" data-indicator="rsi">RSI</button>
+              <button class="indicator-tab" data-indicator="macd">MACD</button>
+              <button class="indicator-tab" data-indicator="kd">KD</button>
+            </div>
+          </div>
+          <div id="technical-chart" class="technical-canvas"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Detailed Modal Research Drawer -->
+  <div id="stock-modal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span id="modal-stock-symbol" class="mono text-cyan" style="font-size: 22px; font-weight: 800;">2313</span>
+          <span id="modal-stock-name" style="font-size: 18px; font-weight: 700;">華通</span>
+          <span id="modal-stock-category" class="sub-tag">SpaceX / 低軌衛星</span>
+        </div>
+        <button id="close-modal-btn" class="close-modal-btn">&times;</button>
+      </div>
+
+      <div class="modal-nav">
+        <button class="modal-nav-btn active" data-tab="advisor">📢 解釋員策略</button>
+        <button class="modal-nav-btn" data-tab="fundamental">📈 基本面研報</button>
+        <button class="modal-nav-btn" data-tab="technical">📊 技術面研報</button>
+      </div>
+
+      <div id="modal-body-content" class="modal-body">
+        <!-- Dynamically populated by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="terminal-footer">
+    <p>Taiwan Stock Institutional Investor Research & Analytics Terminal — Streamlined Executive Edition 2.0</p>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script src="data/stock_database.js"></script>
+  <script src="js/data_loader.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
