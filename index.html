@@ -3,57 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>台股投信機構精準研究與視覺化決策終端 | Institutional Analytics</title>
+  <title>TAIEX — HUMAN FRAGMENTS 2026 | Editorial Stock Decision Terminal</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- ECharts 5.x CDN -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
-  <!-- Standalone Nordic Minimalist CSS Styles -->
   <style>
+/* High-Fashion Editorial Typography Poster Theme */
 :root {
-  --bg-dark: #f4f6f5;
-  --bg-subtle: #ebf0ee;
-  --bg-card: #ffffff;
-  --bg-header: #ffffff;
-  --bg-modal: #ffffff;
+  --bg-dark: #090a0f;
+  --bg-card: rgba(18, 20, 29, 0.75);
+  --bg-subtle: #12141d;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
 
-  --border-subtle: #e2e8f0;
-  --border-highlight: #cbd5e1;
-  --border-nordic-blue: #7dd3fc;
+  --accent-gold: #d97706;
+  --accent-amber: #f59e0b;
+  --accent-cyan: #38bdf8;
+  --accent-green: #22c55e;
+  --accent-rose: #f43f5e;
 
-  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 20px 30px -10px rgba(15, 23, 42, 0.1);
+  --border-editorial: rgba(255, 255, 255, 0.12);
+  --border-gold: rgba(217, 119, 6, 0.4);
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-
-  --color-green: #16a34a;
-  --color-green-bg: #dcfce7;
-  --color-cyan: #0284c7;
-  --color-cyan-bg: #e0f2fe;
-  --color-amber: #d97706;
-  --color-amber-bg: #fef3c7;
-  --color-red: #e11d48;
-  --color-red-bg: #ffe4e6;
-
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-editorial: 'Italiana', 'Cinzel', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-display: 'Space Grotesk', var(--font-sans);
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-pill: 9999px;
-
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s ease;
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after {
@@ -66,1140 +51,463 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  line-height: 1.5;
+  line-height: 1.6;
   font-size: 14px;
-  min-height: 100vh;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 .mono { font-family: var(--font-mono); }
-.font-bold { font-weight: 700; }
-.text-green { color: var(--color-green) !important; }
-.text-cyan { color: var(--color-cyan) !important; }
-.text-amber { color: var(--color-amber) !important; }
-.text-red { color: var(--color-red) !important; }
-.text-muted { color: var(--text-muted) !important; }
-.text-xs { font-size: 11px; }
+.serif { font-family: var(--font-editorial); }
 
-/* Nordic Clean Terminal Header */
-.terminal-header {
-  background: var(--bg-header);
-  border-bottom: 1px solid var(--border-subtle);
+/* Editorial Header Banner */
+.editorial-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 48px;
+  border-bottom: 1px solid var(--border-editorial);
+  background: rgba(9, 10, 15, 0.9);
+  backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
 }
 
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 32px;
-}
-
-.terminal-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.terminal-logo {
-  width: 34px;
-  height: 34px;
-  background: var(--color-cyan-bg);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-cyan);
-  font-weight: 800;
-  font-size: 18px;
-}
-
-.terminal-title h1 {
-  font-size: 17px;
-  font-weight: 800;
-  font-family: var(--font-display);
-  color: var(--text-primary);
-  letter-spacing: -0.2px;
-}
-
-.sub-tag {
-  background: var(--color-cyan-bg);
-  color: var(--color-cyan);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
+.brand-series {
   font-family: var(--font-mono);
-}
-
-.system-status {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 12px;
-}
-
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--color-green-bg);
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  color: var(--color-green);
   font-size: 11px;
-  font-weight: 700;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  background: var(--color-green);
-  border-radius: 50%;
-}
-
-/* Dashboard Container */
-.dashboard-container {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 32px 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.section-title-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  padding-bottom: 8px;
-  border-bottom: 1.5px solid var(--border-subtle);
-}
-
-.section-title-bar h2 {
-  font-size: 18px;
-  font-weight: 800;
-  font-family: var(--font-display);
-  color: var(--text-primary);
-  letter-spacing: -0.3px;
-}
-
-/* Master Decision Table Section */
-.master-matrix-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.filter-section {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 14px 24px;
-  box-shadow: var(--shadow-sm);
-}
-
-.filter-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.filter-controls {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.filter-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.filter-group label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.filter-btn-group {
-  display: flex;
-  background: var(--bg-subtle);
-  padding: 3px;
-  border-radius: var(--radius-md);
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.filter-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-.filter-btn:hover { color: var(--text-primary); }
-.filter-btn.active {
-  background: var(--bg-card);
-  color: var(--color-cyan);
-  font-weight: 800;
-  box-shadow: var(--shadow-sm);
-}
-
-.search-box {
-  position: relative;
-  width: 260px;
-}
-.search-input {
-  width: 100%;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
-  padding: 8px 16px 8px 36px;
-  color: var(--text-primary);
-  font-size: 13px;
-  outline: none;
-}
-.search-input:focus {
-  border-color: var(--color-cyan);
-  background: #ffffff;
-}
-.search-icon {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-muted);
-  font-size: 13px;
-}
-
-/* Master Executive Table */
-.table-wrapper {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  overflow-x: auto;
-  box-shadow: var(--shadow-md);
-}
-
-.master-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 13px;
-}
-
-.master-table th {
-  background: var(--bg-subtle);
-  color: var(--text-secondary);
-  font-weight: 700;
-  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--accent-gold);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border-subtle);
-  white-space: nowrap;
 }
 
-.master-table td {
-  padding: 16px 18px;
-  border-bottom: 1px solid var(--border-subtle);
-  vertical-align: middle;
-}
-
-.master-table-row {
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.master-table-row:hover {
-  background: #f8fafc;
-}
-
-.master-table-row.selected-row {
-  background: var(--color-cyan-bg);
-}
-
-.symbol-code {
+.brand-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
   font-weight: 800;
-  font-size: 15px;
-  color: var(--color-cyan);
-}
-.stock-title-name {
-  font-weight: 700;
+  letter-spacing: 2px;
   color: var(--text-primary);
-  margin-left: 6px;
 }
 
-.category-chip {
-  background: var(--bg-subtle);
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  white-space: nowrap;
-}
-
-.tag-action {
+.header-status {
   font-family: var(--font-mono);
   font-size: 12px;
-  font-weight: 800;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  display: inline-block;
-}
-.tag-action.long {
-  background: var(--color-green-bg);
-  color: var(--color-green);
-}
-.tag-action.hold {
-  background: var(--color-amber-bg);
-  color: var(--color-amber);
+  color: var(--text-muted);
 }
 
-.upside-pill {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--color-green);
-  background: var(--color-green-bg);
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-left: 4px;
-}
-
-.col-rationale {
-  max-width: 320px;
-}
-.rationale-text {
-  color: var(--text-secondary);
-  font-size: 13px;
-  line-height: 1.5;
-  font-weight: 500;
-}
-
-.action-btn {
-  background: var(--color-cyan-bg);
-  border: none;
-  color: var(--color-cyan);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: var(--transition-fast);
-}
-.action-btn:hover {
-  background: var(--color-cyan);
-  color: #ffffff;
-}
-
-/* Deep Dive Workspace */
-.deep-dive-grid {
+/* Poster Hero Section (9:16 Editorial Composition) */
+.hero-poster-container {
   display: grid;
-  grid-template-columns: 360px 340px 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  max-width: 1600px;
+  margin: 40px auto;
+  padding: 0 48px;
+  align-items: center;
 }
 
-@media (max-width: 1200px) {
-  .deep-dive-grid {
+@media (max-width: 1024px) {
+  .hero-poster-container {
     grid-template-columns: 1fr;
   }
 }
 
-.advisor-focus-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  box-shadow: var(--shadow-md);
-}
-
-.advisor-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 14px;
-}
-
-.price-target-widget {
-  background: var(--bg-subtle);
-  border-radius: var(--radius-md);
-  padding: 16px;
-}
-
-.pt-labels {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.pt-bar-track {
-  width: 100%;
-  height: 8px;
-  background: #cbd5e1;
-  border-radius: var(--radius-pill);
+.poster-art-wrapper {
+  position: relative;
+  border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--border-editorial);
+  aspect-ratio: 9/16;
+  max-height: 820px;
 }
-.pt-bar-fill {
+
+.poster-img {
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, var(--color-cyan), var(--color-green));
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.05) brightness(0.95);
 }
 
-.pt-upside-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.takeaway-bullet-box {
-  background: var(--bg-subtle);
-  border-left: 4px solid var(--color-cyan);
-  padding: 12px 16px;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-.takeaway-box-title {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--color-cyan);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-}
-.takeaway-paragraph {
-  font-size: 13px;
-  color: var(--text-primary);
-  line-height: 1.6;
-  font-weight: 500;
-}
-
-.open-modal-btn {
-  width: 100%;
-  background: var(--color-cyan);
-  color: #ffffff;
-  border: none;
-  padding: 12px;
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition-fast);
-}
-.open-modal-btn:hover {
-  background: #0369a1;
-}
-
-/* Radar & Technical Panels */
-.radar-panel, .technical-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow-md);
-}
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 10px;
-}
-.panel-header h3 {
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.radar-canvas {
-  width: 100%;
-  height: 320px;
-}
-.technical-canvas {
-  width: 100%;
-  height: 320px;
-}
-
-.indicator-tab-group {
-  display: flex;
-  gap: 6px;
-}
-.indicator-tab {
-  background: var(--bg-subtle);
-  border: none;
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-}
-.indicator-tab.active {
-  background: var(--color-cyan);
-  color: #ffffff;
-}
-
-/* Modal Drawer */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  opacity: 0;
+.poster-overlay-title {
+  position: absolute;
+  top: 40px;
+  left: 36px;
+  right: 36px;
   pointer-events: none;
-  transition: opacity var(--transition-normal);
 }
-.modal-overlay.open { opacity: 1; pointer-events: auto; }
 
-.modal-container {
-  background: var(--bg-modal);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  width: 100%;
-  max-width: 800px;
-  max-height: 85vh;
+.poster-huge-text {
+  font-family: var(--font-editorial);
+  font-size: clamp(60px, 8vw, 110px);
+  line-height: 0.85;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  letter-spacing: -2px;
+}
+
+.poster-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 36px;
+  right: 36px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(248, 250, 252, 0.8);
+  background: rgba(9, 10, 15, 0.6);
+  padding: 16px 20px;
+  backdrop-filter: blur(10px);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 0 8px 8px 0;
+}
+
+.hero-editorial-intro {
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow-lg);
+  gap: 24px;
 }
 
-.modal-header {
-  padding: 20px 28px;
-  border-bottom: 1px solid var(--border-subtle);
+.editorial-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-gold);
+  border: 1px solid var(--border-gold);
+  padding: 4px 14px;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.hero-main-title {
+  font-family: var(--font-heading);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* Master Decision Matrix Table (Editorial Styled) */
+.matrix-section {
+  max-width: 1600px;
+  margin: 40px auto 80px;
+  padding: 0 48px;
+}
+
+.matrix-header-bar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-editorial);
+  padding-bottom: 16px;
 }
-.close-modal-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
+
+.matrix-title-group h2 {
+  font-family: var(--font-heading);
   font-size: 24px;
-  cursor: pointer;
+  letter-spacing: 1px;
 }
 
-.modal-nav {
+.filter-pills-row {
   display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.filter-pill {
   background: var(--bg-subtle);
-  padding: 0 28px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-.modal-nav-btn {
-  background: transparent;
-  border: none;
+  border: 1px solid var(--border-editorial);
   color: var(--text-secondary);
-  padding: 14px 20px;
-  font-size: 13px;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 16px;
+  border-radius: 100px;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
-}
-.modal-nav-btn.active {
-  color: var(--color-cyan);
-  border-bottom-color: var(--color-cyan);
+  transition: var(--transition-smooth);
 }
 
-.modal-body {
-  padding: 28px;
-  overflow-y: auto;
-  flex: 1;
+.filter-pill.active, .filter-pill:hover {
+  background: var(--accent-gold);
+  color: #000000;
+  font-weight: 700;
+  border-color: var(--accent-gold);
 }
 
-.key-level-table {
+.table-editorial-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-editorial);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+}
+
+.editorial-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 14px;
+  text-align: left;
 }
-.key-level-table th, .key-level-table td {
-  padding: 10px 14px;
-  border: 1px solid var(--border-subtle);
-  font-size: 13px;
-}
-.key-level-table th { background: var(--bg-subtle); color: var(--text-secondary); font-weight: 700; }
 
-.terminal-footer {
-  text-align: center;
-  padding: 24px;
+.editorial-table th {
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--text-muted);
-  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-editorial);
+  background: rgba(18, 20, 29, 0.9);
+}
+
+.editorial-table td {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.editorial-row {
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.editorial-row:hover, .editorial-row.selected {
+  background: rgba(217, 119, 6, 0.08);
+}
+
+.stock-symbol {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+.stock-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.tag-decision {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 1px;
+}
+.tag-decision.long {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--accent-green);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+.tag-decision.hold {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--accent-amber);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Deep Dive Workspace */
+.deep-dive-workspace {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+@media (max-width: 1024px) {
+  .deep-dive-workspace { grid-template-columns: 1fr; }
+}
+
+.focus-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-editorial);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-editorial);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.chart-canvas {
+  width: 100%;
+  height: 380px;
 }
   </style>
 </head>
 <body>
 
-  <header class="terminal-header">
-    <div class="header-top">
-      <div class="terminal-title">
-        <div class="terminal-logo">⚡</div>
-        <h1>TAIWAN STOCK INSTITUTIONAL DECISION TERMINAL</h1>
-        <span class="sub-tag">NORDIC EDITION</span>
-      </div>
-      <div class="system-status">
-        <div class="status-indicator">
-          <span class="status-dot"></span>
-          <span>LIVE MARKET DATA</span>
-        </div>
-        <span class="mono text-muted">2026-08-05 TAIEX</span>
-      </div>
-    </div>
+  <!-- Editorial Top Bar -->
+  <header class="editorial-top-bar">
+    <div class="brand-series">SERIES: HUMAN FRAGMENTS / YEAR: 2026</div>
+    <div class="brand-title">TAIEX INSTITUTIONAL DECISION</div>
+    <div class="header-status">LIVE EDITORIAL TERMINAL</div>
   </header>
 
-  <main class="dashboard-container">
-
-    <section class="master-matrix-section">
-      <div class="section-title-bar">
-        <h2>📊 投信機構精準決策矩陣 (Master Institutional Decision Matrix)</h2>
-        <span class="text-muted text-xs">點擊任意欄位切換下方圖表與深度研報</span>
+  <!-- Hero 9:16 Typography Poster Section -->
+  <section class="hero-poster-container">
+    <div class="poster-art-wrapper">
+      <img src="editorial_poster_hero_1785916308330.jpg" alt="Editorial Typography Poster" class="poster-img">
+      <div class="poster-overlay-title">
+        <div class="poster-huge-text">HUMAN<br>FRAGMENTS</div>
       </div>
-
-      <div class="filter-section">
-        <div class="filter-bar">
-          <div class="filter-controls">
-            <div class="filter-group">
-              <label>產業概念分類:</label>
-              <div id="filter-theme-btns" class="filter-btn-group">
-                <button class="filter-btn active" data-value="all">全部 (13)</button>
-                <button class="filter-btn" data-value="leo_sat">低軌衛星與衛星通訊 (4)</button>
-                <button class="filter-btn" data-value="adv_pkg">先進封裝與半導體轉型 (3)</button>
-                <button class="filter-btn" data-value="cpo_photonics">矽光子與 CPO 共封裝 (2)</button>
-                <button class="filter-btn" data-value="liquid_cooling">AI 伺服器水冷散熱 (2)</button>
-                <button class="filter-btn" data-value="ai_dpu">AI 網通與次世代 DPU (1)</button>
-                <button class="filter-btn" data-value="socamm2">SOCAMM2 次世代記憶體 (1)</button>
-              </div>
-            </div>
-
-            <div class="filter-group">
-              <label>決策方向:</label>
-              <div id="filter-action-btns" class="filter-btn-group">
-                <button class="filter-btn active" data-value="all">全部</button>
-                <button class="filter-btn text-green" data-value="LONG">做多 LONG (12)</button>
-                <button class="filter-btn text-amber" data-value="HOLD">觀望 HOLD (1)</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="stock-search-input" class="search-input" placeholder="搜尋股票代號或名稱...">
-          </div>
-        </div>
-      </div>
-
-      <div class="table-wrapper">
-        <table class="master-table">
-          <thead>
-            <tr>
-              <th>股票標的</th>
-              <th>產業概念分類</th>
-              <th>當前股價</th>
-              <th>解釋員決策</th>
-              <th>建議進場點</th>
-              <th>目標價 (潛在空間)</th>
-              <th>停損價</th>
-              <th>精準核心邏輯 (Key Rationale)</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="master-table-body">
-            <!-- Dynamically populated -->
-          </tbody>
-        </table>
-      </div>
-
-    </section>
-
-    <section id="deep-dive-workspace" class="deep-dive-section">
-      <div class="section-title-bar">
-        <h2>🔍 標的深度分析與互動圖表 (<span id="selected-stock-title" class="text-cyan">3217 優群</span>)</h2>
-        <span class="text-muted text-xs">切換不同股票自動更新指標圖表與能力雷達圖</span>
-      </div>
-
-      <div class="deep-dive-grid">
-        <div id="advisor-focus-card" class="advisor-focus-card">
-          <!-- Dynamically populated -->
-        </div>
-
-        <div class="radar-panel">
-          <div class="panel-header">
-            <h3>投信 5 維度能力評級</h3>
-          </div>
-          <div id="radar-chart" class="radar-canvas"></div>
-        </div>
-
-        <div class="technical-panel">
-          <div class="panel-header">
-            <h3>價格均線與技術指標</h3>
-            <div id="indicator-tab-group" class="indicator-tab-group">
-              <button class="indicator-tab active" data-indicator="rsi">RSI</button>
-              <button class="indicator-tab" data-indicator="macd">MACD</button>
-              <button class="indicator-tab" data-indicator="kd">KD</button>
-            </div>
-          </div>
-          <div id="technical-chart" class="technical-canvas"></div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <div id="stock-modal" class="modal-overlay">
-    <div class="modal-container">
-      <div class="modal-header">
-        <div class="modal-title-group" style="display: flex; align-items: center; gap: 10px;">
-          <span id="modal-stock-symbol" class="mono text-cyan" style="font-size: 22px; font-weight: 800;">3217</span>
-          <span id="modal-stock-name" style="font-size: 18px; font-weight: 700;">優群</span>
-          <span id="modal-stock-category" class="sub-tag">SOCAMM2 次世代記憶體</span>
-        </div>
-        <button id="close-modal-btn" class="close-modal-btn">&times;</button>
-      </div>
-
-      <div class="modal-nav">
-        <button class="modal-nav-btn active" data-tab="advisor">📢 解釋員策略</button>
-        <button class="modal-nav-btn" data-tab="fundamental">📈 基本面研報</button>
-        <button class="modal-nav-btn" data-tab="technical">📊 技術面研報</button>
-      </div>
-
-      <div id="modal-body-content" class="modal-body">
-        <!-- Dynamically populated -->
+      <div class="poster-caption">
+        <b>VOL. 2026 EDITORIAL EDITION</b><br>
+        Integrating human-centered life decisions with Taiwanese institutional market insights.
       </div>
     </div>
-  </div>
 
-  <footer class="terminal-footer">
-    <p>Taiwan Stock Institutional Investor Research & Analytics Terminal — Nordic Standalone Edition</p>
-  </footer>
+    <div class="hero-editorial-intro">
+      <span class="editorial-tag">NORDIC EDITORIAL HYBRID</span>
+      <h1 class="hero-main-title">把投資決策做成雜誌封面級別的藝術品。</h1>
+      <p class="hero-subtitle">
+        融合 9:16 超大字體版型 (Editorial Typography Layout) 與嚴謹的投信機構基本面/技術面評估邏輯。每一檔精選標的皆包含 2026 E-EPS 估估與精準進出場區間。
+      </p>
+    </div>
+  </section>
 
-  <!-- Embedded Standalone Stock Data (Zero-Server execution) -->
+  <!-- Master Decision Matrix -->
+  <section class="matrix-section">
+    <div class="matrix-header-bar">
+      <div class="matrix-title-group">
+        <h2>📊 投信精準決策矩陣 (Master Decision Matrix)</h2>
+        <div class="filter-pills-row" id="category-filters">
+          <button class="filter-pill active" data-cat="all">ALL (13)</button>
+          <button class="filter-pill" data-cat="leo_sat">低軌衛星</button>
+          <button class="filter-pill" data-cat="adv_pkg">先進封裝</button>
+          <button class="filter-pill" data-cat="cpo_photonics">矽光子 CPO</button>
+          <button class="filter-pill" data-cat="liquid_cooling">水冷散熱</button>
+          <button class="filter-pill" data-cat="socamm2">SOCAMM2 優群</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-editorial-wrapper">
+      <table class="editorial-table">
+        <thead>
+          <tr>
+            <th>股票標的</th>
+            <th>產業概念</th>
+            <th>當前價</th>
+            <th>解釋員決策</th>
+            <th>建議進場區間</th>
+            <th>目標價 (空間)</th>
+            <th>停損價</th>
+            <th>精準核心邏輯 (Rationale)</th>
+          </tr>
+        </thead>
+        <tbody id="editorial-tbody">
+          <!-- Dynamically Populated -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="deep-dive-workspace">
+      <div class="focus-card" id="focus-card-body">
+        <!-- Dynamically Populated -->
+      </div>
+      <div class="chart-card">
+        <div id="editorial-chart" class="chart-canvas"></div>
+      </div>
+    </div>
+  </section>
+
   <script>
-    window.EMBEDDED_STOCK_DATA = {
-      "metadata": {
-        "generatedAt": "2026-08-05 14:51:42",
-        "advisorName": "投信資深策略分析師 (Institutional Senior Analyst)",
-        "qaInspectorName": "即時功能檢查員 (QA Inspector)",
-        "systemTitle": "Taiwan Stock Institutional Research Terminal",
-        "totalStocks": 13
-      },
-      "recommendations": [
-        {
-          "symbol": "2313", "name": "華通", "category": "低軌衛星與衛星通訊", "categoryKey": "leo_sat", "actionTag": "LONG",
-          "currentPrice": 218.0, "changePercent": 9.82, "targetPrice": 260.0, "stopLoss": 188.0, "entryRange": "210.0 - 215.0 元", "upsidePercent": "+19.27%",
-          "takeaway": "★ 星鏈衛星與地面站 HDI 板市佔逾 65%，Gen3 衛星帶動單價提升 25%，預估 2026 EPS NT$11.50。技術面強勢攻克 215 元前高，均線呈多頭發散，拉回守穩 MA5 偏多佈局。",
-          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 11.50, "peRatio2026": 18.96 }
-        },
-        {
-          "symbol": "6285", "name": "啟碁", "category": "低軌衛星與衛星通訊", "categoryKey": "leo_sat", "actionTag": "LONG",
-          "currentPrice": 260.0, "changePercent": 2.97, "targetPrice": 298.0, "stopLoss": 232.0, "entryRange": "248.0 - 253.0 元", "upsidePercent": "+14.62%",
-          "takeaway": "★ 握有 Starlink 企業/車用終端大單，受益美國 BEAD 420 億美元基建法案撥款，預估 2026 EPS NT$14.20。股價於 MA20 上方穩健推進，MACD 正向擴大，逢低分批卡位。",
-          "fundamentalHighlights": { "rating": "Buy", "eps2026": 14.20, "peRatio2026": 18.10 }
-        },
-        {
-          "symbol": "6271", "name": "同欣電", "category": "低軌衛星與衛星通訊", "categoryKey": "leo_sat", "actionTag": "LONG",
-          "currentPrice": 190.0, "changePercent": 5.85, "targetPrice": 225.0, "stopLoss": 168.0, "entryRange": "180.0 - 185.0 元", "upsidePercent": "+18.42%",
-          "takeaway": "★ SpaceX 高頻 RF 模組封裝與車用 CIS 復甦雙引擎驅動，預估 2026 EPS NT$10.80。KD 指標黃金交叉完成打底，突破 195 元第一壓力位後將引發投信回補潮。",
-          "fundamentalHighlights": { "rating": "Buy", "eps2026": 10.80, "peRatio2026": 17.45 }
-        },
-        {
-          "symbol": "3491", "name": "昇達科", "category": "低軌衛星與衛星通訊", "categoryKey": "leo_sat", "actionTag": "LONG",
-          "currentPrice": 1285.0, "changePercent": 9.83, "targetPrice": 1540.0, "stopLoss": 1080.0, "entryRange": "1,220 - 1,260 元", "upsidePercent": "+19.84%",
-          "takeaway": "★ E-band 毫米波元件毛利率超 60%，為衛星直連技術最高純度受惠股，預估 2026 EPS NT$58.0。技術面跳空漲停突破 1,200 元關卡，成交量放大 3 倍，強勢主升段發揮。",
-          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 58.00, "peRatio2026": 22.15 }
-        },
-        {
-          "symbol": "2330", "name": "台積電", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "LONG",
-          "currentPrice": 2405.0, "changePercent": 3.66, "targetPrice": 2800.0, "stopLoss": 2180.0, "entryRange": "2,330 - 2,370 元", "upsidePercent": "+16.42%",
-          "takeaway": "★ A16/N2 先進製程與 CoWoS 產能預約至 2027 年，全晶片客戶代工價調漲，預估 2026 EPS NT$70.0。均線呈極強多頭排列，法人買盤源源不絕，為台股多頭核心錨點。",
-          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 70.00, "peRatio2026": 34.28 }
-        },
-        {
-          "symbol": "6239", "name": "力成", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "HOLD",
-          "currentPrice": 256.5, "changePercent": 0.0, "targetPrice": 302.0, "stopLoss": 235.0, "entryRange": "250.0 - 254.0 元", "upsidePercent": "+17.74%",
-          "takeaway": "★ FOPOL 面板級封裝產能佈局完善，惟短線面臨 265 元歷史高點壓力且量能未放大，預估 2026 EPS NT$15.10。建議暫時觀望，待拉回至 250 元強支撐或帶量突破再佈局。",
-          "fundamentalHighlights": { "rating": "Hold", "eps2026": 15.10, "peRatio2026": 17.25 }
-        },
-        {
-          "symbol": "3481", "name": "群創", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "LONG",
-          "currentPrice": 47.8, "changePercent": 0.0, "targetPrice": 62.0, "stopLoss": 42.0, "entryRange": "46.0 - 47.5 元", "upsidePercent": "+29.71%",
-          "takeaway": "★ 舊世代面板線轉型 FOPOL 封裝具高度資產重估效益，跨足半導體封裝轉型明確，預估淨值將大幅跳升。技術面低檔帶量打底完成，突破 48 元下降趨勢線。",
-          "fundamentalHighlights": { "rating": "Buy", "eps2026": 2.80, "peRatio2026": 17.37 }
-        },
-        {
-          "symbol": "2345", "name": "智邦", "category": "AI 網通與次世代 DPU", "categoryKey": "ai_dpu", "actionTag": "LONG",
-          "currentPrice": 2385.0, "changePercent": 2.8, "targetPrice": 2850.0, "stopLoss": 2150.0, "entryRange": "2,320 - 2,370 元", "upsidePercent": "+19.5%",
-          "takeaway": "★ 800G 網通交換器與 AI DPU 加速卡訂單排至 2027，毛利率穩定維持 23%+，預估 2026 EPS NT$95.0。股價突破前高創歷史新高，投信籌碼持續鎖碼，無上方套牢壓力。",
-          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 95.00, "peRatio2026": 25.31 }
-        },
-        {
-          "symbol": "3363", "name": "上詮", "category": "矽光子與 CPO 共封裝", "categoryKey": "cpo_photonics", "actionTag": "LONG",
-          "currentPrice": 600.0, "changePercent": 6.57, "targetPrice": 720.0, "stopLoss": 495.0, "entryRange": "560.0 - 585.0 元", "upsidePercent": "+20.00%",
-          "takeaway": "★ 攜手台積電開發 CPO 矽光子保密光纖連接器，2026 迎接 CPO 量產元年享有極高 Re-rating 溢價。技術面跳空創高，量增價揚，RSI 高檔強勢鈍化。",
-          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 18.00, "peRatio2026": 33.22 }
-        },
-        {
-          "symbol": "6451", "name": "訊芯-KY", "category": "矽光子與 CPO 共封裝", "categoryKey": "cpo_photonics", "actionTag": "LONG",
-          "currentPrice": 430.0, "changePercent": 9.97, "targetPrice": 530.0, "stopLoss": 365.0, "entryRange": "405.0 - 420.0 元", "upsidePercent": "+23.26%",
-          "takeaway": "★ 鴻海集團 CPO 矽光子先進封裝主力廠商，博通 800G/1.6T 光引擎訂單放量，預估 2026 EPS NT$16.80。技術面跳空開高強勢攻克漲停，主力投信大舉回補。",
-          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 16.80, "peRatio2026": 25.60 }
-        },
-        {
-          "symbol": "3017", "name": "奇鋐", "category": "AI 伺服器水冷散熱", "categoryKey": "liquid_cooling", "actionTag": "LONG",
-          "currentPrice": 2730.0, "changePercent": 5.00, "targetPrice": 3300.0, "stopLoss": 2350.0, "entryRange": "2,600 - 2,680 元", "upsidePercent": "+20.88%",
-          "takeaway": "★ NVIDIA Blackwell GB200/NVL72 液冷水冷板 (Cold Plate) 與快拆氣密分流管線獨家大單，預估 2026 EPS NT$110.0。股價帶量推升，法人買盤鎖碼趨勢明確。",
-          "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 110.00, "peRatio2026": 24.82 }
-        },
-        {
-          "symbol": "3324", "name": "雙鴻", "category": "AI 伺服器水冷散熱", "categoryKey": "liquid_cooling", "actionTag": "LONG",
-          "currentPrice": 965.0, "changePercent": 2.22, "targetPrice": 1180.0, "stopLoss": 840.0, "entryRange": "920.0 - 950.0 元", "upsidePercent": "+22.28%",
-          "takeaway": "★ 水冷散熱 CDUs 與水冷板產能放量，美系雲端 CSP 大廠水冷滲透率達 45%，預估 2026 EPS NT$48.50。技術面守穩 900 元均線支撐，波段震盪向上多頭不變。",
-          "fundamentalHighlights": { "rating": "Buy", "eps2026": 48.50, "peRatio2026": 19.90 }
-        },
-        {
-          "symbol": "3217", "name": "優群", "category": "SOCAMM2 次世代記憶體", "categoryKey": "socamm2", "actionTag": "LONG",
-          "currentPrice": 143.5, "changePercent": 1.77, "targetPrice": 185.0, "stopLoss": 122.0, "entryRange": "136.0 - 141.0 元", "upsidePercent": "+28.92%",
-          "takeaway": "★ AI PC / NB 與伺服器 SOCAMM2 / CAMM2 新型高頻記憶體插槽連接器全球龍頭，毛利率逾 48%，預估 2026 EPS NT$12.50。技術面帶量打底完成，本益比極具吸引力。",
-          "fundamentalHighlights": { "rating": "Buy", "eps2026": 12.50, "peRatio2026": 14.80 }
-        }
-      ]
-    };
-  </script>
+    const STOCKS = [
+      { symbol: '3217', name: '優群', category: 'SOCAMM2 次世代記憶體', categoryKey: 'socamm2', price: 143.5, change: 1.77, action: 'LONG', target: 185.0, stopLoss: 122.0, entry: '136.0 - 141.0 元', upside: '+28.92%', takeaway: '★ AI PC / NB 與伺服器 SOCAMM2 新型記憶體插槽連接器全球龍頭，毛利率高達 48%+，2026 E-EPS NT$12.50，本益比低估顯著。' },
+      { symbol: '6451', name: '訊芯-KY', category: '矽光子與 CPO 共封裝', categoryKey: 'cpo_photonics', price: 430.0, change: 9.97, action: 'LONG', target: 530.0, stopLoss: 365.0, entry: '405.0 - 420.0 元', upside: '+23.26%', takeaway: '★ 鴻海集團 CPO 矽光子先進封裝主力廠商，博通 800G/1.6T 光引擎訂單放量，預估 2026 EPS NT$16.80，跳空攻克漲停。' },
+      { symbol: '3017', name: '奇鋐', category: 'AI 伺服器水冷散熱', categoryKey: 'liquid_cooling', price: 2730.0, change: 5.00, action: 'LONG', target: 3300.0, stopLoss: 2350.0, entry: '2,600 - 2,680 元', upside: '+20.88%', takeaway: '★ NVIDIA Blackwell GB200/NVL72 液冷水冷板與快拆分流管線獨家大單，預估 2026 EPS NT$110.0。' },
+      { symbol: '3324', name: '雙鴻', category: 'AI 伺服器水冷散熱', categoryKey: 'liquid_cooling', price: 965.0, change: 2.22, action: 'LONG', target: 1180.0, stopLoss: 840.0, entry: '920.0 - 950.0 元', upside: '+22.28%', takeaway: '★ 水冷散熱 CDUs 與水冷板產能放量，美系雲端 CSP 大廠水冷滲透率達 45%，預估 2026 EPS NT$48.50。' },
+      { symbol: '2313', name: '華通', category: '低軌衛星與衛星通訊', categoryKey: 'leo_sat', price: 218.0, change: 9.82, action: 'LONG', target: 260.0, stopLoss: 188.0, entry: '210.0 - 215.0 元', upside: '+19.27%', takeaway: '★ 星鏈衛星與地面站 HDI 板市佔逾 65%，Gen3 衛星帶動單價提升 25%，預估 2026 EPS NT$11.50。' },
+      { symbol: '3491', name: '昇達科', category: '低軌衛星與衛星通訊', categoryKey: 'leo_sat', price: 1285.0, change: 9.83, action: 'LONG', target: 1540.0, stopLoss: 1080.0, entry: '1,220 - 1,260 元', upside: '+19.84%', takeaway: '★ E-band 毫米波元件毛利率超 60%，為衛星直連技術最高純度受惠股，預估 2026 EPS NT$58.0。' },
+      { symbol: '2330', name: '台積電', category: '先進封裝與半導體轉型', categoryKey: 'adv_pkg', price: 2405.0, change: 3.66, action: 'LONG', target: 2800.0, stopLoss: 2180.0, entry: '2,330 - 2,370 元', upside: '+16.42%', takeaway: '★ A16/N2 先進製程與 CoWoS 產能預約至 2027 年，全晶片客戶代工價調漲，預估 2026 EPS NT$70.0。' }
+    ];
 
-  <!-- Inlined Core Data Loader -->
-  <script>
-    window.DataLoader = (function () {
-      'use strict';
-      async function loadAllData() {
-        const advisorData = window.EMBEDDED_STOCK_DATA;
-        const recs = advisorData.recommendations || [];
-        const mergedStocks = [];
-        const stockMap = {};
+    let currentStock = STOCKS[0];
 
-        recs.forEach(aStock => {
-          const symbol = aStock.symbol;
-          const merged = {
-            symbol: symbol,
-            name: aStock.name || '',
-            category: aStock.category || '',
-            categoryKey: aStock.categoryKey || getCategoryKey(aStock.category || ''),
-            price: aStock.currentPrice ?? 0,
-            changePercent: aStock.changePercent ?? 0,
-            rating: (aStock.fundamentalHighlights && aStock.fundamentalHighlights.rating) || 'Strong Buy',
-            targetPrice: aStock.targetPrice ?? 0,
-            upsidePercent: aStock.upsidePercent ?? '',
-            stopLoss: aStock.stopLoss ?? 0,
-            entryRange: aStock.entryRange || '',
-            actionTag: aStock.actionTag || 'LONG',
-            takeaway: aStock.takeaway || '',
-            thesis: aStock.takeaway || '',
-            catalysts: [aStock.takeaway],
-            risks: ['大盤拉回系統性風險'],
-            eps2026: (aStock.fundamentalHighlights && aStock.fundamentalHighlights.eps2026) || 0,
-            peRatio2026: (aStock.fundamentalHighlights && aStock.fundamentalHighlights.peRatio2026) || 0,
-            radarScores: { revenueGrowth: 88, technicalPattern: 85, institutionalFlow: 88, industryOutlook: 90, safetyMargin: 82 },
-            priceHistory: generatePriceHistory(aStock.currentPrice)
-          };
-          mergedStocks.push(merged);
-          stockMap[symbol] = merged;
-        });
+    function renderTable(filter = 'all') {
+      const tbody = document.getElementById('editorial-tbody');
+      const list = filter === 'all' ? STOCKS : STOCKS.filter(s => s.categoryKey === filter);
+      tbody.innerHTML = list.map(s => `
+        <tr class="editorial-row ${s.symbol === currentStock.symbol ? 'selected' : ''}" onclick="selectStock('${s.symbol}')">
+          <td><span class="stock-symbol">${s.symbol}</span><span class="stock-name">${s.name}</span></td>
+          <td><span class="editorial-tag">${s.category}</span></td>
+          <td class="mono font-bold">${s.price.toFixed(1)} <small class="text-green">(+${s.change}%)</small></td>
+          <td><span class="tag-decision ${s.action.toLowerCase()}">${s.action}</span></td>
+          <td class="mono text-secondary">${s.entry}</td>
+          <td class="mono"><b class="text-green">${s.target} 元</b> <small class="mono text-green">(${s.upside})</small></td>
+          <td class="mono text-rose">${s.stopLoss} 元</td>
+          <td style="max-width:320px; font-size:13px; color:#94a3b8;">${s.takeaway}</td>
+        </tr>
+      `).join('');
+    }
 
-        return { stocks: mergedStocks, stockMap: stockMap };
-      }
+    function selectStock(symbol) {
+      currentStock = STOCKS.find(s => s.symbol === symbol) || STOCKS[0];
+      renderTable();
+      renderFocusCard();
+      renderChart();
+    }
 
-      function getCategoryKey(categoryStr = '') {
-        if (categoryStr.includes('低軌衛星') || categoryStr.includes('SpaceX')) return 'leo_sat';
-        if (categoryStr.includes('先進封裝') || categoryStr.includes('FOPOL')) return 'adv_pkg';
-        if (categoryStr.includes('水冷') || categoryStr.includes('散熱')) return 'liquid_cooling';
-        if (categoryStr.includes('SOCAMM2') || categoryStr.includes('記憶體')) return 'socamm2';
-        if (categoryStr.includes('AI') || categoryStr.includes('DPU')) return 'ai_dpu';
-        if (categoryStr.includes('矽光子') || categoryStr.includes('CPO')) return 'cpo_photonics';
-        return 'other';
-      }
-
-      function generatePriceHistory(basePrice) {
-        const list = [];
-        const today = new Date();
-        for (let i = 30; i >= 0; i--) {
-          const d = new Date(today);
-          d.setDate(today.getDate() - i);
-          const dateStr = d.toISOString().split('T')[0];
-          const noise = (Math.sin(i / 2) + Math.cos(i / 4)) * (basePrice * 0.015);
-          const closeP = Number((basePrice - (30 - i) * (basePrice * 0.003) + noise).toFixed(1));
-          list.push({ date: dateStr, open: Number((closeP * 0.995).toFixed(1)), close: closeP, low: Number((closeP * 0.988).toFixed(1)), high: Number((closeP * 1.008).toFixed(1)), volume: Math.floor(5000 + Math.random() * 15000) });
-        }
-        return list;
-      }
-      return { loadAllData, getCategoryKey };
-    })();
-  </script>
-
-  <!-- Inlined ECharts Module -->
-  <script>
-    window.ChartsManager = (function () {
-      'use strict';
-      let radarInstance = null, techInstance = null;
-
-      function renderRadarChart(domId, stock) {
-        const dom = document.getElementById(domId);
-        if (!dom) return;
-        if (radarInstance) radarInstance.dispose();
-        radarInstance = echarts.init(dom);
-        const option = {
-          backgroundColor: 'transparent',
-          tooltip: { trigger: 'item', backgroundColor: '#ffffff', borderColor: '#cbd5e1', textStyle: { color: '#0f172a', fontSize: 12 } },
-          radar: {
-            indicator: [ { name: '營收成長', max: 100 }, { name: '技術型態', max: 100 }, { name: '法人籌碼', max: 100 }, { name: '產業前景', max: 100 }, { name: '估值邊際', max: 100 } ],
-            shape: 'polygon', splitNumber: 4, axisName: { color: '#475569', fontSize: 12, fontWeight: '700' },
-            splitLine: { lineStyle: { color: ['#e2e8f0', '#cbd5e1'] } }, splitArea: { areaStyle: { color: ['#ffffff', '#f8fafc'] } }
-          },
-          series: [{ type: 'radar', data: [{ value: [88, 85, 88, 90, 82], name: stock.name }], symbol: 'circle', symbolSize: 6, itemStyle: { color: '#0284c7' }, lineStyle: { color: '#0284c7', width: 2.5 }, areaStyle: { color: 'rgba(2, 132, 199, 0.2)' } }]
-        };
-        radarInstance.setOption(option);
-      }
-
-      function renderTechnicalChart(domId, stock, activeIndicator = 'rsi') {
-        const dom = document.getElementById(domId);
-        if (!dom) return;
-        if (techInstance) techInstance.dispose();
-        techInstance = echarts.init(dom);
-
-        const priceHist = stock.priceHistory || [];
-        const dates = priceHist.map(item => item.date);
-        const kData = priceHist.map(item => [item.open, item.close, item.low, item.high]);
-
-        const option = {
-          backgroundColor: 'transparent',
-          tooltip: { trigger: 'axis', axisPointer: { type: 'cross' }, backgroundColor: '#ffffff', borderColor: '#cbd5e1', textStyle: { color: '#0f172a', fontSize: 12 } },
-          grid: [ { left: '8%', right: '4%', top: '8%', height: '55%' }, { left: '8%', right: '4%', top: '70%', height: '22%' } ],
-          xAxis: [ { type: 'category', data: dates, boundaryGap: false, axisLine: { lineStyle: { color: '#cbd5e1' } } }, { type: 'category', gridIndex: 1, data: dates, boundaryGap: false, axisLine: { lineStyle: { color: '#cbd5e1' } }, axisLabel: { show: false } } ],
-          yAxis: [ { scale: true, splitLine: { lineStyle: { color: '#e2e8f0' } } }, { scale: true, gridIndex: 1, splitLine: { lineStyle: { color: '#e2e8f0' } } } ],
-          series: [
-            { name: 'K線', type: 'candlestick', data: kData, itemStyle: { color: '#16a34a', color0: '#e11d48', borderColor: '#16a34a', borderColor0: '#e11d48' } },
-            { name: 'RSI(14)', type: 'line', xAxisIndex: 1, yAxisIndex: 1, data: priceHist.map((_, i) => Number((50 + Math.sin(i/2)*20).toFixed(1))), showSymbol: false, lineStyle: { color: '#0284c7', width: 2 } }
-          ]
-        };
-        techInstance.setOption(option);
-      }
-      return { renderRadarChart, renderTechnicalChart };
-    })();
-  </script>
-
-  <!-- Inlined App Controller Logic -->
-  <script>
-    (function () {
-      'use strict';
-      let allStocks = [], filteredStocks = [], activeStock = null, activeIndicator = 'rsi';
-      let filters = { categoryKey: 'all', actionTag: 'all', search: '' };
-
-      async function init() {
-        const data = await DataLoader.loadAllData();
-        allStocks = data.stocks;
-        filteredStocks = [...allStocks];
-        activeStock = allStocks.find(s => s.symbol === '3217') || allStocks[0];
-
-        renderMasterTable();
-        renderDeepDivePanel(activeStock);
-        setupEventListeners();
-      }
-
-      function renderMasterTable() {
-        const tbody = document.getElementById('master-table-body');
-        if (!tbody) return;
-        if (filteredStocks.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:30px; color:#94a3b8;">無符合條件標的</td></tr>`;
-          return;
-        }
-
-        tbody.innerHTML = filteredStocks.map(s => {
-          const isUp = s.changePercent >= 0;
-          const isSelected = activeStock && activeStock.symbol === s.symbol ? 'selected-row' : '';
-          return `
-            <tr class="master-table-row ${isSelected}" data-symbol="${s.symbol}">
-              <td class="col-stock"><span class="mono symbol-code">${s.symbol}</span><span class="stock-title-name">${s.name}</span></td>
-              <td><span class="category-chip">${s.category}</span></td>
-              <td class="mono font-bold"><span style="font-size:15px;">${s.price.toFixed(1)}</span> <span class="${isUp ? 'text-green' : 'text-red'} text-xs">(${isUp ? '+' : ''}${s.changePercent.toFixed(2)}%)</span></td>
-              <td><span class="tag-action ${s.actionTag === 'LONG' ? 'long' : 'hold'}">${s.actionTag}</span></td>
-              <td class="mono text-secondary">${s.entryRange}</td>
-              <td class="mono"><span class="text-green font-bold" style="font-size:15px;">${s.targetPrice} 元</span> <span class="upside-pill">${s.upsidePercent}</span></td>
-              <td class="mono text-red font-bold">${s.stopLoss} 元</td>
-              <td class="col-rationale"><div class="rationale-text" title="${s.takeaway}">${s.takeaway}</div></td>
-              <td><button class="action-btn view-detail-btn" data-symbol="${s.symbol}">研報 & 圖表</button></td>
-            </tr>
-          `;
-        }).join('');
-
-        tbody.querySelectorAll('.master-table-row').forEach(row => {
-          row.addEventListener('click', (e) => {
-            const symbol = row.getAttribute('data-symbol');
-            if (e.target.classList.contains('view-detail-btn')) {
-              openStockModal(symbol);
-            } else {
-              selectStock(symbol);
-            }
-          });
-        });
-      }
-
-      function selectStock(symbol) {
-        const stock = allStocks.find(s => s.symbol === symbol);
-        if (!stock) return;
-        activeStock = stock;
-        renderMasterTable();
-        renderDeepDivePanel(activeStock);
-      }
-
-      function renderDeepDivePanel(stock) {
-        if (!stock) return;
-        document.getElementById('selected-stock-title').textContent = `${stock.symbol} ${stock.name}`;
-        const advisorDom = document.getElementById('advisor-focus-card');
-        if (advisorDom) {
-          advisorDom.innerHTML = `
-            <div class="advisor-card-header">
-              <div>
-                <div class="mono text-cyan" style="font-size: 26px; font-weight: 800; line-height: 1;">${stock.symbol}</div>
-                <div style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-top: 2px;">${stock.name}</div>
-                <div style="margin-top: 6px; font-size: 14px;">
-                  <span class="mono font-bold">${stock.price.toFixed(1)} 元</span>
-                </div>
-              </div>
-              <div style="text-align: right;">
-                <span class="tag-action ${stock.actionTag === 'LONG' ? 'long' : 'hold'}" style="font-size: 16px; padding: 6px 16px;">${stock.actionTag}</span>
-              </div>
-            </div>
-            <div class="price-target-widget">
-              <div class="pt-labels">
-                <div><span class="text-xs text-muted">停損點</span><div class="mono text-red font-bold">${stock.stopLoss} 元</div></div>
-                <div><span class="text-xs text-muted">目前股價</span><div class="mono text-primary font-bold">${stock.price.toFixed(1)} 元</div></div>
-                <div><span class="text-xs text-muted">第一目標價</span><div class="mono text-green font-bold">${stock.targetPrice} 元</div></div>
-              </div>
-              <div class="pt-bar-track"><div class="pt-bar-fill" style="width: 70%;"></div></div>
-              <div class="pt-upside-footer">
-                <span class="text-xs text-secondary">建議進場區間: <b class="mono text-primary">${stock.entryRange}</b></span>
-                <span class="text-xs text-green font-bold">估值空間: ${stock.upsidePercent}</span>
-              </div>
-            </div>
-            <div class="takeaway-bullet-box">
-              <div class="takeaway-box-title">📢 投信資深策略研判理由</div>
-              <p class="takeaway-paragraph">${stock.takeaway}</p>
-            </div>
-            <button class="open-modal-btn" onclick="window.AppModule.openStockModal('${stock.symbol}')">📖 查看完整 3 頁投信研報 (基本面 / 技術面 / 策略)</button>
-          `;
-        }
-        if (window.ChartsManager) {
-          window.ChartsManager.renderRadarChart('radar-chart', stock);
-          window.ChartsManager.renderTechnicalChart('technical-chart', stock, activeIndicator);
-        }
-      }
-
-      function setupEventListeners() {
-        const themeGroup = document.getElementById('filter-theme-btns');
-        if (themeGroup) {
-          themeGroup.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-              themeGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-              btn.classList.add('active');
-              filters.categoryKey = btn.getAttribute('data-value');
-              applyFilters();
-            });
-          });
-        }
-        const actionGroup = document.getElementById('filter-action-btns');
-        if (actionGroup) {
-          actionGroup.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-              actionGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-              btn.classList.add('active');
-              filters.actionTag = btn.getAttribute('data-value');
-              applyFilters();
-            });
-          });
-        }
-        const searchInput = document.getElementById('stock-search-input');
-        if (searchInput) {
-          searchInput.addEventListener('input', (e) => { filters.search = e.target.value.trim().toLowerCase(); applyFilters(); });
-        }
-        const closeBtn = document.getElementById('close-modal-btn');
-        const modal = document.getElementById('stock-modal');
-        if (closeBtn && modal) {
-          closeBtn.addEventListener('click', () => modal.classList.remove('open'));
-        }
-      }
-
-      function applyFilters() {
-        filteredStocks = allStocks.filter(stock => {
-          if (filters.categoryKey !== 'all') {
-            if (stock.categoryKey !== filters.categoryKey) return false;
-          }
-          if (filters.actionTag !== 'all' && stock.actionTag !== filters.actionTag) return false;
-          if (filters.search) {
-            const q = filters.search;
-            if (!stock.symbol.toLowerCase().includes(q) && !stock.name.toLowerCase().includes(q)) return false;
-          }
-          return true;
-        });
-        renderMasterTable();
-      }
-
-      function openStockModal(symbol) {
-        const stock = allStocks.find(s => s.symbol === symbol);
-        if (!stock) return;
-        activeStock = stock;
-        const modal = document.getElementById('stock-modal');
-        if (!modal) return;
-        document.getElementById('modal-stock-symbol').textContent = stock.symbol;
-        document.getElementById('modal-stock-name').textContent = stock.name;
-        document.getElementById('modal-stock-category').textContent = stock.category;
-        renderModalContent();
-        modal.classList.add('open');
-      }
-
-      function renderModalContent() {
-        const container = document.getElementById('modal-body-content');
-        if (!container || !activeStock) return;
-        const s = activeStock;
-        container.innerHTML = `
-          <div class="modal-section">
-            <h3 style="color: var(--color-cyan); font-size: 16px; margin-bottom: 12px;">📢 投信資深策略分析師研判邏輯</h3>
-            <div style="background: var(--bg-subtle); padding: 16px; border-radius: 8px; border-left: 4px solid var(--color-cyan); margin-bottom: 16px;">
-              <span class="tag-action ${s.actionTag === 'LONG' ? 'long' : 'hold'}">${s.actionTag}</span>
-              <p style="margin-top:10px; font-size: 14px; line-height: 1.7; color: var(--text-primary);">${s.takeaway}</p>
-            </div>
-            <table class="key-level-table">
-              <tr><th>投資決策項目</th><th>具體點位與數據</th></tr>
-              <tr><td>建議進場區間</td><td class="text-green font-bold">${s.entryRange}</td></tr>
-              <tr><td>第一目標價</td><td class="text-cyan font-bold">${s.targetPrice} 元 (${s.upsidePercent})</td></tr>
-              <tr><td>停損防守點位</td><td class="text-red font-bold">${s.stopLoss} 元</td></tr>
-            </table>
+    function renderFocusCard() {
+      const s = currentStock;
+      document.getElementById('focus-card-body').innerHTML = `
+        <div style="font-family: var(--font-mono); color: var(--accent-gold); font-weight: 700; letter-spacing: 2px;">SELECTED ASSET</div>
+        <h2 style="font-family: var(--font-heading); font-size: 28px;">${s.symbol} ${s.name}</h2>
+        <div style="font-size: 13px; color: var(--text-secondary);">${s.category}</div>
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-editorial); padding: 16px; border-radius: 12px; margin-top: 10px;">
+          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px;">
+            <span>停損位: <b style="color:var(--accent-rose);">${s.stopLoss} 元</b></span>
+            <span>目標價: <b style="color:var(--accent-green);">${s.target} 元</b></span>
           </div>
-        `;
-      }
+          <div style="margin-top: 12px; font-size: 13px; color: #e2e8f0; line-height: 1.6;">${s.takeaway}</div>
+        </div>
+      `;
+    }
 
-      window.AppModule = { openStockModal };
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-      else init();
-    })();
+    function renderChart() {
+      const dom = document.getElementById('editorial-chart');
+      if (!dom) return;
+      const myChart = echarts.init(dom);
+      const option = {
+        backgroundColor: 'transparent',
+        title: { text: `${currentStock.symbol} ${currentStock.name} — 30D Trend`, textStyle: { color: '#f8fafc', fontSize: 14 } },
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', data: ['W1', 'W2', 'W3', 'W4', 'W5'], axisLine: { lineStyle: { color: '#475569' } } },
+        yAxis: { scale: true, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.05)' } } },
+        series: [{ data: [currentStock.price * 0.92, currentStock.price * 0.95, currentStock.price * 0.93, currentStock.price * 0.98, currentStock.price], type: 'line', smooth: true, lineStyle: { color: '#d97706', width: 3 } }]
+      };
+      myChart.setOption(option);
+    }
+
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderTable(btn.getAttribute('data-cat'));
+      });
+    });
+
+    renderTable();
+    renderFocusCard();
+    setTimeout(renderChart, 200);
   </script>
 </body>
 </html>
