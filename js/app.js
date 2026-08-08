@@ -13,6 +13,7 @@
   let activeChartMode = 'kline'; // 'kline', 'profile', 'radar', 'oscillator'
   let activeOscillatorTab = 'rsi'; // 'rsi', 'macd', 'kd'
   let activeModalTab = 'advisor';
+  let currentTheme = localStorage.getItem('apple_stock_theme') || 'light';
   let watchlist = new Set(JSON.parse(localStorage.getItem('apple_stock_watchlist') || '[]'));
   let autoTickTimer = null;
   let lastRefreshTime = new Date();
@@ -33,6 +34,9 @@
     try {
       console.log('[Apple Terminal] Initializing Cupertino Executive Terminal...');
 
+      // Set initial Theme
+      applyTheme(currentTheme);
+
       const data = await DataLoader.loadAllData();
       allStocks = data.stocks || [];
       filteredStocks = [...allStocks];
@@ -50,6 +54,21 @@
     } catch (err) {
       console.error('[Apple Terminal] Initialization Error:', err);
       showErrorMessage('資料載入失敗，請確認 JSON / JS 檔案載入狀態。');
+    }
+  }
+
+  function applyTheme(theme) {
+    currentTheme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('apple_stock_theme', theme);
+
+    const btn = document.getElementById('theme-toggle-btn');
+    if (btn) {
+      btn.textContent = theme === 'dark' ? '☀️ 淺色模式' : '🌙 深色模式';
+    }
+
+    if (activeStock && window.ChartsManager) {
+      renderActiveChart(activeStock);
     }
   }
 
@@ -263,7 +282,7 @@
           </div>
           <div style="text-align: right;">
             <span class="tag-action ${actionClass}" style="font-size: 14px; padding: 4px 14px;">${stock.actionTag}</span>
-            <div class="text-xs text-muted" style="margin-top: 6px;">評級: <b style="color: var(--accent-gold);">${stock.rating || 'Strong Buy'}</b></div>
+            <div class="text-xs text-muted" style="margin-top: 6px;">評級: <b style="color: var(--apple-blue);">${stock.rating || 'Strong Buy'}</b></div>
           </div>
         </div>
 
@@ -292,23 +311,23 @@
         </div>
 
         <!-- 5 MA Matrix -->
-        <div style="margin-top: 12px; background: var(--bg-subtle); border-radius: 10px; padding: 10px 12px; border: 1px solid var(--border-subtle);">
-          <div style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 700; margin-bottom: 6px; display: flex; justify-content: space-between;">
+        <div style="margin-top: 12px; background: var(--bg-subtle); border-radius: 12px; padding: 10px 12px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 11px; font-family: var(--font-mono); color: var(--apple-blue); font-weight: 700; margin-bottom: 6px; display: flex; justify-content: space-between;">
             <span>📊 5 大移動平均線 (5 MA) 數據</span>
             <span style="color: var(--text-muted); font-size: 10px;">近 30D 趨勢</span>
           </div>
           <div style="display: grid; grid-template-columns: repeat(5, 1fr); text-align: center; font-family: var(--font-mono); font-size: 11px;">
-            <div><span style="color: #f59e0b;">MA5</span><div class="font-bold" style="margin-top: 2px;">${ma.ma5 || '-'}</div></div>
-            <div><span style="color: #38bdf8;">MA10</span><div class="font-bold" style="margin-top: 2px;">${ma.ma10 || '-'}</div></div>
-            <div><span style="color: #34d399;">MA20</span><div class="font-bold" style="margin-top: 2px;">${ma.ma20 || '-'}</div></div>
-            <div><span style="color: #c084fc;">MA30</span><div class="font-bold" style="margin-top: 2px;">${ma.ma30 || '-'}</div></div>
-            <div><span style="color: #fbbf24;">MA50</span><div class="font-bold" style="margin-top: 2px;">${ma.ma50 || '-'}</div></div>
+            <div><span style="color: #ff9500;">MA5</span><div class="font-bold" style="margin-top: 2px;">${ma.ma5 || '-'}</div></div>
+            <div><span style="color: #0071e3;">MA10</span><div class="font-bold" style="margin-top: 2px;">${ma.ma10 || '-'}</div></div>
+            <div><span style="color: #34c759;">MA20</span><div class="font-bold" style="margin-top: 2px;">${ma.ma20 || '-'}</div></div>
+            <div><span style="color: #af52de;">MA30</span><div class="font-bold" style="margin-top: 2px;">${ma.ma30 || '-'}</div></div>
+            <div><span style="color: #ff9500;">MA50</span><div class="font-bold" style="margin-top: 2px;">${ma.ma50 || '-'}</div></div>
           </div>
         </div>
 
         <!-- AI Valuation Simulator Slider -->
-        <div style="margin-top: 12px; background: var(--bg-subtle); border-radius: 10px; padding: 12px; border: 1px solid var(--border-subtle);">
-          <div style="font-size: 11.5px; font-family: var(--font-mono); color: var(--accent-gold); font-weight: 800; margin-bottom: 8px;">
+        <div style="margin-top: 12px; background: var(--bg-subtle); border-radius: 12px; padding: 12px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 11.5px; font-family: var(--font-mono); color: var(--apple-blue); font-weight: 800; margin-bottom: 8px;">
             🧮 AI 投信目標價與本益比動態試算器
           </div>
           <div style="display: grid; gap: 8px; font-size: 11px;">
@@ -324,7 +343,7 @@
               </div>
               <input type="range" id="sim-pe-range" min="5" max="50" step="0.5" value="${basePE}" style="width:100%;">
             </div>
-            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:6px; margin-top:4px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px; margin-top:4px;">
               <span style="color:var(--text-muted);">試算目標價: <b class="mono text-green" id="sim-target-val" style="font-size:14px;">${Math.round(baseEPS * basePE)} 元</b></span>
               <span style="color:var(--text-muted);">預期 ROI: <b class="mono text-cyan" id="sim-roi-val">+${(((baseEPS * basePE - currentP) / currentP) * 100).toFixed(1)}%</b></span>
             </div>
@@ -332,16 +351,16 @@
         </div>
 
         <div class="takeaway-bullet-box">
-          <div style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-gold); font-weight: 700; margin-bottom: 4px;">📢 投信資深策略研判理由</div>
+          <div style="font-size: 11px; font-family: var(--font-mono); color: var(--apple-blue); font-weight: 700; margin-bottom: 4px;">📢 投信資深策略研判理由</div>
           <p style="font-size: 12.5px; line-height: 1.55; color: var(--text-primary);">${stock.takeaway}</p>
         </div>
 
         <!-- Institutional Note Input -->
         <div style="margin-top: 10px;">
-          <textarea id="stock-user-note" placeholder="✏️ 輸入對 ${stock.name} 的研究筆記..." style="width:100%; height:45px; background:var(--bg-subtle); border:1px solid var(--border-subtle); border-radius:8px; padding:8px; color:var(--text-primary); font-size:11px; outline:none; resize:none;">${savedNote}</textarea>
+          <textarea id="stock-user-note" placeholder="✏️ 輸入對 ${stock.name} 的研究筆記..." style="width:100%; height:45px; background:var(--bg-subtle); border:1px solid var(--border-subtle); border-radius:10px; padding:8px 12px; color:var(--text-primary); font-size:11.5px; outline:none; resize:none;">${savedNote}</textarea>
         </div>
 
-        <div style="display:flex; gap:8px; margin-top:10px;">
+        <div style="display:flex; gap:8px; margin-top:12px;">
           <button class="open-modal-btn" style="flex:1;" onclick="window.AppModule.openStockModal('${stock.symbol}')">
             📖 完整 3 頁機構研報
           </button>
@@ -400,6 +419,15 @@
   }
 
   function setupEventListeners() {
+    // Theme Toggle Button
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(nextTheme);
+      });
+    }
+
     // Category Filter Buttons
     const themeGroup = document.getElementById('filter-theme-btns');
     if (themeGroup) {
@@ -596,7 +624,7 @@
 
     if (activeModalTab === 'advisor') {
       container.innerHTML = `
-        <div style="background: var(--bg-subtle); padding: 18px; border-radius: 12px; border-left: 4px solid var(--accent-gold); margin-bottom: 18px;">
+        <div style="background: var(--bg-subtle); padding: 18px; border-radius: 14px; border-left: 4px solid var(--apple-blue); margin-bottom: 18px;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <span class="tag-action ${s.actionTag === 'LONG' ? 'long' : 'hold'}" style="font-size: 13px; padding: 4px 14px;">${s.actionTag} 決策</span>
             <span class="mono text-muted text-xs">資深策略分析師研判</span>
@@ -604,7 +632,7 @@
           <p style="margin-top: 12px; font-size: 14px; line-height: 1.7; color: var(--text-primary); font-weight: 500;">${s.takeaway}</p>
         </div>
 
-        <div class="modal-section-title">🎯 精準操作點位與估值指標</div>
+        <div class="modal-section-title" style="font-size:14px; font-weight:700; color:var(--apple-blue); margin-bottom:10px;">🎯 精準操作點位與估值指標</div>
         <table class="key-level-table">
           <tr><th>投資決策項目</th><th>具體點位與估值數據</th></tr>
           <tr><td>建議進場區間</td><td class="text-green font-bold">${s.entryRange}</td></tr>
@@ -619,41 +647,41 @@
       const risksHtml = (fh.risks || ['大盤系統性修正']).map(r => `<li>${r}</li>`).join('');
 
       container.innerHTML = `
-        <div style="background: var(--bg-subtle); padding: 16px; border-radius: 12px; border-left: 4px solid var(--accent-cyan); margin-bottom: 18px;">
-          <div style="font-size: 12px; color: var(--accent-cyan); font-weight: 800; text-transform: uppercase;" class="mono">INVESTMENT THESIS 核心論述</div>
+        <div style="background: var(--bg-subtle); padding: 16px; border-radius: 14px; border-left: 4px solid var(--apple-blue); margin-bottom: 18px;">
+          <div style="font-size: 12px; color: var(--apple-blue); font-weight: 800; text-transform: uppercase;" class="mono">INVESTMENT THESIS 核心論述</div>
           <p style="margin-top: 8px; font-size: 13.5px; line-height: 1.65; color: var(--text-primary);">${fh.thesis || s.takeaway}</p>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
-          <div style="background: rgba(52, 211, 153, 0.06); border: 1px solid rgba(52, 211, 153, 0.2); padding: 16px; border-radius: 12px;">
-            <div style="color: var(--accent-green); font-weight: 800; font-size: 13px;" class="mono">🚀 產業營運催化劑 (Catalysts)</div>
+          <div style="background: rgba(52, 199, 89, 0.08); border: 1px solid rgba(52, 199, 89, 0.2); padding: 16px; border-radius: 14px;">
+            <div style="color: var(--apple-green); font-weight: 800; font-size: 13px;" class="mono">🚀 產業營運催化劑 (Catalysts)</div>
             <ul class="bullet-list">${catalystsHtml}</ul>
           </div>
 
-          <div style="background: rgba(251, 113, 133, 0.06); border: 1px solid rgba(251, 113, 133, 0.2); padding: 16px; border-radius: 12px;">
-            <div style="color: var(--accent-rose); font-weight: 800; font-size: 13px;" class="mono">⚠️ 潛在風險點 (Risks)</div>
+          <div style="background: rgba(255, 59, 48, 0.08); border: 1px solid rgba(255, 59, 48, 0.2); padding: 16px; border-radius: 14px;">
+            <div style="color: var(--apple-red); font-weight: 800; font-size: 13px;" class="mono">⚠️ 潛在風險點 (Risks)</div>
             <ul class="bullet-list">${risksHtml}</ul>
           </div>
         </div>
 
-        <div class="modal-section-title">💡 2026 估值重估邏輯 (Valuation Logic)</div>
-        <div style="background: var(--bg-subtle); padding: 14px 18px; border-radius: 10px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+        <div class="modal-section-title" style="font-size:14px; font-weight:700; color:var(--apple-blue); margin-bottom:10px;">💡 2026 估值重估邏輯 (Valuation Logic)</div>
+        <div style="background: var(--bg-subtle); padding: 14px 18px; border-radius: 12px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
           ${fh.valuationLogic || `目標價系基於 2026 E-EPS NT$ ${s.eps2026} 乘以 ${s.peRatio2026}x 本益比。`}
         </div>
       `;
     } else if (activeModalTab === 'technical') {
       container.innerHTML = `
-        <div class="modal-section-title">📈 近 30 日 K 線與 5 大移動平均線 (MA5 / MA10 / MA20 / MA30 / MA50)</div>
-        <div id="modal-chart-container" style="width:100%; height:320px; background:var(--bg-subtle); border-radius:12px; padding:10px; margin-bottom:18px; border:1px solid var(--border-subtle);"></div>
+        <div class="modal-section-title" style="font-size:14px; font-weight:700; color:var(--apple-blue); margin-bottom:10px;">📈 近 30 日 K 線與 5 大移動平均線 (MA5 / MA10 / MA20 / MA30 / MA50)</div>
+        <div id="modal-chart-container" style="width:100%; height:320px; background:var(--bg-subtle); border-radius:14px; padding:10px; margin-bottom:18px; border:1px solid var(--border-subtle);"></div>
 
-        <div class="modal-section-title">📊 5 大均線價位矩陣表</div>
+        <div class="modal-section-title" style="font-size:14px; font-weight:700; color:var(--apple-blue); margin-bottom:10px;">📊 5 大均線價位矩陣表</div>
         <table class="key-level-table">
           <tr><th>移動平均線 (MA)</th><th>價格 (元)</th><th>均線戰術型態與防守意涵</th></tr>
-          <tr><td style="color:#f59e0b;" class="font-bold">MA5 5日均線</td><td class="mono font-bold">${ma.ma5 || '-'}</td><td>極短線攻擊發散線，守穩代表強勢主升段持續發揮</td></tr>
-          <tr><td style="color:#38bdf8;" class="font-bold">MA10 10日均線</td><td class="mono font-bold">${ma.ma10 || '-'}</td><td>短線洗盤防守支撐線，逢低回檔首要觀察買點</td></tr>
-          <tr><td style="color:#34d399;" class="font-bold">MA20 20日均線 (月線)</td><td class="mono font-bold">${ma.ma20 || '-'}</td><td>法人中短線波段生命線，站穩月線維持多頭架構</td></tr>
-          <tr><td style="color:#c084fc;" class="font-bold">MA30 30日均線</td><td class="mono font-bold">${ma.ma30 || '-'}</td><td>季前中期支撐防守線，強烈支撐區域</td></tr>
-          <tr><td style="color:#fbbf24;" class="font-bold">MA50 50日均線 (季線)</td><td class="mono font-bold">${ma.ma50 || '-'}</td><td>中長線趨勢方向線，突破防守即引發機構加碼潮</td></tr>
+          <tr><td style="color:#ff9500;" class="font-bold">MA5 5日均線</td><td class="mono font-bold">${ma.ma5 || '-'}</td><td>極短線攻擊發散線，守穩代表強勢主升段持續發揮</td></tr>
+          <tr><td style="color:#0071e3;" class="font-bold">MA10 10日均線</td><td class="mono font-bold">${ma.ma10 || '-'}</td><td>短線洗盤防守支撐線，逢低回檔首要觀察買點</td></tr>
+          <tr><td style="color:#34c759;" class="font-bold">MA20 20日均線 (月線)</td><td class="mono font-bold">${ma.ma20 || '-'}</td><td>法人中短線波段生命線，站穩月線維持多頭架構</td></tr>
+          <tr><td style="color:#af52de;" class="font-bold">MA30 30日均線</td><td class="mono font-bold">${ma.ma30 || '-'}</td><td>季前中期支撐防守線，強烈支撐區域</td></tr>
+          <tr><td style="color:#ff9500;" class="font-bold">MA50 50日均線 (季線)</td><td class="mono font-bold">${ma.ma50 || '-'}</td><td>中長線趨勢方向線，突破防守即引發機構加碼潮</td></tr>
         </table>
       `;
 
@@ -687,7 +715,7 @@
   function showErrorMessage(msg) {
     const container = document.querySelector('.dashboard-container');
     if (container) {
-      container.innerHTML = `<div style="color: var(--accent-rose); text-align: center; padding: 60px; font-size: 16px;">${msg}</div>`;
+      container.innerHTML = `<div style="color: var(--apple-red); text-align: center; padding: 60px; font-size: 16px;">${msg}</div>`;
     }
   }
 
