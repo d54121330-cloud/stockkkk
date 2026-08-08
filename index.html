@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>台股投信機構精準決策終端 | Apple macOS & iOS Cupertino Design</title>
+  <title>台股投信機構精準決策終端 | Apple Cupertino Design System</title>
 
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- ECharts 5.x CDN -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
   <style>
-/* Authentic Apple macOS / iOS Cupertino Design System */
+/* Authentic Apple Cupertino Design System - Premium Typography & Clean UI */
 :root {
   /* Apple Light Titanium Theme */
   --bg-main: #f5f5f7;
-  --bg-card: rgba(255, 255, 255, 0.85);
-  --bg-subtle: rgba(0, 0, 0, 0.04);
-  --bg-modal: rgba(255, 255, 255, 0.95);
-  --bg-segmented: #e5e5ea;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-subtle: rgba(0, 0, 0, 0.035);
+  --bg-modal: rgba(255, 255, 255, 0.96);
+  --bg-segmented: #e3e3e8;
 
   --text-primary: #1d1d1f;
-  --text-secondary: #515154;
+  --text-secondary: #424245;
   --text-muted: #86868b;
 
   --apple-blue: #0071e3;
@@ -36,10 +36,9 @@
 
   --border-subtle: rgba(0, 0, 0, 0.08);
   --border-highlight: rgba(0, 113, 227, 0.3);
-  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang TC", "Inter", "Helvetica Neue", sans-serif;
 
   --transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -47,7 +46,7 @@
 /* Apple Dark Mode Variables */
 [data-theme="dark"] {
   --bg-main: #000000;
-  --bg-card: rgba(28, 28, 30, 0.82);
+  --bg-card: rgba(28, 28, 30, 0.85);
   --bg-subtle: rgba(255, 255, 255, 0.06);
   --bg-modal: rgba(28, 28, 30, 0.96);
   --bg-segmented: rgba(118, 118, 128, 0.24);
@@ -77,7 +76,7 @@ body {
   transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
-.mono { font-family: var(--font-mono); }
+.mono { font-family: var(--font-sans); font-weight: 600; }
 .font-bold { font-weight: 700; }
 .text-green { color: var(--apple-green) !important; }
 .text-cyan { color: var(--apple-blue) !important; }
@@ -110,12 +109,11 @@ body {
 .logo-badge {
   background: var(--apple-blue);
   color: #ffffff;
-  font-weight: 800;
-  font-family: var(--font-sans);
+  font-weight: 700;
   font-size: 13px;
   padding: 4px 12px;
   border-radius: 100px;
-  box-shadow: 0 4px 14px rgba(0, 113, 227, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
 }
 
 .header-brand h1 {
@@ -151,13 +149,13 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--apple-green);
   background: rgba(52, 199, 89, 0.12);
   padding: 5px 14px;
   border-radius: 100px;
   border: 1px solid rgba(52, 199, 89, 0.25);
+  font-weight: 500;
 }
 
 .status-dot {
@@ -219,7 +217,7 @@ body {
 .ticker-chip:hover .ticker-name, .ticker-chip.active .ticker-name { color: #ffffff; }
 .ticker-chip:hover .ticker-chg, .ticker-chip.active .ticker-chg { color: #ffffff !important; }
 
-.ticker-sym { font-weight: 800; color: var(--apple-blue); font-family: var(--font-mono); }
+.ticker-sym { font-weight: 700; color: var(--apple-blue); }
 .ticker-name { color: var(--text-primary); font-weight: 600; }
 
 /* Dashboard Container */
@@ -241,6 +239,49 @@ body {
   backdrop-filter: blur(30px) saturate(190%);
   box-shadow: var(--card-shadow);
 }
+
+/* Executive Summary Card (摘要簡介卡片) */
+.summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px 26px;
+  backdrop-filter: blur(30px) saturate(190%);
+  box-shadow: var(--card-shadow);
+}
+
+.summary-header {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--apple-blue);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1000px) {
+  .summary-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.summary-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  padding: 14px 18px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.summary-item-label { font-size: 11.5px; color: var(--text-muted); font-weight: 500; }
+.summary-item-value { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.summary-item-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
 
 /* Apple Segmented Controls */
 .filter-bar {
@@ -282,7 +323,7 @@ body {
   border: none;
   color: var(--text-secondary);
   font-family: var(--font-sans);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   padding: 6px 16px;
   border-radius: 100px;
@@ -294,10 +335,10 @@ body {
   background: #ffffff;
   color: #000000;
   font-weight: 700;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 [data-theme="dark"] .filter-btn.active {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   color: #000000;
 }
 
@@ -342,26 +383,6 @@ body {
   transform: translateY(-50%);
   color: var(--text-muted);
   font-size: 12px;
-}
-
-/* Screener Sliders Bar */
-.screener-bar {
-  display: flex;
-  gap: 28px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-subtle);
-  margin-top: 14px;
-  flex-wrap: wrap;
-}
-.screener-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-.screener-item input[type=range] {
-  accent-color: var(--apple-blue);
 }
 
 /* Master Decision Table */
@@ -417,8 +438,7 @@ body {
 .star-btn.starred, .star-btn:hover { color: var(--apple-amber); }
 
 .symbol-code {
-  font-family: var(--font-mono);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 14px;
   color: var(--apple-blue);
 }
@@ -432,7 +452,7 @@ body {
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 500;
   padding: 3px 12px;
   border-radius: 100px;
@@ -459,8 +479,7 @@ body {
 }
 
 .upside-pill {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--apple-green);
   background: rgba(52, 199, 89, 0.15);
@@ -568,7 +587,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: var(--transition-smooth);
-  box-shadow: 0 4px 14px rgba(0, 113, 227, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
 }
 .open-modal-btn:hover { background: var(--apple-blue-hover); }
 
@@ -696,13 +715,12 @@ body {
   border: 1px solid var(--border-subtle);
   font-size: 13px;
 }
-.key-level-table th { background: var(--bg-subtle); color: var(--text-muted); font-family: var(--font-mono); }
+.key-level-table th { background: var(--bg-subtle); color: var(--text-muted); }
 
 .terminal-footer {
   text-align: center;
   padding: 28px;
   color: var(--text-muted);
-  font-family: var(--font-mono);
   font-size: 11px;
   border-top: 1px solid var(--border-subtle);
 }
@@ -735,6 +753,35 @@ body {
 
   <!-- Main Workspace -->
   <main class="dashboard-container">
+
+    <!-- Executive Summary Card (Apple 精準戰略摘要簡介) -->
+    <div class="summary-card">
+      <div class="summary-header">
+         投信機構戰略總覽與市場精準摘要
+      </div>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="summary-item-label">全市場籌碼動向</span>
+          <span class="summary-item-value text-green">12 做多 (92%)</span>
+          <span class="summary-item-sub">1 檔維持觀望階段</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-item-label">領航四大核心產業</span>
+          <span class="summary-item-value text-cyan" style="font-size: 13.5px;">低軌衛星 / 先進封裝</span>
+          <span class="summary-item-sub">矽光子 CPO 與水冷散熱</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-item-label">平均估值潛在空間</span>
+          <span class="summary-item-value text-amber">+22.8%</span>
+          <span class="summary-item-sub">Re-Rating 目標價調升</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-item-label">機構勝率風控守則</span>
+          <span class="summary-item-value text-green" style="font-size: 13.5px;">站穩月線 (MA20) 控盤</span>
+          <span class="summary-item-sub">逢低分批回檔偏多佈局</span>
+        </div>
+      </div>
+    </div>
 
     <!-- Filter Card -->
     <div class="glass-card">
@@ -770,18 +817,6 @@ body {
         <div class="search-box">
           <span class="search-icon">🔍</span>
           <input type="text" id="stock-search-input" class="search-input" placeholder="搜尋股票代號或名稱...">
-        </div>
-      </div>
-
-      <!-- Quant Screener Sliders -->
-      <div class="screener-bar">
-        <div class="screener-item">
-          <span>最小潛在漲幅: <b class="mono text-green" id="screener-upside-val">0%</b></span>
-          <input type="range" id="screener-upside" min="0" max="30" step="1" value="0">
-        </div>
-        <div class="screener-item">
-          <span>最高預估本益比 (P/E): <b class="mono text-amber" id="screener-pe-val">40x</b></span>
-          <input type="range" id="screener-pe" min="10" max="40" step="1" value="40">
         </div>
       </div>
     </div>
@@ -843,7 +878,7 @@ body {
     <div class="modal-container">
       <div class="modal-header">
         <div class="modal-title-group" style="display: flex; align-items: center; gap: 10px;">
-          <span id="modal-stock-symbol" class="mono text-cyan" style="font-size: 20px; font-weight: 800;">3217</span>
+          <span id="modal-stock-symbol" class="text-cyan" style="font-size: 20px; font-weight: 800;">3217</span>
           <span id="modal-stock-name" style="font-size: 16px; font-weight: 700;">優群</span>
           <span id="modal-stock-category" class="category-chip">SOCAMM2 次世代記憶體</span>
         </div>
@@ -863,13 +898,13 @@ body {
   </div>
 
   <footer class="terminal-footer">
-    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Titanium Edition v4.0</p>
+    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v5.0</p>
   </footer>
 
   <!-- Data & Application Scripts with Cache-Busting Parameters -->
-  <script src="data/stock_database.js?v=4.0"></script>
-  <script src="js/data_loader.js?v=4.0"></script>
-  <script src="js/charts.js?v=4.0"></script>
-  <script src="js/app.js?v=4.0"></script>
+  <script src="data/stock_database.js?v=5.0"></script>
+  <script src="js/data_loader.js?v=5.0"></script>
+  <script src="js/charts.js?v=5.0"></script>
+  <script src="js/app.js?v=5.0"></script>
 </body>
 </html>
