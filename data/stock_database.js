@@ -1,9 +1,10 @@
 window.EMBEDDED_STOCK_DATA = {
   "metadata": {
-    "generatedAt": "2026-08-08 13:25:22",
+    "generatedAt": "2026-08-08 13:29:15",
     "advisorName": "投信資深策略分析師 (Institutional Senior Analyst)",
     "systemTitle": "Taiwan Stock Institutional Research & Analytics Terminal",
-    "totalStocks": 13,
+    "totalDefaultStocks": 13,
+    "totalVaultStocks": 1,
     "updateMethod": "Real-Market TWSE/TPEx Yahoo API Engine",
     "technicalAnalysis": "100% Accurate Real Historical Data (O/H/L/C/V)"
   },
@@ -24,7 +25,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 11.5,
-        "peRatio2026": 18.96
+        "peRatio2026": 18.96,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -452,7 +464,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Neutral Hold",
         "eps2026": 14.2,
-        "peRatio2026": 16.41
+        "peRatio2026": 16.41,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -880,7 +903,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Buy",
         "eps2026": 10.8,
-        "peRatio2026": 17.91
+        "peRatio2026": 17.91,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -1308,7 +1342,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 58.0,
-        "peRatio2026": 21.29
+        "peRatio2026": 21.29,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -1736,7 +1781,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 70.0,
-        "peRatio2026": 33.85
+        "peRatio2026": 33.85,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -2164,7 +2220,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Underperform",
         "eps2026": 12.0,
-        "peRatio2026": 21.88
+        "peRatio2026": 21.88,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -2592,7 +2659,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Sell",
         "eps2026": 1.8,
-        "peRatio2026": 26.41
+        "peRatio2026": 26.41,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -3020,7 +3098,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 95.0,
-        "peRatio2026": 23.31
+        "peRatio2026": 23.31,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -3448,7 +3537,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 18.0,
-        "peRatio2026": 32.33
+        "peRatio2026": 32.33,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -3876,7 +3976,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Buy",
         "eps2026": 18.5,
-        "peRatio2026": 22.75
+        "peRatio2026": 22.75,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -4304,7 +4415,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 98.0,
-        "peRatio2026": 28.41
+        "peRatio2026": 28.41,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -4732,7 +4854,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Buy",
         "eps2026": 45.0,
-        "peRatio2026": 22.55
+        "peRatio2026": 22.55,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -5160,7 +5293,18 @@ window.EMBEDDED_STOCK_DATA = {
       "fundamentalHighlights": {
         "rating": "Neutral Hold",
         "eps2026": 10.5,
-        "peRatio2026": 13.52
+        "peRatio2026": 13.52,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
       },
       "priceHistory": [
         {
@@ -5570,6 +5714,447 @@ window.EMBEDDED_STOCK_DATA = {
         "ma20": 147.72,
         "ma30": 157.28,
         "ma50": 166.12
+      }
+    }
+  ],
+  "vaultRecommendations": [
+    {
+      "symbol": "2327",
+      "name": "國巨",
+      "category": "專題研究：被動元件與 AI MLCC",
+      "categoryKey": "special_vault",
+      "actionTag": "LONG",
+      "currentPrice": 540.0,
+      "changePercent": -5.26,
+      "targetPrice": 680.0,
+      "stopLoss": 486.0,
+      "entryRange": "633.4 - 534.6 元",
+      "upsidePercent": "+25.93%",
+      "takeaway": "★ 【獨立專題觀察庫】收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。預估 2026 EPS NT$42.50 (YoY +28.6%)。建議資金組態：首批建倉 15%，目標空間 +25.93%，停損位 495.0 元。",
+      "fundamentalHighlights": {
+        "rating": "Strong Buy",
+        "eps2026": 42.5,
+        "peRatio2026": 16.0,
+        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "catalysts": [
+          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
+          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
+          "車用與工控高階被動元件合約價維持穩健"
+        ],
+        "risks": [
+          "全球智聯網需求放緩",
+          "日系同業高階產能擴張削價"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+      },
+      "priceHistory": [
+        {
+          "date": "2026-05-29",
+          "open": 775.0,
+          "high": 784.0,
+          "low": 735.0,
+          "close": 738.0,
+          "volume": 27645
+        },
+        {
+          "date": "2026-06-01",
+          "open": 765.0,
+          "high": 811.0,
+          "low": 765.0,
+          "close": 790.0,
+          "volume": 30698
+        },
+        {
+          "date": "2026-06-02",
+          "open": 771.0,
+          "high": 847.0,
+          "low": 757.0,
+          "close": 846.0,
+          "volume": 21640
+        },
+        {
+          "date": "2026-06-03",
+          "open": 810.0,
+          "high": 844.0,
+          "low": 810.0,
+          "close": 820.0,
+          "volume": 15243
+        },
+        {
+          "date": "2026-06-04",
+          "open": 775.0,
+          "high": 788.0,
+          "low": 743.0,
+          "close": 743.0,
+          "volume": 20895
+        },
+        {
+          "date": "2026-06-05",
+          "open": 708.0,
+          "high": 778.0,
+          "low": 670.0,
+          "close": 769.0,
+          "volume": 26975
+        },
+        {
+          "date": "2026-06-08",
+          "open": 693.0,
+          "high": 751.0,
+          "low": 693.0,
+          "close": 751.0,
+          "volume": 23963
+        },
+        {
+          "date": "2026-06-09",
+          "open": 790.0,
+          "high": 826.0,
+          "low": 772.0,
+          "close": 826.0,
+          "volume": 48459
+        },
+        {
+          "date": "2026-06-10",
+          "open": 864.0,
+          "high": 908.0,
+          "low": 803.0,
+          "close": 819.0,
+          "volume": 92059
+        },
+        {
+          "date": "2026-06-11",
+          "open": 850.0,
+          "high": 861.0,
+          "low": 761.0,
+          "close": 842.0,
+          "volume": 113782
+        },
+        {
+          "date": "2026-06-12",
+          "open": 919.0,
+          "high": 919.0,
+          "low": 852.0,
+          "close": 855.0,
+          "volume": 86064
+        },
+        {
+          "date": "2026-06-15",
+          "open": 921.0,
+          "high": 940.0,
+          "low": 921.0,
+          "close": 940.0,
+          "volume": 39733
+        },
+        {
+          "date": "2026-06-16",
+          "open": 970.0,
+          "high": 1000.0,
+          "low": 950.0,
+          "close": 950.0,
+          "volume": 77130
+        },
+        {
+          "date": "2026-06-17",
+          "open": 936.0,
+          "high": 998.0,
+          "low": 930.0,
+          "close": 984.0,
+          "volume": 54391
+        },
+        {
+          "date": "2026-06-18",
+          "open": 1015.0,
+          "high": 1080.0,
+          "low": 974.0,
+          "close": 1080.0,
+          "volume": 90546
+        },
+        {
+          "date": "2026-06-22",
+          "open": 1115.0,
+          "high": 1120.0,
+          "low": 1040.0,
+          "close": 1065.0,
+          "volume": 59102
+        },
+        {
+          "date": "2026-06-23",
+          "open": 1060.0,
+          "high": 1085.0,
+          "low": 1020.0,
+          "close": 1020.0,
+          "volume": 44344
+        },
+        {
+          "date": "2026-06-24",
+          "open": 1005.0,
+          "high": 1075.0,
+          "low": 985.0,
+          "close": 1050.0,
+          "volume": 47711
+        },
+        {
+          "date": "2026-06-25",
+          "open": 1070.0,
+          "high": 1155.0,
+          "low": 1040.0,
+          "close": 1125.0,
+          "volume": 58912
+        },
+        {
+          "date": "2026-06-26",
+          "open": 1100.0,
+          "high": 1100.0,
+          "low": 1015.0,
+          "close": 1015.0,
+          "volume": 52009
+        },
+        {
+          "date": "2026-06-29",
+          "open": 985.0,
+          "high": 1065.0,
+          "low": 979.0,
+          "close": 1040.0,
+          "volume": 39888
+        },
+        {
+          "date": "2026-06-30",
+          "open": 1065.0,
+          "high": 1140.0,
+          "low": 1045.0,
+          "close": 1140.0,
+          "volume": 55005
+        },
+        {
+          "date": "2026-07-01",
+          "open": 1200.0,
+          "high": 1220.0,
+          "low": 1130.0,
+          "close": 1140.0,
+          "volume": 69879
+        },
+        {
+          "date": "2026-07-02",
+          "open": 1095.0,
+          "high": 1125.0,
+          "low": 1040.0,
+          "close": 1055.0,
+          "volume": 43599
+        },
+        {
+          "date": "2026-07-03",
+          "open": 1010.0,
+          "high": 1075.0,
+          "low": 999.0,
+          "close": 1045.0,
+          "volume": 36974
+        },
+        {
+          "date": "2026-07-06",
+          "open": 1045.0,
+          "high": 1055.0,
+          "low": 985.0,
+          "close": 1005.0,
+          "volume": 39646
+        },
+        {
+          "date": "2026-07-07",
+          "open": 1000.0,
+          "high": 1025.0,
+          "low": 905.0,
+          "close": 905.0,
+          "volume": 61372
+        },
+        {
+          "date": "2026-07-08",
+          "open": 906.0,
+          "high": 930.0,
+          "low": 856.0,
+          "close": 891.0,
+          "volume": 67677
+        },
+        {
+          "date": "2026-07-09",
+          "open": 915.0,
+          "high": 948.0,
+          "low": 900.0,
+          "close": 900.0,
+          "volume": 49819
+        },
+        {
+          "date": "2026-07-10",
+          "open": 900.0,
+          "high": 900.0,
+          "low": 900.0,
+          "close": 900.0,
+          "volume": 0
+        },
+        {
+          "date": "2026-07-13",
+          "open": 921.0,
+          "high": 921.0,
+          "low": 810.0,
+          "close": 816.0,
+          "volume": 67936
+        },
+        {
+          "date": "2026-07-14",
+          "open": 798.0,
+          "high": 823.0,
+          "low": 737.0,
+          "close": 778.0,
+          "volume": 78184
+        },
+        {
+          "date": "2026-07-15",
+          "open": 799.0,
+          "high": 813.0,
+          "low": 773.0,
+          "close": 798.0,
+          "volume": 50194
+        },
+        {
+          "date": "2026-07-16",
+          "open": 775.0,
+          "high": 807.0,
+          "low": 775.0,
+          "close": 776.0,
+          "volume": 41847
+        },
+        {
+          "date": "2026-07-17",
+          "open": 710.0,
+          "high": 724.0,
+          "low": 699.0,
+          "close": 699.0,
+          "volume": 31497
+        },
+        {
+          "date": "2026-07-20",
+          "open": 663.0,
+          "high": 666.0,
+          "low": 630.0,
+          "close": 630.0,
+          "volume": 30769
+        },
+        {
+          "date": "2026-07-21",
+          "open": 621.0,
+          "high": 680.0,
+          "low": 608.0,
+          "close": 670.0,
+          "volume": 92602
+        },
+        {
+          "date": "2026-07-22",
+          "open": 713.0,
+          "high": 730.0,
+          "low": 676.0,
+          "close": 703.0,
+          "volume": 66797
+        },
+        {
+          "date": "2026-07-23",
+          "open": 708.0,
+          "high": 732.0,
+          "low": 681.0,
+          "close": 696.0,
+          "volume": 58538
+        },
+        {
+          "date": "2026-07-24",
+          "open": 679.0,
+          "high": 685.0,
+          "low": 639.0,
+          "close": 642.0,
+          "volume": 40347
+        },
+        {
+          "date": "2026-07-27",
+          "open": 650.0,
+          "high": 655.0,
+          "low": 590.0,
+          "close": 625.0,
+          "volume": 55223
+        },
+        {
+          "date": "2026-07-28",
+          "open": 575.0,
+          "high": 582.0,
+          "low": 563.0,
+          "close": 563.0,
+          "volume": 32130
+        },
+        {
+          "date": "2026-07-29",
+          "open": 539.0,
+          "high": 545.0,
+          "low": 507.0,
+          "close": 507.0,
+          "volume": 49885
+        },
+        {
+          "date": "2026-07-30",
+          "open": 479.5,
+          "high": 527.0,
+          "low": 456.5,
+          "close": 456.5,
+          "volume": 104022
+        },
+        {
+          "date": "2026-07-31",
+          "open": 502.0,
+          "high": 502.0,
+          "low": 502.0,
+          "close": 502.0,
+          "volume": 5993
+        },
+        {
+          "date": "2026-08-03",
+          "open": 534.0,
+          "high": 552.0,
+          "low": 526.0,
+          "close": 552.0,
+          "volume": 21981
+        },
+        {
+          "date": "2026-08-04",
+          "open": 581.0,
+          "high": 583.0,
+          "low": 545.0,
+          "close": 566.0,
+          "volume": 83823
+        },
+        {
+          "date": "2026-08-05",
+          "open": 608.0,
+          "high": 618.0,
+          "low": 568.0,
+          "close": 578.0,
+          "volume": 61153
+        },
+        {
+          "date": "2026-08-06",
+          "open": 563.0,
+          "high": 578.0,
+          "low": 536.0,
+          "close": 570.0,
+          "volume": 51720
+        },
+        {
+          "date": "2026-08-07",
+          "open": 560.0,
+          "high": 578.0,
+          "low": 531.0,
+          "close": 540.0,
+          "volume": 42221
+        }
+      ],
+      "maMetrics": {
+        "ma5": 561.2,
+        "ma10": 545.95,
+        "ma20": 633.38,
+        "ma30": 756.28,
+        "ma50": 814.33
       }
     }
   ]
