@@ -76,7 +76,6 @@ body {
   transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
-.mono { font-family: var(--font-sans); font-weight: 600; }
 .font-bold { font-weight: 700; }
 .text-green { color: var(--apple-green) !important; }
 .text-cyan { color: var(--apple-blue) !important; }
@@ -126,7 +125,23 @@ body {
 .header-status-group {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+}
+
+.methodology-btn {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  color: var(--apple-blue);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.methodology-btn:hover {
+  background: var(--apple-blue);
+  color: #ffffff;
 }
 
 .theme-toggle-btn {
@@ -230,17 +245,7 @@ body {
   gap: 24px;
 }
 
-/* Glassmorphic Apple Cards */
-.glass-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 20px;
-  padding: 22px 26px;
-  backdrop-filter: blur(30px) saturate(190%);
-  box-shadow: var(--card-shadow);
-}
-
-/* Executive Summary Card (摘要簡介卡片) */
+/* Executive Summary Card */
 .summary-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -257,7 +262,7 @@ body {
   margin-bottom: 12px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
 }
 
 .summary-grid {
@@ -280,10 +285,19 @@ body {
   gap: 4px;
 }
 .summary-item-label { font-size: 11.5px; color: var(--text-muted); font-weight: 500; }
-.summary-item-value { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.summary-item-value { font-size: 15px; font-weight: 700; color: var(--text-primary); }
 .summary-item-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
 
-/* Apple Segmented Controls */
+/* Filter Card */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 22px 26px;
+  backdrop-filter: blur(30px) saturate(190%);
+  box-shadow: var(--card-shadow);
+}
+
 .filter-bar {
   display: flex;
   justify-content: space-between;
@@ -472,6 +486,11 @@ body {
   color: var(--apple-green);
   border: 1px solid rgba(52, 199, 89, 0.3);
 }
+.tag-action.short {
+  background: rgba(255, 59, 48, 0.15);
+  color: var(--apple-red);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+}
 .tag-action.hold {
   background: rgba(255, 149, 0, 0.15);
   color: var(--apple-amber);
@@ -481,14 +500,14 @@ body {
 .upside-pill {
   font-size: 11px;
   font-weight: 700;
-  color: var(--apple-green);
-  background: rgba(52, 199, 89, 0.15);
   padding: 2px 7px;
   border-radius: 6px;
   margin-left: 6px;
 }
+.upside-pill.up { color: var(--apple-green); background: rgba(52, 199, 89, 0.15); }
+.upside-pill.down { color: var(--apple-red); background: rgba(255, 59, 48, 0.15); }
 
-.col-rationale { max-width: 340px; }
+.col-rationale { max-width: 360px; }
 .rationale-text {
   color: var(--text-secondary);
   font-size: 12.5px;
@@ -607,7 +626,7 @@ body {
   height: 440px;
 }
 
-/* Modal Drawer */
+/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -735,6 +754,9 @@ body {
       <h1>台股投信機構精準決策終端</h1>
     </div>
     <div class="header-status-group">
+      <button id="open-methodology-btn" class="methodology-btn">
+        ℹ️ 算術白皮書
+      </button>
       <button id="theme-toggle-btn" class="theme-toggle-btn">
         ☀️ 淺色模式
       </button>
@@ -754,16 +776,17 @@ body {
   <!-- Main Workspace -->
   <main class="dashboard-container">
 
-    <!-- Executive Summary Card (Apple 精準戰略摘要簡介) -->
+    <!-- Executive Summary Card -->
     <div class="summary-card">
       <div class="summary-header">
-         投信機構戰略總覽與市場精準摘要
+        <span> 投信機構戰略總覽與市場精準摘要</span>
+        <button class="methodology-btn" onclick="window.AppModule.openMethodologyModal()" style="font-size: 11.5px; padding: 3px 12px;">ℹ️ 檢視指標計算公式白皮書</button>
       </div>
       <div class="summary-grid">
         <div class="summary-item">
-          <span class="summary-item-label">全市場籌碼動向</span>
-          <span class="summary-item-value text-green">12 做多 (92%)</span>
-          <span class="summary-item-sub">1 檔維持觀望階段</span>
+          <span class="summary-item-label">全市場籌碼與策略佈局</span>
+          <span class="summary-item-value text-green">9 做多 / 2 做空 / 2 觀望</span>
+          <span class="summary-item-sub">多空雙向對沖風控策略</span>
         </div>
         <div class="summary-item">
           <span class="summary-item-label">領航四大核心產業</span>
@@ -771,14 +794,14 @@ body {
           <span class="summary-item-sub">矽光子 CPO 與水冷散熱</span>
         </div>
         <div class="summary-item">
-          <span class="summary-item-label">平均估值潛在空間</span>
-          <span class="summary-item-value text-amber">+22.8%</span>
+          <span class="summary-item-label">做多標的平均估值空間</span>
+          <span class="summary-item-value text-green">+21.9%</span>
           <span class="summary-item-sub">Re-Rating 目標價調升</span>
         </div>
         <div class="summary-item">
-          <span class="summary-item-label">機構勝率風控守則</span>
-          <span class="summary-item-value text-green" style="font-size: 13.5px;">站穩月線 (MA20) 控盤</span>
-          <span class="summary-item-sub">逢低分批回檔偏多佈局</span>
+          <span class="summary-item-label">做空對沖標的目標下修</span>
+          <span class="summary-item-value text-rose">-13.2%</span>
+          <span class="summary-item-sub">基本面與均線轉空標的</span>
         </div>
       </div>
     </div>
@@ -803,9 +826,10 @@ body {
           <div class="filter-group">
             <label>決策:</label>
             <div id="filter-action-btns" class="segmented-control">
-              <button class="filter-btn active" data-value="all">全部</button>
-              <button class="filter-btn text-green" data-value="LONG">做多 LONG (12)</button>
-              <button class="filter-btn text-amber" data-value="HOLD">觀望 HOLD (1)</button>
+              <button class="filter-btn active" data-value="all">全部 (13)</button>
+              <button class="filter-btn text-green" data-value="LONG">做多 LONG (9)</button>
+              <button class="filter-btn text-rose" data-value="SHORT">做空 SHORT (2)</button>
+              <button class="filter-btn text-amber" data-value="HOLD">觀望 HOLD (2)</button>
             </div>
           </div>
 
@@ -834,7 +858,7 @@ body {
             <th>建議進場點</th>
             <th>目標價 (潛在空間)</th>
             <th>停損價</th>
-            <th>精準核心邏輯 (Key Rationale)</th>
+            <th>機構量化投資論述與勝率研判 (INSTITUTIONAL QUANT RATIONALE)</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -844,7 +868,7 @@ body {
       </table>
     </div>
 
-    <!-- Deep Dive Workspace with Multi-Chart Mode Switcher -->
+    <!-- Deep Dive Workspace with Multi-Chart Mode Switcher (Removed 5D Radar Chart) -->
     <section class="deep-dive-grid">
       <div id="advisor-focus-card" class="advisor-focus-card">
         <!-- Dynamically populated -->
@@ -854,8 +878,7 @@ body {
         <div class="chart-header">
           <div class="segmented-control">
             <button class="filter-btn chart-mode-tab active" data-mode="kline">📈 30D K線與5大均線</button>
-            <button class="filter-btn chart-mode-tab" data-mode="profile">📊 法人籌碼分佈</button>
-            <button class="filter-btn chart-mode-tab" data-mode="radar">🎯 5維度能力雷達</button>
+            <button class="filter-btn chart-mode-tab" data-mode="profile">📊 法人籌碼分佈 (Price-Volume POC)</button>
             <button class="filter-btn chart-mode-tab" data-mode="oscillator">📉 技術指標 (RSI/MACD/KD)</button>
           </div>
 
@@ -872,6 +895,76 @@ body {
     </section>
 
   </main>
+
+  <!-- Quant Methodology & Formula Whitepaper Modal -->
+  <div id="methodology-modal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-group" style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 18px; font-weight: 800; color: var(--apple-blue);">ℹ️ 機構量化數據與指標算術邏輯白皮書 (Quant Methodology)</span>
+        </div>
+        <button id="close-methodology-btn" class="close-modal-btn">&times;</button>
+      </div>
+
+      <div class="modal-body" style="padding: 26px 34px;">
+        <div style="background: var(--bg-subtle); padding: 16px; border-radius: 14px; border-left: 4px solid var(--apple-blue); margin-bottom: 20px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--apple-blue);">📌 數據透明度與量化計算聲明</div>
+          <p style="margin-top: 6px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.6;">
+            本系統所有 K 線、移動平均線、指標與法人籌碼分佈均直接對接證交所與櫃買中心實時成交數據，並通過標準金融數學公式計算，絕無隨機假資料。
+          </p>
+        </div>
+
+        <!-- Section 1 -->
+        <div style="margin-bottom: 22px;">
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">1. 法人籌碼分佈 (Price-Volume Profile & POC) 計算方法</h3>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6;">
+            採用近 30 個交易日之成交量矩陣進行分位數彙整：
+            <br/>• <b>價位帶劃分</b>：取近 30 日最高價 $P_{max}$ 與最低价 $P_{min}$，均分為 10 個區間帶 $Bin_i = [P_{min} + i \cdot \Delta P, P_{min} + (i+1) \cdot \Delta P]$。
+            <br/>• <b>成交量歸戶公式</b>：$Volume(Bin_i) = \sum_{t=1}^{30} V_t \cdot \mathbb{I}(Close_t \in Bin_i)$
+            <br/>• <b>籌碼密集峰值 (Point of Control, POC)</b>：柱體最長之區間帶為機構法人主力成本集中區，即為關鍵支撐/壓力位。
+          </p>
+        </div>
+
+        <!-- Section 2 -->
+        <div style="margin-bottom: 22px;">
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">2. 技術指標精準算術公式</h3>
+          <table class="key-level-table">
+            <tr><th>指標名稱</th><th>精準數學公式與計算參數</th><th>實務判讀規則</th></tr>
+            <tr>
+              <td class="font-bold">5大移動平均線<br/>(MA5/10/20/30/50)</td>
+              <td>$$MA_n = \frac{1}{n} \sum_{i=0}^{n-1} Close_{t-i}$$</td>
+              <td>MA20 (20日線) 視為法人月線生命線。股價高於 MA20 且 MA20 向上代表強勢多頭。</td>
+            </tr>
+            <tr>
+              <td class="font-bold">Wilder's RSI(14)</td>
+              <td>$$RS = \frac{AvgGain_{14}}{AvgLoss_{14}}, \quad RSI = 100 - \frac{100}{1 + RS}$$</td>
+              <td>RSI > 70 為超買區，RSI < 30 為超賣區；RSI 向上突破 50 中軸確認波段動能發散。</td>
+            </tr>
+            <tr>
+              <td class="font-bold">MACD (12, 26, 9)</td>
+              <td>$$DIF = EMA_{12} - EMA_{26}, \quad DEM = EMA_9(DIF)$$<br/>$$Histogram = (DIF - DEM) \times 2$$</td>
+              <td>DIF 向上突破 DEM 形成黃金交叉；柱狀體由紅轉綠擴大代表法人籌碼追價動能強勁。</td>
+            </tr>
+            <tr>
+              <td class="font-bold">KD (9, 3, 3) 隨機指標</td>
+              <td>$$RSV = \frac{C_t - L_9}{H_9 - L_9} \times 100$$<br/>$$K_t = \frac{2}{3}K_{t-1} + \frac{1}{3}RSV_t, \quad D_t = \frac{2}{3}D_{t-1} + \frac{1}{3}K_t$$</td>
+              <td>K 值向上穿過 D 值為金叉買點；低檔 K < 20 形成金叉為極高勝率波段起漲點。</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Section 3 -->
+        <div>
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">3. 多空雙向決策與防守點位機制</h3>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6;">
+            • <b>做多 (LONG)</b>：基本面營運成長且股價站穩 MA20 月線，目標價依據 $2026E \text{ EPS} \times P/E_{target}$。
+            <br/>• <b>做空 (SHORT)</b>：產業面面臨削價競爭或跌破 MA50 季線，目標價依據估值下修 $2026E \text{ EPS} \times P/E_{lower}$。
+            <br/>• <b>觀望 (HOLD)</b>：區間震盪無明確突破，建議資金配置 0%，等待放量突破再行操作。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Research Modal Drawer -->
   <div id="stock-modal" class="modal-overlay">
@@ -898,13 +991,13 @@ body {
   </div>
 
   <footer class="terminal-footer">
-    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v5.0</p>
+    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v6.0</p>
   </footer>
 
   <!-- Data & Application Scripts with Cache-Busting Parameters -->
-  <script src="data/stock_database.js?v=5.0"></script>
-  <script src="js/data_loader.js?v=5.0"></script>
-  <script src="js/charts.js?v=5.0"></script>
-  <script src="js/app.js?v=5.0"></script>
+  <script src="data/stock_database.js?v=6.0"></script>
+  <script src="js/data_loader.js?v=6.0"></script>
+  <script src="js/charts.js?v=6.0"></script>
+  <script src="js/app.js?v=6.0"></script>
 </body>
 </html>
