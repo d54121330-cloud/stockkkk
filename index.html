@@ -144,6 +144,22 @@ body {
   color: #ffffff;
 }
 
+.vault-nav-btn {
+  background: rgba(175, 82, 222, 0.12);
+  border: 1px solid rgba(175, 82, 222, 0.3);
+  color: var(--apple-purple);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.vault-nav-btn:hover, .vault-nav-btn.active {
+  background: var(--apple-purple);
+  color: #ffffff;
+}
+
 .theme-toggle-btn {
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
@@ -754,6 +770,9 @@ body {
       <h1>台股投信機構精準決策終端</h1>
     </div>
     <div class="header-status-group">
+      <button id="open-vault-btn" class="vault-nav-btn">
+        📁 專題研究庫 (國巨 2327)
+      </button>
       <button id="open-methodology-btn" class="methodology-btn">
         ℹ️ 算術白皮書
       </button>
@@ -799,9 +818,9 @@ body {
           <span class="summary-item-sub">Re-Rating 目標價調升</span>
         </div>
         <div class="summary-item">
-          <span class="summary-item-label">做空對沖標的目標下修</span>
-          <span class="summary-item-value text-rose">-13.2%</span>
-          <span class="summary-item-sub">基本面與均線轉空標的</span>
+          <span class="summary-item-label">按需獨立專題觀察庫</span>
+          <span class="summary-item-value text-purple" style="color: var(--apple-purple);">國巨 (2327) 已載入</span>
+          <span class="summary-item-sub">點擊右上方按鈕獨立開啟</span>
         </div>
       </div>
     </div>
@@ -813,23 +832,23 @@ body {
           <div class="filter-group">
             <label>產業概念:</label>
             <div id="filter-theme-btns" class="segmented-control">
-              <button class="filter-btn active" data-value="all">全部 (13)</button>
+              <button class="filter-btn active" data-value="all">常態清單 (13)</button>
               <button class="filter-btn" data-value="leo_sat">低軌衛星 (4)</button>
               <button class="filter-btn" data-value="adv_pkg">先進封裝 (3)</button>
               <button class="filter-btn" data-value="cpo_photonics">矽光子 CPO (2)</button>
               <button class="filter-btn" data-value="liquid_cooling">水冷散熱 (2)</button>
-              <button class="filter-btn" data-value="ai_dpu">AI 網通 DPU (1)</button>
-              <button class="filter-btn" data-value="socamm2">SOCAMM2 族群 (1)</button>
+              <button class="filter-btn" data-value="ai_dpu">AI 網通 (1)</button>
+              <button class="filter-btn" data-value="special_vault" style="color: var(--apple-purple); font-weight:700;">📁 專題研究庫 (1)</button>
             </div>
           </div>
 
           <div class="filter-group">
             <label>決策:</label>
             <div id="filter-action-btns" class="segmented-control">
-              <button class="filter-btn active" data-value="all">全部 (13)</button>
-              <button class="filter-btn text-green" data-value="LONG">做多 LONG (9)</button>
-              <button class="filter-btn text-rose" data-value="SHORT">做空 SHORT (2)</button>
-              <button class="filter-btn text-amber" data-value="HOLD">觀望 HOLD (2)</button>
+              <button class="filter-btn active" data-value="all">全部</button>
+              <button class="filter-btn text-green" data-value="LONG">做多 LONG</button>
+              <button class="filter-btn text-rose" data-value="SHORT">做空 SHORT</button>
+              <button class="filter-btn text-amber" data-value="HOLD">觀望 HOLD</button>
             </div>
           </div>
 
@@ -840,7 +859,7 @@ body {
 
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="stock-search-input" class="search-input" placeholder="搜尋股票代號或名稱...">
+          <input type="text" id="stock-search-input" class="search-input" placeholder="搜尋股票代號或名稱 (如 2327 國巨)...">
         </div>
       </div>
     </div>
@@ -868,7 +887,7 @@ body {
       </table>
     </div>
 
-    <!-- Deep Dive Workspace with Multi-Chart Mode Switcher (Removed 5D Radar Chart) -->
+    <!-- Deep Dive Workspace with Multi-Chart Mode Switcher -->
     <section class="deep-dive-grid">
       <div id="advisor-focus-card" class="advisor-focus-card">
         <!-- Dynamically populated -->
@@ -991,13 +1010,13 @@ body {
   </div>
 
   <footer class="terminal-footer">
-    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v6.0</p>
+    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v7.0</p>
   </footer>
 
   <!-- Data & Application Scripts with Cache-Busting Parameters -->
-  <script src="data/stock_database.js?v=6.0"></script>
-  <script src="js/data_loader.js?v=6.0"></script>
-  <script src="js/charts.js?v=6.0"></script>
-  <script src="js/app.js?v=6.0"></script>
+  <script src="data/stock_database.js?v=7.0"></script>
+  <script src="js/data_loader.js?v=7.0"></script>
+  <script src="js/charts.js?v=7.0"></script>
+  <script src="js/app.js?v=7.0"></script>
 </body>
 </html>
