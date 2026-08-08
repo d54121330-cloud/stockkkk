@@ -10,7 +10,7 @@
   let allStocks = [];
   let filteredStocks = [];
   let activeStock = null;
-  let activeChartMode = 'kline'; // 'kline', 'profile', 'radar', 'oscillator'
+  let activeChartMode = 'kline'; // 'kline', 'profile', 'oscillator'
   let activeOscillatorTab = 'rsi'; // 'rsi', 'macd', 'kd'
   let activeModalTab = 'advisor';
   let currentTheme = localStorage.getItem('apple_stock_theme') || 'light';
@@ -38,7 +38,7 @@
       const data = await DataLoader.loadAllData();
       allStocks = data.stocks || [];
       filteredStocks = [...allStocks];
-      activeStock = allStocks.find(s => s.symbol === '3217') || allStocks[0];
+      activeStock = allStocks.find(s => s.symbol === '2330') || allStocks[0];
 
       renderTickerBar();
       renderMasterTable();
@@ -157,8 +157,20 @@
       const changeClass = isUp ? 'text-green' : 'text-rose';
       const changeSign = isUp ? '+' : '';
       const isSelected = activeStock && activeStock.symbol === s.symbol ? 'selected-row' : '';
-      const actionClass = s.actionTag === 'LONG' ? 'long' : 'hold';
+      
+      let actionClass = 'long';
+      let actionLabel = '做多 LONG';
+      if (s.actionTag === 'SHORT') {
+        actionClass = 'short';
+        actionLabel = '做空 SHORT';
+      } else if (s.actionTag === 'HOLD') {
+        actionClass = 'hold';
+        actionLabel = '觀望 HOLD';
+      }
+
       const isStarred = watchlist.has(s.symbol) ? 'starred' : '';
+      const rawUpside = parseFloat((s.upsidePercent || '').replace(/[^0-9.-]/g, '')) || 0;
+      const upsideClass = rawUpside >= 0 ? 'up' : 'down';
 
       return `
         <tr class="master-table-row ${isSelected}" data-symbol="${s.symbol}">
@@ -179,14 +191,14 @@
             <span class="${changeClass} text-xs" style="margin-left: 4px;">(${changeSign}${s.changePercent.toFixed(2)}%)</span>
           </td>
           <td>
-            <span class="tag-action ${actionClass}">${s.actionTag}</span>
+            <span class="tag-action ${actionClass}">${actionLabel}</span>
           </td>
           <td class="text-secondary font-bold">
             ${s.entryRange}
           </td>
           <td>
-            <span class="text-green font-bold" style="font-size: 15px;">${s.targetPrice ? s.targetPrice + ' 元' : '-'}</span>
-            <span class="upside-pill">${s.upsidePercent}</span>
+            <span class="${rawUpside >= 0 ? 'text-green' : 'text-rose'} font-bold" style="font-size: 15px;">${s.targetPrice ? s.targetPrice + ' 元' : '-'}</span>
+            <span class="upside-pill ${upsideClass}">${s.upsidePercent}</span>
           </td>
           <td class="text-rose font-bold">
             ${s.stopLoss ? s.stopLoss + ' 元' : '-'}
@@ -253,12 +265,21 @@
       const isUp = stock.changePercent >= 0;
       const changeClass = isUp ? 'text-green' : 'text-rose';
       const changeSign = isUp ? '+' : '';
-      const actionClass = stock.actionTag === 'LONG' ? 'long' : 'hold';
+      
+      let actionClass = 'long';
+      let actionLabel = '做多 LONG';
+      if (stock.actionTag === 'SHORT') {
+        actionClass = 'short';
+        actionLabel = '做空 SHORT';
+      } else if (stock.actionTag === 'HOLD') {
+        actionClass = 'hold';
+        actionLabel = '觀望 HOLD';
+      }
 
       const currentP = stock.price;
       const targetP = stock.targetPrice || currentP;
       const stopP = stock.stopLoss || (currentP * 0.85);
-      const rangeSpan = Math.max(targetP - stopP, 1);
+      const rangeSpan = Math.max(Math.abs(targetP - stopP), 1);
       const fillPct = Math.min(Math.max(((currentP - stopP) / rangeSpan) * 100, 10), 95);
 
       const ma = stock.maMetrics || {};
@@ -279,15 +300,15 @@
             </div>
           </div>
           <div style="text-align: right;">
-            <span class="tag-action ${actionClass}" style="font-size: 14px; padding: 4px 14px;">${stock.actionTag}</span>
-            <div class="text-xs text-muted" style="margin-top: 6px;">評級: <b style="color: var(--apple-blue); font-weight: 700;">${stock.rating || 'Strong Buy'}</b></div>
+            <span class="tag-action ${actionClass}" style="font-size: 14px; padding: 4px 14px;">${actionLabel}</span>
+            <div class="text-xs text-muted" style="margin-top: 6px;">評級: <b style="color: var(--apple-blue); font-weight: 700;">${stock.rating || 'Buy'}</b></div>
           </div>
         </div>
 
         <div class="price-target-widget">
           <div class="pt-labels">
             <div>
-              <span class="text-xs text-muted">停損價</span>
+              <span class="text-xs text-muted">停損防守價</span>
               <div class="text-rose font-bold">${stopP} 元</div>
             </div>
             <div>
@@ -295,8 +316,8 @@
               <div class="text-primary font-bold">${currentP.toFixed(1)} 元</div>
             </div>
             <div>
-              <span class="text-xs text-muted">第一目標價</span>
-              <div class="text-green font-bold">${targetP} 元</div>
+              <span class="text-xs text-muted">目標價位</span>
+              <div class="${targetP >= currentP ? 'text-green' : 'text-rose'} font-bold">${targetP} 元</div>
             </div>
           </div>
           <div class="pt-bar-track">
@@ -304,7 +325,7 @@
           </div>
           <div class="pt-upside-footer">
             <span class="text-xs text-secondary">建議區間: <b class="text-primary font-bold">${stock.entryRange}</b></span>
-            <span class="text-xs text-green font-bold">潛在空間: ${stock.upsidePercent}</span>
+            <span class="text-xs ${targetP >= currentP ? 'text-green' : 'text-rose'} font-bold">潛在空間: ${stock.upsidePercent}</span>
           </div>
         </div>
 
@@ -349,7 +370,7 @@
         </div>
 
         <div class="takeaway-bullet-box">
-          <div style="font-size: 11.5px; color: var(--apple-blue); font-weight: 700; margin-bottom: 4px;">📢 投信資深策略研判理由</div>
+          <div style="font-size: 11.5px; color: var(--apple-blue); font-weight: 700; margin-bottom: 4px;">📢 機構量化投資論述與勝率研判</div>
           <p style="font-size: 12.5px; line-height: 1.55; color: var(--text-primary);">${stock.takeaway}</p>
         </div>
 
@@ -409,8 +430,6 @@
       window.ChartsManager.renderTechnicalChart('main-chart-canvas', stock);
     } else if (activeChartMode === 'profile') {
       window.ChartsManager.renderVolumeProfileChart('main-chart-canvas', stock);
-    } else if (activeChartMode === 'radar') {
-      window.ChartsManager.renderRadarChart('main-chart-canvas', stock);
     } else if (activeChartMode === 'oscillator') {
       window.ChartsManager.renderOscillatorChart('main-chart-canvas', stock, activeOscillatorTab);
     }
@@ -423,6 +442,21 @@
       themeBtn.addEventListener('click', () => {
         const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
         applyTheme(nextTheme);
+      });
+    }
+
+    // Methodology Whitepaper Modal Open
+    const methodologyBtn = document.getElementById('open-methodology-btn');
+    if (methodologyBtn) {
+      methodologyBtn.addEventListener('click', openMethodologyModal);
+    }
+
+    const closeMethodologyBtn = document.getElementById('close-methodology-btn');
+    const methodologyModal = document.getElementById('methodology-modal');
+    if (closeMethodologyBtn && methodologyModal) {
+      closeMethodologyBtn.addEventListener('click', () => methodologyModal.classList.remove('open'));
+      methodologyModal.addEventListener('click', (e) => {
+        if (e.target === methodologyModal) methodologyModal.classList.remove('open');
       });
     }
 
@@ -537,6 +571,11 @@
     });
   }
 
+  function openMethodologyModal() {
+    const modal = document.getElementById('methodology-modal');
+    if (modal) modal.classList.add('open');
+  }
+
   function applyFilters() {
     filteredStocks = allStocks.filter(stock => {
       if (filters.categoryKey !== 'all' && stock.categoryKey !== filters.categoryKey) {
@@ -597,8 +636,8 @@
       container.innerHTML = `
         <div style="background: var(--bg-subtle); padding: 18px; border-radius: 14px; border-left: 4px solid var(--apple-blue); margin-bottom: 18px;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span class="tag-action ${s.actionTag === 'LONG' ? 'long' : 'hold'}" style="font-size: 13px; padding: 4px 14px;">${s.actionTag} 決策</span>
-            <span class="text-muted text-xs">資深策略分析師研判</span>
+            <span class="tag-action ${s.actionTag === 'LONG' ? 'long' : s.actionTag === 'SHORT' ? 'short' : 'hold'}" style="font-size: 13px; padding: 4px 14px;">${s.actionTag} 決策</span>
+            <span class="text-muted text-xs">資深機構策略分析師研判</span>
           </div>
           <p style="margin-top: 12px; font-size: 14px; line-height: 1.7; color: var(--text-primary); font-weight: 500;">${s.takeaway}</p>
         </div>
@@ -606,8 +645,8 @@
         <div class="modal-section-title" style="font-size:14px; font-weight:700; color:var(--apple-blue); margin-bottom:10px;">🎯 精準操作點位與估值指標</div>
         <table class="key-level-table">
           <tr><th>投資決策項目</th><th>具體點位與估值數據</th></tr>
-          <tr><td>建議進場區間</td><td class="text-green font-bold">${s.entryRange}</td></tr>
-          <tr><td>第一目標價</td><td class="text-cyan font-bold">${s.targetPrice} 元 (${s.upsidePercent})</td></tr>
+          <tr><td>建議進場區間</td><td class="font-bold">${s.entryRange}</td></tr>
+          <tr><td>目標價位</td><td class="${s.targetPrice >= s.currentPrice ? 'text-green' : 'text-rose'} font-bold">${s.targetPrice} 元 (${s.upsidePercent})</td></tr>
           <tr><td>停損防守點位</td><td class="text-rose font-bold">${s.stopLoss} 元</td></tr>
           <tr><td>2026 E-EPS 估算</td><td class="font-bold">NT$ ${s.eps2026 || '-'} 元</td></tr>
           <tr><td>預估 2026 P/E 本益比</td><td class="font-bold">${s.peRatio2026 || '-'} x</td></tr>
@@ -671,10 +710,10 @@
     const summaryText = `【台股投信機構精準研報】\n` +
       `📌 標的：${s.symbol} ${s.name} (${s.category})\n` +
       `現價：${s.price.toFixed(1)}元 | 決策：${s.actionTag}\n` +
-      `進場區間：${s.entryRange}\n` +
-      `第一目標價：${s.targetPrice}元 (${s.upsidePercent})\n` +
-      `停損點：${s.stopLoss}元\n` +
-      `核心理由：${s.takeaway}`;
+      `建議進場區間：${s.entryRange}\n` +
+      `目標價位：${s.targetPrice}元 (${s.upsidePercent})\n` +
+      `停損防守點：${s.stopLoss}元\n` +
+      `機構研判論述：${s.takeaway}`;
 
     navigator.clipboard.writeText(summaryText).then(() => {
       alert(`✅ 已複製 ${s.symbol} ${s.name} 研報摘要至剪貼簿！`);
@@ -693,6 +732,7 @@
   // Global Exports
   window.AppModule = {
     openStockModal: openStockModal,
+    openMethodologyModal: openMethodologyModal,
     copyStockSummary: copyStockSummary
   };
 
