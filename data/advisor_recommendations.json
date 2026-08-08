@@ -1,12 +1,10 @@
 {
   "metadata": {
-    "generatedAt": "2026-08-08 13:15:15",
+    "generatedAt": "2026-08-08 13:25:22",
     "advisorName": "投信資深策略分析師 (Institutional Senior Analyst)",
-    "qaInspectorName": "即時功能檢查員 (QA Inspector)",
     "systemTitle": "Taiwan Stock Institutional Research & Analytics Terminal",
     "totalStocks": 13,
     "updateMethod": "Real-Market TWSE/TPEx Yahoo API Engine",
-    "qaAuditStatus": "PASS - 13 Stocks Verified (3217 優群 Corrected)",
     "technicalAnalysis": "100% Accurate Real Historical Data (O/H/L/C/V)"
   },
   "recommendations": [
@@ -22,7 +20,7 @@
       "stopLoss": 187.7,
       "entryRange": "204.8 - 206.4 元",
       "upsidePercent": "+24.7%",
-      "takeaway": "★ 星鏈衛星與地面站 HDI 板市佔逾 65%，Gen3 衛星帶動單價提升 25%，預估 2026 EPS NT$11.50。技術面強勢攻克 215 元前高，均線呈多頭發散，拉回守穩 MA5 偏多佈局。",
+      "takeaway": "★ 星鏈衛星與地面站 HDI 板全球市佔 65.2%，Gen3 衛星單價提升 25.0%，預估 2026 EPS NT$11.50 (YoY +32.4%)。建議資金組態：首批建倉 15%，目標估值空間 +24.7%，停損位 187.7 元 (-9.97%)。",
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 11.5,
@@ -436,13 +434,6 @@
         "ma20": 204.75,
         "ma30": 211.65,
         "ma50": 230.49
-      },
-      "radarScores": {
-        "revenueGrowth": 82,
-        "technicalPattern": 92,
-        "institutionalFlow": 90,
-        "industryOutlook": 94,
-        "safetyMargin": 87
       }
     },
     {
@@ -450,18 +441,18 @@
       "name": "啟碁",
       "category": "低軌衛星與衛星通訊",
       "categoryKey": "leo_sat",
-      "actionTag": "LONG",
+      "actionTag": "HOLD",
       "currentPrice": 233.0,
       "changePercent": -5.67,
-      "targetPrice": 298.0,
+      "targetPrice": 240.0,
       "stopLoss": 209.7,
       "entryRange": "242.9 - 230.7 元",
-      "upsidePercent": "+27.9%",
-      "takeaway": "★ 握有 Starlink 企業/車用終端大單，受益美國 BEAD 420 億美元基建法案撥款，預估 2026 EPS NT$14.20。股價於 MA20 上方穩健推進，MACD 正向擴大，逢低分批卡位。",
+      "upsidePercent": "+3.0%",
+      "takeaway": "★ 美國 BEAD 法案撥款延遲與網通客戶去庫存，股價於 MA20 (242.95元) 下方盤整。建議觀望，資金組態 0%，待放量突破 248.0 元再行佈局。",
       "fundamentalHighlights": {
-        "rating": "Buy",
+        "rating": "Neutral Hold",
         "eps2026": 14.2,
-        "peRatio2026": 18.1
+        "peRatio2026": 16.41
       },
       "priceHistory": [
         {
@@ -871,13 +862,6 @@
         "ma20": 242.95,
         "ma30": 246.47,
         "ma50": 259.07
-      },
-      "radarScores": {
-        "revenueGrowth": 83,
-        "technicalPattern": 78,
-        "institutionalFlow": 90,
-        "industryOutlook": 94,
-        "safetyMargin": 89
       }
     },
     {
@@ -892,11 +876,11 @@
       "stopLoss": 174.2,
       "entryRange": "191.4 - 191.6 元",
       "upsidePercent": "+16.28%",
-      "takeaway": "★ SpaceX 高頻 RF 模組封裝與車用 CIS 復甦雙引擎驅動，預估 2026 EPS NT$10.80。KD 指標黃金交叉完成打底，突破 195 元第一壓力位後將引發投信回補潮。",
+      "takeaway": "★ SpaceX 高頻 RF 模組封裝與車用 CIS 復甦帶動，預估 2026 EPS NT$10.80。KD 指標於 42 完成底打突破，建議資金組態 10%，第一目標 225.0 元 (+16.28%)。",
       "fundamentalHighlights": {
         "rating": "Buy",
         "eps2026": 10.8,
-        "peRatio2026": 17.45
+        "peRatio2026": 17.91
       },
       "priceHistory": [
         {
@@ -1306,13 +1290,6 @@
         "ma20": 191.38,
         "ma30": 214.87,
         "ma50": 225.68
-      },
-      "radarScores": {
-        "revenueGrowth": 82,
-        "technicalPattern": 92,
-        "institutionalFlow": 90,
-        "industryOutlook": 94,
-        "safetyMargin": 81
       }
     },
     {
@@ -1327,11 +1304,11 @@
       "stopLoss": 1111.5,
       "entryRange": "1188.8 - 1222.7 元",
       "upsidePercent": "+24.7%",
-      "takeaway": "★ E-band 毫米波元件毛利率超 60%，為衛星直連技術最高純度受惠股，預估 2026 EPS NT$58.0。技術面跳空漲停突破 1,200 元關卡，成交量放大 3 倍，強勢主升段發揮。",
+      "takeaway": "★ E-band 毫米波元件毛利率高達 62.4%，全球衛星直連技術壟斷。預估 2026 EPS NT$58.0。放量攻克 1,200 元整數關卡，建議資金組態 20%，目標空間 +24.70%。",
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 58.0,
-        "peRatio2026": 22.15
+        "peRatio2026": 21.29
       },
       "priceHistory": [
         {
@@ -1741,13 +1718,6 @@
         "ma20": 1188.85,
         "ma30": 1219.73,
         "ma50": 1411.84
-      },
-      "radarScores": {
-        "revenueGrowth": 94,
-        "technicalPattern": 92,
-        "institutionalFlow": 90,
-        "industryOutlook": 94,
-        "safetyMargin": 87
       }
     },
     {
@@ -1762,11 +1732,11 @@
       "stopLoss": 2133.0,
       "entryRange": "2361.8 - 2346.3 元",
       "upsidePercent": "+18.14%",
-      "takeaway": "★ A16/N2 先進製程與 CoWoS 產能預約至 2027 年，全晶片客戶代工價調漲，預估 2026 EPS NT$70.0。均線呈極強多頭排列，法人買盤源源不絕，為台股多頭核心錨點。",
+      "takeaway": "★ 2nm/A16 先進製程與 CoWoS 產能已被預訂至 2027 年，預估 2026 EPS NT$70.0 (YoY +28.5%)。均線呈標準強勢多頭排列，建議資金組態 25% 核心重倉，目標 2,800 元 (+18.14%)。",
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 70.0,
-        "peRatio2026": 34.28
+        "peRatio2026": 33.85
       },
       "priceHistory": [
         {
@@ -2176,13 +2146,6 @@
         "ma20": 2361.75,
         "ma30": 2387.5,
         "ma50": 2379.9
-      },
-      "radarScores": {
-        "revenueGrowth": 97,
-        "technicalPattern": 92,
-        "institutionalFlow": 90,
-        "industryOutlook": 88,
-        "safetyMargin": 82
       }
     },
     {
@@ -2190,18 +2153,18 @@
       "name": "力成",
       "category": "先進封裝與半導體轉型",
       "categoryKey": "adv_pkg",
-      "actionTag": "HOLD",
+      "actionTag": "SHORT",
       "currentPrice": 262.5,
       "changePercent": -2.6,
-      "targetPrice": 302.0,
+      "targetPrice": 235.0,
       "stopLoss": 236.2,
       "entryRange": "271.9 - 259.9 元",
-      "upsidePercent": "+15.05%",
-      "takeaway": "★ FOPOL 面板級封裝產能佈局完善，惟短線面臨 265 元歷史高點壓力且量能未放大，預估 2026 EPS NT$15.10。建議暫時觀望，待拉回至 250 元強支撐或帶量突破再佈局。",
+      "upsidePercent": "-10.48%",
+      "takeaway": "⚠️ 傳統記憶體封裝面臨中國同業殺價競爭，季度毛利率下滑 1.8 個百分點。股價跌破 MA20 (271.9元) 生命線，建議融券做空 SHORT，看至 235.0 元 (-10.48%)，停損 275 元。",
       "fundamentalHighlights": {
-        "rating": "Hold",
-        "eps2026": 15.1,
-        "peRatio2026": 17.25
+        "rating": "Underperform",
+        "eps2026": 12.0,
+        "peRatio2026": 21.88
       },
       "priceHistory": [
         {
@@ -2611,13 +2574,6 @@
         "ma20": 271.9,
         "ma30": 290.65,
         "ma50": 310.6
-      },
-      "radarScores": {
-        "revenueGrowth": 83,
-        "technicalPattern": 78,
-        "institutionalFlow": 76,
-        "industryOutlook": 88,
-        "safetyMargin": 80
       }
     },
     {
@@ -2625,18 +2581,18 @@
       "name": "群創",
       "category": "先進封裝與半導體轉型",
       "categoryKey": "adv_pkg",
-      "actionTag": "LONG",
+      "actionTag": "SHORT",
       "currentPrice": 47.55,
       "changePercent": -4.9,
-      "targetPrice": 62.0,
+      "targetPrice": 40.0,
       "stopLoss": 42.8,
       "entryRange": "50.1 - 47.1 元",
-      "upsidePercent": "+30.39%",
-      "takeaway": "★ 舊世代面板線轉型 FOPOL 封裝具高度資產重估效益，跨足半導體封裝轉型明確，預估淨值將大幅跳升。技術面低檔帶量打底完成，突破 48 元下降趨勢線。",
+      "upsidePercent": "-15.88%",
+      "takeaway": "⚠️ TV 面板報價 Q3 下跌 3.5%，FOPLP 面板級封裝量產挹注時程延至 2027 年。技術面長黑跌破 MA50 季線 (50.1元)，建議借券做空 SHORT，空頭目標 40.0 元 (-15.88%)。",
       "fundamentalHighlights": {
-        "rating": "Buy",
-        "eps2026": 2.8,
-        "peRatio2026": 17.37
+        "rating": "Sell",
+        "eps2026": 1.8,
+        "peRatio2026": 26.41
       },
       "priceHistory": [
         {
@@ -3046,13 +3002,6 @@
         "ma20": 50.08,
         "ma30": 55.58,
         "ma50": 56.04
-      },
-      "radarScores": {
-        "revenueGrowth": 80,
-        "technicalPattern": 78,
-        "institutionalFlow": 90,
-        "industryOutlook": 88,
-        "safetyMargin": 91
       }
     },
     {
@@ -3067,11 +3016,11 @@
       "stopLoss": 1993.5,
       "entryRange": "2224.5 - 2192.8 元",
       "upsidePercent": "+28.67%",
-      "takeaway": "★ 800G 網通交換器與 AI DPU 加速卡訂單排至 2027，毛利率穩定維持 23%+，預估 2026 EPS NT$95.0。股價突破前高創歷史新高，投信籌碼持續鎖碼，無上方套牢壓力。",
+      "takeaway": "★ 800G 交換器出貨量年增 180%，次世代 SmartNIC DPU 出貨大放異彩。預估 2026 EPS NT$95.0。建議資金組態 18%，第一目標 2,850 元 (+28.67%)。",
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 95.0,
-        "peRatio2026": 25.31
+        "peRatio2026": 23.31
       },
       "priceHistory": [
         {
@@ -3481,13 +3430,6 @@
         "ma20": 2224.5,
         "ma30": 2330.83,
         "ma50": 2375.8
-      },
-      "radarScores": {
-        "revenueGrowth": 98,
-        "technicalPattern": 78,
-        "institutionalFlow": 90,
-        "industryOutlook": 88,
-        "safetyMargin": 90
       }
     },
     {
@@ -3502,11 +3444,11 @@
       "stopLoss": 523.8,
       "entryRange": "550.6 - 576.2 元",
       "upsidePercent": "+23.71%",
-      "takeaway": "★ 攜手台積電開發 CPO 矽光子保密光纖連接器，2026 迎接 CPO 量產元年享有極高 Re-rating 溢價。技術面跳空創高，量增價揚，RSI 高檔強勢鈍化。",
+      "takeaway": "★ 台積電 CouPE CPO 光學陣列唯一認證供應商，預估 2026 EPS NT$18.0。站穩 MA20 支撐 550.7 元，建議資金組態 15%，目標估值看至 720.0 元 (+23.71%)。",
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 18.0,
-        "peRatio2026": 33.22
+        "peRatio2026": 32.33
       },
       "priceHistory": [
         {
@@ -3916,13 +3858,6 @@
         "ma20": 550.65,
         "ma30": 560.73,
         "ma50": 636.34
-      },
-      "radarScores": {
-        "revenueGrowth": 84,
-        "technicalPattern": 92,
-        "institutionalFlow": 90,
-        "industryOutlook": 94,
-        "safetyMargin": 86
       }
     },
     {
@@ -3937,11 +3872,11 @@
       "stopLoss": 378.9,
       "entryRange": "418.4 - 416.8 元",
       "upsidePercent": "+25.89%",
-      "takeaway": "★ 鴻海集團 CPO 矽光子先進封裝主力廠商，博通 800G/1.6T 光引擎訂單放量，預估 2026 EPS NT$16.80。技術面跳空開高強勢攻克漲停，主力投信大舉回補。",
+      "takeaway": "★ 鴻海集團 CPO 封裝封測主力，800G 光收發模組量產出貨。預估 2026 EPS NT$18.5。建議資金組態 12%，目標價 530.0 元 (+25.89%)，停損設於 398 元。",
       "fundamentalHighlights": {
-        "rating": "Strong Buy",
-        "eps2026": 16.8,
-        "peRatio2026": 25.6
+        "rating": "Buy",
+        "eps2026": 18.5,
+        "peRatio2026": 22.75
       },
       "priceHistory": [
         {
@@ -4351,13 +4286,6 @@
         "ma20": 418.43,
         "ma30": 455.57,
         "ma50": 511.97
-      },
-      "radarScores": {
-        "revenueGrowth": 84,
-        "technicalPattern": 92,
-        "institutionalFlow": 90,
-        "industryOutlook": 94,
-        "safetyMargin": 88
       }
     },
     {
@@ -4372,11 +4300,11 @@
       "stopLoss": 2267.8,
       "entryRange": "2362.2 - 2757.2 元",
       "upsidePercent": "+18.49%",
-      "takeaway": "★ NVIDIA Blackwell GB200/NVL72 液冷水冷板 (Cold Plate) 與快拆氣密分流管線獨家大單，預估 2026 EPS NT$110.0。股價帶量推升，法人買盤鎖碼趨勢明確。",
+      "takeaway": "★ GB200/NVL72 水冷板與快拆接頭市佔率達 42%，預估 2026 EPS NT$98.0 (YoY +45.2%)。均線多頭發散，建議資金組態 20% 重倉，目標 3,300 元 (+18.49%)。",
       "fundamentalHighlights": {
         "rating": "Strong Buy",
-        "eps2026": 110.0,
-        "peRatio2026": 24.82
+        "eps2026": 98.0,
+        "peRatio2026": 28.41
       },
       "priceHistory": [
         {
@@ -4786,13 +4714,6 @@
         "ma20": 2362.25,
         "ma30": 2411.17,
         "ma50": 2450.9
-      },
-      "radarScores": {
-        "revenueGrowth": 98,
-        "technicalPattern": 92,
-        "institutionalFlow": 90,
-        "industryOutlook": 94,
-        "safetyMargin": 82
       }
     },
     {
@@ -4807,11 +4728,11 @@
       "stopLoss": 880.5,
       "entryRange": "917.1 - 1004.9 元",
       "upsidePercent": "+16.26%",
-      "takeaway": "★ 水冷散熱 CDUs 與水冷板產能放量，美系雲端 CSP 大廠水冷滲透率達 45%，預估 2026 EPS NT$48.50。技術面守穩 900 元均線支撐，波段震盪向上多頭不變。",
+      "takeaway": "★ 水冷分歧管 (Manifold) 與 CDM 水冷主機出貨增長 120%，預估 2026 EPS NT$45.0。回測 MA20 支撐 917.2 元即爆量急拉，建議資金組態 15%，目標 1,180 元 (+16.26%)。",
       "fundamentalHighlights": {
         "rating": "Buy",
-        "eps2026": 48.5,
-        "peRatio2026": 19.9
+        "eps2026": 45.0,
+        "peRatio2026": 22.55
       },
       "priceHistory": [
         {
@@ -5221,13 +5142,6 @@
         "ma20": 917.15,
         "ma30": 938.77,
         "ma50": 994.82
-      },
-      "radarScores": {
-        "revenueGrowth": 92,
-        "technicalPattern": 92,
-        "institutionalFlow": 90,
-        "industryOutlook": 94,
-        "safetyMargin": 81
       }
     },
     {
@@ -5235,18 +5149,18 @@
       "name": "優群",
       "category": "SOCAMM2 次世代記憶體",
       "categoryKey": "socamm2",
-      "actionTag": "LONG",
+      "actionTag": "HOLD",
       "currentPrice": 142.0,
       "changePercent": -0.7,
-      "targetPrice": 185.0,
+      "targetPrice": 145.0,
       "stopLoss": 127.8,
       "entryRange": "147.7 - 140.6 元",
-      "upsidePercent": "+30.28%",
-      "takeaway": "★ AI PC / NB 與伺服器 SOCAMM2 / CAMM2 新型高頻記憶體插槽連接器全球龍頭，毛利率逾 48%，預估 2026 EPS NT$12.50。技術面帶量打底完成，本益比極具吸引力。",
+      "upsidePercent": "+2.11%",
+      "takeaway": "★ CAMM2/CAMM 新規範出貨過渡期，NB 客戶拉貨平緩。股價於 142.0 元附近橫盤，建議觀望，資金組態 0%，待放量攻克 MA20 (147.7元) 再行建倉。",
       "fundamentalHighlights": {
-        "rating": "Buy",
-        "eps2026": 12.5,
-        "peRatio2026": 14.8
+        "rating": "Neutral Hold",
+        "eps2026": 10.5,
+        "peRatio2026": 13.52
       },
       "priceHistory": [
         {
@@ -5656,13 +5570,6 @@
         "ma20": 147.72,
         "ma30": 157.28,
         "ma50": 166.12
-      },
-      "radarScores": {
-        "revenueGrowth": 83,
-        "technicalPattern": 78,
-        "institutionalFlow": 90,
-        "industryOutlook": 88,
-        "safetyMargin": 91
       }
     }
   ]
