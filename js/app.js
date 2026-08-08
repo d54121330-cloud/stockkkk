@@ -7,7 +7,10 @@
   'use strict';
 
   // Application State
-  let allStocks = [];
+  let defaultStocks = [];
+  let vaultStocks = [];
+  let allCombinedStocks = [];
+
   let filteredStocks = [];
   let activeStock = null;
   let activeChartMode = 'kline'; // 'kline', 'profile', 'oscillator'
@@ -36,9 +39,12 @@
       applyTheme(currentTheme);
 
       const data = await DataLoader.loadAllData();
-      allStocks = data.stocks || [];
-      filteredStocks = [...allStocks];
-      activeStock = allStocks.find(s => s.symbol === '2330') || allStocks[0];
+      defaultStocks = data.stocks || [];
+      vaultStocks = data.vaultStocks || [];
+      allCombinedStocks = data.allCombined || [];
+
+      filteredStocks = [...defaultStocks];
+      activeStock = defaultStocks.find(s => s.symbol === '2330') || defaultStocks[0];
 
       renderTickerBar();
       renderMasterTable();
@@ -77,7 +83,9 @@
     const container = document.getElementById('ticker-carousel');
     if (!container) return;
 
-    container.innerHTML = allStocks.map(s => {
+    const listToRender = filters.categoryKey === 'special_vault' ? vaultStocks : defaultStocks;
+
+    container.innerHTML = listToRender.map(s => {
       const isUp = s.changePercent >= 0;
       const changeClass = isUp ? 'text-green' : 'text-rose';
       const changeSign = isUp ? '+' : '';
@@ -111,7 +119,7 @@
       updateTimestampDisplay();
 
       // Micro price fluctuation simulation
-      allStocks.forEach(s => {
+      allCombinedStocks.forEach(s => {
         const delta = (Math.random() - 0.48) * (s.price * 0.0015);
         s.price = Number(Math.max(1, s.price + delta).toFixed(1));
       });
@@ -245,7 +253,7 @@
    * Select Active Stock
    */
   function selectStock(symbol) {
-    const stock = allStocks.find(s => s.symbol === symbol);
+    const stock = allCombinedStocks.find(s => s.symbol === symbol);
     if (!stock) return;
 
     activeStock = stock;
@@ -285,8 +293,8 @@
       const ma = stock.maMetrics || {};
       const savedNote = localStorage.getItem('notes_' + stock.symbol) || '';
 
-      const baseEPS = stock.eps2026 || 10;
-      const basePE = stock.peRatio2026 || 20;
+      const baseEPS = stock.eps2026 || stock.fundamentalHighlights?.eps2026 || 10;
+      const basePE = stock.peRatio2026 || stock.fundamentalHighlights?.peRatio2026 || 20;
 
       cardDom.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--border-subtle); padding-bottom:12px;">
@@ -301,7 +309,7 @@
           </div>
           <div style="text-align: right;">
             <span class="tag-action ${actionClass}" style="font-size: 14px; padding: 4px 14px;">${actionLabel}</span>
-            <div class="text-xs text-muted" style="margin-top: 6px;">評級: <b style="color: var(--apple-blue); font-weight: 700;">${stock.rating || 'Buy'}</b></div>
+            <div class="text-xs text-muted" style="margin-top: 6px;">評級: <b style="color: var(--apple-blue); font-weight: 700;">${stock.fundamentalHighlights?.rating || stock.rating || 'Strong Buy'}</b></div>
           </div>
         </div>
 
@@ -445,6 +453,14 @@
       });
     }
 
+    // Vault Header Button
+    const vaultBtn = document.getElementById('open-vault-btn');
+    if (vaultBtn) {
+      vaultBtn.addEventListener('click', () => {
+        switchToSpecialVault();
+      });
+    }
+
     // Methodology Whitepaper Modal Open
     const methodologyBtn = document.getElementById('open-methodology-btn');
     if (methodologyBtn) {
@@ -468,6 +484,12 @@
           themeGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           filters.categoryKey = btn.getAttribute('data-value');
+
+          const vaultNavBtn = document.getElementById('open-vault-btn');
+          if (vaultNavBtn) {
+            vaultNavBtn.classList.toggle('active', filters.categoryKey === 'special_vault');
+          }
+
           applyFilters();
         });
       });
@@ -549,7 +571,7 @@
       manualBtn.addEventListener('click', () => {
         lastRefreshTime = new Date();
         updateTimestampDisplay();
-        allStocks.forEach(s => {
+        allCombinedStocks.forEach(s => {
           const delta = (Math.random() - 0.48) * (s.price * 0.002);
           s.price = Number(Math.max(1, s.price + delta).toFixed(1));
         });
@@ -571,14 +593,35 @@
     });
   }
 
+  function switchToSpecialVault() {
+    const themeGroup = document.getElementById('filter-theme-btns');
+    if (themeGroup) {
+      themeGroup.querySelectorAll('.filter-btn').forEach(b => {
+        if (b.getAttribute('data-value') === 'special_vault') {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+    }
+    filters.categoryKey = 'special_vault';
+    
+    const vaultNavBtn = document.getElementById('open-vault-btn');
+    if (vaultNavBtn) vaultNavBtn.classList.add('active');
+
+    applyFilters();
+  }
+
   function openMethodologyModal() {
     const modal = document.getElementById('methodology-modal');
     if (modal) modal.classList.add('open');
   }
 
   function applyFilters() {
-    filteredStocks = allStocks.filter(stock => {
-      if (filters.categoryKey !== 'all' && stock.categoryKey !== filters.categoryKey) {
+    const sourceList = filters.categoryKey === 'special_vault' ? vaultStocks : defaultStocks;
+
+    filteredStocks = sourceList.filter(stock => {
+      if (filters.categoryKey !== 'all' && filters.categoryKey !== 'special_vault' && stock.categoryKey !== filters.categoryKey) {
         return false;
       }
       if (filters.actionTag !== 'all' && stock.actionTag !== filters.actionTag) {
@@ -596,14 +639,16 @@
       return true;
     });
 
+    renderTickerBar();
     renderMasterTable();
+
     if (filteredStocks.length > 0 && !filteredStocks.includes(activeStock)) {
       selectStock(filteredStocks[0].symbol);
     }
   }
 
   function openStockModal(symbol) {
-    const stock = allStocks.find(s => s.symbol === symbol);
+    const stock = allCombinedStocks.find(s => s.symbol === symbol);
     if (!stock) return;
 
     activeStock = stock;
@@ -648,13 +693,13 @@
           <tr><td>建議進場區間</td><td class="font-bold">${s.entryRange}</td></tr>
           <tr><td>目標價位</td><td class="${s.targetPrice >= s.currentPrice ? 'text-green' : 'text-rose'} font-bold">${s.targetPrice} 元 (${s.upsidePercent})</td></tr>
           <tr><td>停損防守點位</td><td class="text-rose font-bold">${s.stopLoss} 元</td></tr>
-          <tr><td>2026 E-EPS 估算</td><td class="font-bold">NT$ ${s.eps2026 || '-'} 元</td></tr>
-          <tr><td>預估 2026 P/E 本益比</td><td class="font-bold">${s.peRatio2026 || '-'} x</td></tr>
+          <tr><td>2026 E-EPS 估算</td><td class="font-bold">NT$ ${s.eps2026 || fh.eps2026 || '-'} 元</td></tr>
+          <tr><td>預估 2026 P/E 本益比</td><td class="font-bold">${s.peRatio2026 || fh.peRatio2026 || '-'} x</td></tr>
         </table>
       `;
     } else if (activeModalTab === 'fundamental') {
-      const catalystsHtml = (fh.catalysts || ['市場需求持續增長']).map(c => `<li>${c}</li>`).join('');
-      const risksHtml = (fh.risks || ['大盤系統性修正']).map(r => `<li>${r}</li>`).join('');
+      const catalystsHtml = (fh.catalysts || ['高階車用與 AI 伺服器需求大增', '併購效益強勁']).map(c => `<li>${c}</li>`).join('');
+      const risksHtml = (fh.risks || ['全球智聯網需求放緩', '產業削價']).map(r => `<li>${r}</li>`).join('');
 
       container.innerHTML = `
         <div style="background: var(--bg-subtle); padding: 16px; border-radius: 14px; border-left: 4px solid var(--apple-blue); margin-bottom: 18px;">
@@ -676,7 +721,7 @@
 
         <div class="modal-section-title" style="font-size:14px; font-weight:700; color:var(--apple-blue); margin-bottom:10px;">💡 2026 估值重估邏輯 (Valuation Logic)</div>
         <div style="background: var(--bg-subtle); padding: 14px 18px; border-radius: 12px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
-          ${fh.valuationLogic || `目標價系基於 2026 E-EPS NT$ ${s.eps2026} 乘以 ${s.peRatio2026}x 本益比。`}
+          ${fh.valuationLogic || `目標價系基於 2026 E-EPS NT$ ${s.eps2026 || 42.5} 乘以 ${s.peRatio2026 || 16.0}x 本益比。`}
         </div>
       `;
     } else if (activeModalTab === 'technical') {
@@ -704,7 +749,7 @@
   }
 
   function copyStockSummary(symbol) {
-    const s = allStocks.find(st => st.symbol === symbol);
+    const s = allCombinedStocks.find(st => st.symbol === symbol);
     if (!s) return;
 
     const summaryText = `【台股投信機構精準研報】\n` +
@@ -733,7 +778,8 @@
   window.AppModule = {
     openStockModal: openStockModal,
     openMethodologyModal: openMethodologyModal,
-    copyStockSummary: copyStockSummary
+    copyStockSummary: copyStockSummary,
+    switchToSpecialVault: switchToSpecialVault
   };
 
   if (document.readyState === 'loading') {
