@@ -22,8 +22,6 @@
     categoryKey: 'all',
     actionTag: 'all',
     onlyWatchlist: false,
-    minUpside: 0,
-    maxPE: 40,
     search: ''
   };
 
@@ -89,8 +87,8 @@
         <div class="ticker-chip ${isSelected}" data-symbol="${s.symbol}">
           <span class="ticker-sym">${s.symbol}</span>
           <span class="ticker-name">${s.name}</span>
-          <span class="ticker-price mono">${s.price.toFixed(1)}</span>
-          <span class="ticker-chg mono ${changeClass}">${changeSign}${s.changePercent.toFixed(2)}%</span>
+          <span class="ticker-price">${s.price.toFixed(1)}</span>
+          <span class="ticker-chg ${changeClass}">${changeSign}${s.changePercent.toFixed(2)}%</span>
         </div>
       `;
     }).join('');
@@ -170,27 +168,27 @@
             </button>
           </td>
           <td class="col-stock">
-            <span class="mono symbol-code">${s.symbol}</span>
+            <span class="symbol-code">${s.symbol}</span>
             <span class="stock-title-name">${s.name}</span>
           </td>
           <td>
             <span class="category-chip">${s.category}</span>
           </td>
-          <td class="mono font-bold">
+          <td class="font-bold">
             <span style="font-size: 15px;">${s.price.toFixed(1)}</span>
             <span class="${changeClass} text-xs" style="margin-left: 4px;">(${changeSign}${s.changePercent.toFixed(2)}%)</span>
           </td>
           <td>
             <span class="tag-action ${actionClass}">${s.actionTag}</span>
           </td>
-          <td class="mono text-secondary">
+          <td class="text-secondary font-bold">
             ${s.entryRange}
           </td>
-          <td class="mono">
+          <td>
             <span class="text-green font-bold" style="font-size: 15px;">${s.targetPrice ? s.targetPrice + ' 元' : '-'}</span>
             <span class="upside-pill">${s.upsidePercent}</span>
           </td>
-          <td class="mono text-rose font-bold">
+          <td class="text-rose font-bold">
             ${s.stopLoss ? s.stopLoss + ' 元' : '-'}
           </td>
           <td class="col-rationale">
@@ -272,17 +270,17 @@
       cardDom.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--border-subtle); padding-bottom:12px;">
           <div>
-            <span class="mono symbol-code" style="font-size: 26px;">${stock.symbol}</span>
+            <span class="symbol-code" style="font-size: 26px;">${stock.symbol}</span>
             <span style="font-size: 18px; font-weight: 700; margin-left: 6px; color: var(--text-primary);">${stock.name}</span>
-            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">${stock.category}</div>
+            <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">${stock.category}</div>
             <div style="margin-top: 6px; font-size: 14px;">
-              <span class="mono font-bold" style="font-size: 17px;">${stock.price.toFixed(1)} 元</span>
-              <span class="${changeClass} mono text-xs" style="margin-left: 4px;">(${changeSign}${stock.changePercent.toFixed(2)}%)</span>
+              <span class="font-bold" style="font-size: 17px;">${stock.price.toFixed(1)} 元</span>
+              <span class="${changeClass} text-xs font-bold" style="margin-left: 4px;">(${changeSign}${stock.changePercent.toFixed(2)}%)</span>
             </div>
           </div>
           <div style="text-align: right;">
             <span class="tag-action ${actionClass}" style="font-size: 14px; padding: 4px 14px;">${stock.actionTag}</span>
-            <div class="text-xs text-muted" style="margin-top: 6px;">評級: <b style="color: var(--apple-blue);">${stock.rating || 'Strong Buy'}</b></div>
+            <div class="text-xs text-muted" style="margin-top: 6px;">評級: <b style="color: var(--apple-blue); font-weight: 700;">${stock.rating || 'Strong Buy'}</b></div>
           </div>
         </div>
 
@@ -290,68 +288,68 @@
           <div class="pt-labels">
             <div>
               <span class="text-xs text-muted">停損價</span>
-              <div class="mono text-rose font-bold">${stopP} 元</div>
+              <div class="text-rose font-bold">${stopP} 元</div>
             </div>
             <div>
               <span class="text-xs text-muted">目前股價</span>
-              <div class="mono text-primary font-bold">${currentP.toFixed(1)} 元</div>
+              <div class="text-primary font-bold">${currentP.toFixed(1)} 元</div>
             </div>
             <div>
               <span class="text-xs text-muted">第一目標價</span>
-              <div class="mono text-green font-bold">${targetP} 元</div>
+              <div class="text-green font-bold">${targetP} 元</div>
             </div>
           </div>
           <div class="pt-bar-track">
             <div class="pt-bar-fill" style="width: ${fillPct.toFixed(1)}%;"></div>
           </div>
           <div class="pt-upside-footer">
-            <span class="text-xs text-secondary">建議區間: <b class="mono text-primary">${stock.entryRange}</b></span>
+            <span class="text-xs text-secondary">建議區間: <b class="text-primary font-bold">${stock.entryRange}</b></span>
             <span class="text-xs text-green font-bold">潛在空間: ${stock.upsidePercent}</span>
           </div>
         </div>
 
         <!-- 5 MA Matrix -->
         <div style="margin-top: 12px; background: var(--bg-subtle); border-radius: 12px; padding: 10px 12px; border: 1px solid var(--border-subtle);">
-          <div style="font-size: 11px; font-family: var(--font-mono); color: var(--apple-blue); font-weight: 700; margin-bottom: 6px; display: flex; justify-content: space-between;">
+          <div style="font-size: 11.5px; color: var(--apple-blue); font-weight: 700; margin-bottom: 6px; display: flex; justify-content: space-between;">
             <span>📊 5 大移動平均線 (5 MA) 數據</span>
-            <span style="color: var(--text-muted); font-size: 10px;">近 30D 趨勢</span>
+            <span style="color: var(--text-muted); font-size: 10.5px;">近 30D 趨勢</span>
           </div>
-          <div style="display: grid; grid-template-columns: repeat(5, 1fr); text-align: center; font-family: var(--font-mono); font-size: 11px;">
-            <div><span style="color: #ff9500;">MA5</span><div class="font-bold" style="margin-top: 2px;">${ma.ma5 || '-'}</div></div>
-            <div><span style="color: #0071e3;">MA10</span><div class="font-bold" style="margin-top: 2px;">${ma.ma10 || '-'}</div></div>
-            <div><span style="color: #34c759;">MA20</span><div class="font-bold" style="margin-top: 2px;">${ma.ma20 || '-'}</div></div>
-            <div><span style="color: #af52de;">MA30</span><div class="font-bold" style="margin-top: 2px;">${ma.ma30 || '-'}</div></div>
-            <div><span style="color: #ff9500;">MA50</span><div class="font-bold" style="margin-top: 2px;">${ma.ma50 || '-'}</div></div>
+          <div style="display: grid; grid-template-columns: repeat(5, 1fr); text-align: center; font-size: 11.5px;">
+            <div><span style="color: #ff9500; font-weight:600;">MA5</span><div class="font-bold" style="margin-top: 2px;">${ma.ma5 || '-'}</div></div>
+            <div><span style="color: #0071e3; font-weight:600;">MA10</span><div class="font-bold" style="margin-top: 2px;">${ma.ma10 || '-'}</div></div>
+            <div><span style="color: #34c759; font-weight:600;">MA20</span><div class="font-bold" style="margin-top: 2px;">${ma.ma20 || '-'}</div></div>
+            <div><span style="color: #af52de; font-weight:600;">MA30</span><div class="font-bold" style="margin-top: 2px;">${ma.ma30 || '-'}</div></div>
+            <div><span style="color: #ff9500; font-weight:600;">MA50</span><div class="font-bold" style="margin-top: 2px;">${ma.ma50 || '-'}</div></div>
           </div>
         </div>
 
         <!-- AI Valuation Simulator Slider -->
         <div style="margin-top: 12px; background: var(--bg-subtle); border-radius: 12px; padding: 12px; border: 1px solid var(--border-subtle);">
-          <div style="font-size: 11.5px; font-family: var(--font-mono); color: var(--apple-blue); font-weight: 800; margin-bottom: 8px;">
+          <div style="font-size: 12px; color: var(--apple-blue); font-weight: 700; margin-bottom: 8px;">
             🧮 AI 投信目標價與本益比動態試算器
           </div>
-          <div style="display: grid; gap: 8px; font-size: 11px;">
+          <div style="display: grid; gap: 8px; font-size: 11.5px;">
             <div>
               <div style="display:flex; justify-content:space-between; color:var(--text-secondary);">
-                <span>預估 2026 EPS: <b class="mono text-primary" id="sim-eps-val">${baseEPS} 元</b></span>
+                <span>預估 2026 EPS: <b class="text-primary font-bold" id="sim-eps-val">${baseEPS} 元</b></span>
               </div>
               <input type="range" id="sim-eps-range" min="1" max="150" step="0.5" value="${baseEPS}" style="width:100%;">
             </div>
             <div>
               <div style="display:flex; justify-content:space-between; color:var(--text-secondary);">
-                <span>預估本益比 (P/E): <b class="mono text-primary" id="sim-pe-val">${basePE} x</b></span>
+                <span>預估本益比 (P/E): <b class="text-primary font-bold" id="sim-pe-val">${basePE} x</b></span>
               </div>
               <input type="range" id="sim-pe-range" min="5" max="50" step="0.5" value="${basePE}" style="width:100%;">
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px; margin-top:4px;">
-              <span style="color:var(--text-muted);">試算目標價: <b class="mono text-green" id="sim-target-val" style="font-size:14px;">${Math.round(baseEPS * basePE)} 元</b></span>
-              <span style="color:var(--text-muted);">預期 ROI: <b class="mono text-cyan" id="sim-roi-val">+${(((baseEPS * basePE - currentP) / currentP) * 100).toFixed(1)}%</b></span>
+              <span style="color:var(--text-muted);">試算目標價: <b class="text-green font-bold" id="sim-target-val" style="font-size:14px;">${Math.round(baseEPS * basePE)} 元</b></span>
+              <span style="color:var(--text-muted);">預期 ROI: <b class="text-cyan font-bold" id="sim-roi-val">+${(((baseEPS * basePE - currentP) / currentP) * 100).toFixed(1)}%</b></span>
             </div>
           </div>
         </div>
 
         <div class="takeaway-bullet-box">
-          <div style="font-size: 11px; font-family: var(--font-mono); color: var(--apple-blue); font-weight: 700; margin-bottom: 4px;">📢 投信資深策略研判理由</div>
+          <div style="font-size: 11.5px; color: var(--apple-blue); font-weight: 700; margin-bottom: 4px;">📢 投信資深策略研判理由</div>
           <p style="font-size: 12.5px; line-height: 1.55; color: var(--text-primary);">${stock.takeaway}</p>
         </div>
 
@@ -464,25 +462,6 @@
       });
     }
 
-    // Screener Sliders
-    const minUpsideSlider = document.getElementById('screener-upside');
-    if (minUpsideSlider) {
-      minUpsideSlider.addEventListener('input', (e) => {
-        filters.minUpside = parseFloat(e.target.value);
-        document.getElementById('screener-upside-val').textContent = `${filters.minUpside}%`;
-        applyFilters();
-      });
-    }
-
-    const maxPESlider = document.getElementById('screener-pe');
-    if (maxPESlider) {
-      maxPESlider.addEventListener('input', (e) => {
-        filters.maxPE = parseFloat(e.target.value);
-        document.getElementById('screener-pe-val').textContent = `${filters.maxPE}x`;
-        applyFilters();
-      });
-    }
-
     // Search Input
     const searchInput = document.getElementById('stock-search-input');
     if (searchInput) {
@@ -569,14 +548,6 @@
       if (filters.onlyWatchlist && !watchlist.has(stock.symbol)) {
         return false;
       }
-      const rawUpside = parseFloat((stock.upsidePercent || '').replace(/[^0-9.]/g, '')) || 0;
-      if (rawUpside < filters.minUpside) {
-        return false;
-      }
-      const pe = stock.peRatio2026 || 20;
-      if (pe > filters.maxPE) {
-        return false;
-      }
       if (filters.search) {
         const q = filters.search;
         const matchSymbol = stock.symbol.toLowerCase().includes(q);
@@ -627,7 +598,7 @@
         <div style="background: var(--bg-subtle); padding: 18px; border-radius: 14px; border-left: 4px solid var(--apple-blue); margin-bottom: 18px;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <span class="tag-action ${s.actionTag === 'LONG' ? 'long' : 'hold'}" style="font-size: 13px; padding: 4px 14px;">${s.actionTag} 決策</span>
-            <span class="mono text-muted text-xs">資深策略分析師研判</span>
+            <span class="text-muted text-xs">資深策略分析師研判</span>
           </div>
           <p style="margin-top: 12px; font-size: 14px; line-height: 1.7; color: var(--text-primary); font-weight: 500;">${s.takeaway}</p>
         </div>
@@ -638,8 +609,8 @@
           <tr><td>建議進場區間</td><td class="text-green font-bold">${s.entryRange}</td></tr>
           <tr><td>第一目標價</td><td class="text-cyan font-bold">${s.targetPrice} 元 (${s.upsidePercent})</td></tr>
           <tr><td>停損防守點位</td><td class="text-rose font-bold">${s.stopLoss} 元</td></tr>
-          <tr><td>2026 E-EPS 估算</td><td class="mono font-bold">NT$ ${s.eps2026 || '-'} 元</td></tr>
-          <tr><td>預估 2026 P/E 本益比</td><td class="mono font-bold">${s.peRatio2026 || '-'} x</td></tr>
+          <tr><td>2026 E-EPS 估算</td><td class="font-bold">NT$ ${s.eps2026 || '-'} 元</td></tr>
+          <tr><td>預估 2026 P/E 本益比</td><td class="font-bold">${s.peRatio2026 || '-'} x</td></tr>
         </table>
       `;
     } else if (activeModalTab === 'fundamental') {
@@ -648,18 +619,18 @@
 
       container.innerHTML = `
         <div style="background: var(--bg-subtle); padding: 16px; border-radius: 14px; border-left: 4px solid var(--apple-blue); margin-bottom: 18px;">
-          <div style="font-size: 12px; color: var(--apple-blue); font-weight: 800; text-transform: uppercase;" class="mono">INVESTMENT THESIS 核心論述</div>
+          <div style="font-size: 12px; color: var(--apple-blue); font-weight: 800; text-transform: uppercase;">INVESTMENT THESIS 核心論述</div>
           <p style="margin-top: 8px; font-size: 13.5px; line-height: 1.65; color: var(--text-primary);">${fh.thesis || s.takeaway}</p>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
           <div style="background: rgba(52, 199, 89, 0.08); border: 1px solid rgba(52, 199, 89, 0.2); padding: 16px; border-radius: 14px;">
-            <div style="color: var(--apple-green); font-weight: 800; font-size: 13px;" class="mono">🚀 產業營運催化劑 (Catalysts)</div>
+            <div style="color: var(--apple-green); font-weight: 800; font-size: 13px;">🚀 產業營運催化劑 (Catalysts)</div>
             <ul class="bullet-list">${catalystsHtml}</ul>
           </div>
 
           <div style="background: rgba(255, 59, 48, 0.08); border: 1px solid rgba(255, 59, 48, 0.2); padding: 16px; border-radius: 14px;">
-            <div style="color: var(--apple-red); font-weight: 800; font-size: 13px;" class="mono">⚠️ 潛在風險點 (Risks)</div>
+            <div style="color: var(--apple-red); font-weight: 800; font-size: 13px;">⚠️ 潛在風險點 (Risks)</div>
             <ul class="bullet-list">${risksHtml}</ul>
           </div>
         </div>
@@ -677,11 +648,11 @@
         <div class="modal-section-title" style="font-size:14px; font-weight:700; color:var(--apple-blue); margin-bottom:10px;">📊 5 大均線價位矩陣表</div>
         <table class="key-level-table">
           <tr><th>移動平均線 (MA)</th><th>價格 (元)</th><th>均線戰術型態與防守意涵</th></tr>
-          <tr><td style="color:#ff9500;" class="font-bold">MA5 5日均線</td><td class="mono font-bold">${ma.ma5 || '-'}</td><td>極短線攻擊發散線，守穩代表強勢主升段持續發揮</td></tr>
-          <tr><td style="color:#0071e3;" class="font-bold">MA10 10日均線</td><td class="mono font-bold">${ma.ma10 || '-'}</td><td>短線洗盤防守支撐線，逢低回檔首要觀察買點</td></tr>
-          <tr><td style="color:#34c759;" class="font-bold">MA20 20日均線 (月線)</td><td class="mono font-bold">${ma.ma20 || '-'}</td><td>法人中短線波段生命線，站穩月線維持多頭架構</td></tr>
-          <tr><td style="color:#af52de;" class="font-bold">MA30 30日均線</td><td class="mono font-bold">${ma.ma30 || '-'}</td><td>季前中期支撐防守線，強烈支撐區域</td></tr>
-          <tr><td style="color:#ff9500;" class="font-bold">MA50 50日均線 (季線)</td><td class="mono font-bold">${ma.ma50 || '-'}</td><td>中長線趨勢方向線，突破防守即引發機構加碼潮</td></tr>
+          <tr><td style="color:#ff9500;" class="font-bold">MA5 5日均線</td><td class="font-bold">${ma.ma5 || '-'}</td><td>極短線攻擊發散線，守穩代表強勢主升段持續發揮</td></tr>
+          <tr><td style="color:#0071e3;" class="font-bold">MA10 10日均線</td><td class="font-bold">${ma.ma10 || '-'}</td><td>短線洗盤防守支撐線，逢低回檔首要觀察買點</td></tr>
+          <tr><td style="color:#34c759;" class="font-bold">MA20 20日均線 (月線)</td><td class="font-bold">${ma.ma20 || '-'}</td><td>法人中短線波段生命線，站穩月線維持多頭架構</td></tr>
+          <tr><td style="color:#af52de;" class="font-bold">MA30 30日均線</td><td class="font-bold">${ma.ma30 || '-'}</td><td>季前中期支撐防守線，強烈支撐區域</td></tr>
+          <tr><td style="color:#ff9500;" class="font-bold">MA50 50日均線 (季線)</td><td class="font-bold">${ma.ma50 || '-'}</td><td>中長線趨勢方向線，突破防守即引發機構加碼潮</td></tr>
         </table>
       `;
 
