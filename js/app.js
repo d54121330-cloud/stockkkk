@@ -1,6 +1,6 @@
 /**
  * Taiwan Stock Institutional Investor Research & Analytics System
- * Executive Application Controller (js/app.js)
+ * Apple Cupertino Executive Controller Application (js/app.js)
  */
 
 (function () {
@@ -10,46 +10,78 @@
   let allStocks = [];
   let filteredStocks = [];
   let activeStock = null;
+  let activeChartMode = 'kline'; // 'kline', 'profile', 'radar', 'oscillator'
+  let activeOscillatorTab = 'rsi'; // 'rsi', 'macd', 'kd'
   let activeModalTab = 'advisor';
+  let watchlist = new Set(JSON.parse(localStorage.getItem('apple_stock_watchlist') || '[]'));
   let autoTickTimer = null;
   let lastRefreshTime = new Date();
 
   let filters = {
     categoryKey: 'all',
     actionTag: 'all',
+    onlyWatchlist: false,
+    minUpside: 0,
+    maxPE: 40,
     search: ''
   };
 
   /**
-   * Application Entry Point
+   * Application Initialization
    */
   async function init() {
     try {
-      console.log('[App] Initializing Executive Research Terminal...');
+      console.log('[Apple Terminal] Initializing Cupertino Executive Terminal...');
 
-      // 1. Load local data FIRST for immediate, 0-latency UI render
       const data = await DataLoader.loadAllData();
       allStocks = data.stocks || [];
       filteredStocks = [...allStocks];
       activeStock = allStocks.find(s => s.symbol === '3217') || allStocks[0];
 
-      // 2. Render UI immediately
+      renderTickerBar();
       renderMasterTable();
       renderDeepDivePanel(activeStock);
       setupEventListeners();
       updateTimestampDisplay();
 
-      // 3. Start 10-second auto-tick simulation
       startAutoTick();
 
-      // 4. Background live sync (non-blocking)
-      triggerBackgroundLiveSync();
-
-      console.log('[App] Executive Terminal Initialized successfully.');
+      console.log('[Apple Terminal] Initialized successfully.');
     } catch (err) {
-      console.error('[App] Initialization Error:', err);
+      console.error('[Apple Terminal] Initialization Error:', err);
       showErrorMessage('資料載入失敗，請確認 JSON / JS 檔案載入狀態。');
     }
+  }
+
+  /**
+   * Render Top Ticker Bar Header
+   */
+  function renderTickerBar() {
+    const container = document.getElementById('ticker-carousel');
+    if (!container) return;
+
+    container.innerHTML = allStocks.map(s => {
+      const isUp = s.changePercent >= 0;
+      const changeClass = isUp ? 'text-green' : 'text-rose';
+      const changeSign = isUp ? '+' : '';
+      const isSelected = activeStock && activeStock.symbol === s.symbol ? 'active' : '';
+
+      return `
+        <div class="ticker-chip ${isSelected}" data-symbol="${s.symbol}">
+          <span class="ticker-sym">${s.symbol}</span>
+          <span class="ticker-name">${s.name}</span>
+          <span class="ticker-price mono">${s.price.toFixed(1)}</span>
+          <span class="ticker-chg mono ${changeClass}">${changeSign}${s.changePercent.toFixed(2)}%</span>
+        </div>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.ticker-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const symbol = chip.getAttribute('data-symbol');
+        selectStock(symbol);
+      });
+    });
   }
 
   /**
@@ -61,12 +93,13 @@
       lastRefreshTime = new Date();
       updateTimestampDisplay();
 
-      // Simulate micro market ticks (+-0.15%)
+      // Micro price fluctuation simulation
       allStocks.forEach(s => {
         const delta = (Math.random() - 0.48) * (s.price * 0.0015);
         s.price = Number(Math.max(1, s.price + delta).toFixed(1));
       });
 
+      renderTickerBar();
       renderMasterTable();
       if (activeStock) renderDeepDivePanel(activeStock);
     }, 10000);
@@ -84,22 +117,6 @@
     }
   }
 
-  function triggerBackgroundLiveSync() {
-    // Non-blocking tick refresh notification
-    setTimeout(() => {
-      const statusText = document.getElementById('status-text');
-      if (statusText) {
-        statusText.textContent = `🟢 已成功連線台股市場資料庫即時更新 (${getFormattedTime()})`;
-      }
-    }, 1000);
-  }
-
-  function getFormattedTime() {
-    const d = new Date();
-    const pad = (n) => String(n).padStart(2, '0');
-    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  }
-
   /**
    * Render Master Executive Decision Table
    */
@@ -110,8 +127,8 @@
     if (filteredStocks.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="9" style="text-align: center; padding: 40px; color: var(--text-muted);">
-            無符合條件之股票標的。
+          <td colspan="10" style="text-align: center; padding: 40px; color: var(--text-muted);">
+            無符合條件之股票標的。請放寬篩選條件。
           </td>
         </tr>
       `;
@@ -124,9 +141,15 @@
       const changeSign = isUp ? '+' : '';
       const isSelected = activeStock && activeStock.symbol === s.symbol ? 'selected-row' : '';
       const actionClass = s.actionTag === 'LONG' ? 'long' : 'hold';
+      const isStarred = watchlist.has(s.symbol) ? 'starred' : '';
 
       return `
         <tr class="master-table-row ${isSelected}" data-symbol="${s.symbol}">
+          <td style="text-align: center;">
+            <button class="star-btn ${isStarred}" data-symbol="${s.symbol}" title="追蹤個股">
+              ${watchlist.has(s.symbol) ? '★' : '☆'}
+            </button>
+          </td>
           <td class="col-stock">
             <span class="mono symbol-code">${s.symbol}</span>
             <span class="stock-title-name">${s.name}</span>
@@ -163,16 +186,30 @@
       `;
     }).join('');
 
+    // Attach Table Row & Star Button Events
     tbody.querySelectorAll('.master-table-row').forEach(row => {
       row.addEventListener('click', (e) => {
         const symbol = row.getAttribute('data-symbol');
-        if (e.target.classList.contains('view-detail-btn')) {
+        if (e.target.classList.contains('star-btn')) {
+          toggleWatchlist(symbol);
+          e.stopPropagation();
+        } else if (e.target.classList.contains('view-detail-btn')) {
           openStockModal(symbol);
         } else {
           selectStock(symbol);
         }
       });
     });
+  }
+
+  function toggleWatchlist(symbol) {
+    if (watchlist.has(symbol)) {
+      watchlist.delete(symbol);
+    } else {
+      watchlist.add(symbol);
+    }
+    localStorage.setItem('apple_stock_watchlist', JSON.stringify(Array.from(watchlist)));
+    renderMasterTable();
   }
 
   /**
@@ -183,12 +220,13 @@
     if (!stock) return;
 
     activeStock = stock;
+    renderTickerBar();
     renderMasterTable();
     renderDeepDivePanel(activeStock);
   }
 
   /**
-   * Render Focused Deep-Dive Panel
+   * Render Focused Deep-Dive Panel & Valuation Simulator
    */
   function renderDeepDivePanel(stock) {
     if (!stock) return;
@@ -207,15 +245,19 @@
       const fillPct = Math.min(Math.max(((currentP - stopP) / rangeSpan) * 100, 10), 95);
 
       const ma = stock.maMetrics || {};
+      const savedNote = localStorage.getItem('notes_' + stock.symbol) || '';
+
+      const baseEPS = stock.eps2026 || 10;
+      const basePE = stock.peRatio2026 || 20;
 
       cardDom.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--border-subtle); padding-bottom:12px;">
           <div>
-            <span class="mono symbol-code" style="font-size: 24px;">${stock.symbol}</span>
-            <span style="font-size: 17px; font-weight: 700; margin-left: 6px; color: var(--text-primary);">${stock.name}</span>
+            <span class="mono symbol-code" style="font-size: 26px;">${stock.symbol}</span>
+            <span style="font-size: 18px; font-weight: 700; margin-left: 6px; color: var(--text-primary);">${stock.name}</span>
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">${stock.category}</div>
             <div style="margin-top: 6px; font-size: 14px;">
-              <span class="mono font-bold">${stock.price.toFixed(1)} 元</span>
+              <span class="mono font-bold" style="font-size: 17px;">${stock.price.toFixed(1)} 元</span>
               <span class="${changeClass} mono text-xs" style="margin-left: 4px;">(${changeSign}${stock.changePercent.toFixed(2)}%)</span>
             </div>
           </div>
@@ -249,6 +291,7 @@
           </div>
         </div>
 
+        <!-- 5 MA Matrix -->
         <div style="margin-top: 12px; background: var(--bg-subtle); border-radius: 10px; padding: 10px 12px; border: 1px solid var(--border-subtle);">
           <div style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 700; margin-bottom: 6px; display: flex; justify-content: space-between;">
             <span>📊 5 大移動平均線 (5 MA) 數據</span>
@@ -257,9 +300,34 @@
           <div style="display: grid; grid-template-columns: repeat(5, 1fr); text-align: center; font-family: var(--font-mono); font-size: 11px;">
             <div><span style="color: #f59e0b;">MA5</span><div class="font-bold" style="margin-top: 2px;">${ma.ma5 || '-'}</div></div>
             <div><span style="color: #38bdf8;">MA10</span><div class="font-bold" style="margin-top: 2px;">${ma.ma10 || '-'}</div></div>
-            <div><span style="color: #22c55e;">MA20</span><div class="font-bold" style="margin-top: 2px;">${ma.ma20 || '-'}</div></div>
-            <div><span style="color: #a855f7;">MA30</span><div class="font-bold" style="margin-top: 2px;">${ma.ma30 || '-'}</div></div>
-            <div><span style="color: #d97706;">MA50</span><div class="font-bold" style="margin-top: 2px;">${ma.ma50 || '-'}</div></div>
+            <div><span style="color: #34d399;">MA20</span><div class="font-bold" style="margin-top: 2px;">${ma.ma20 || '-'}</div></div>
+            <div><span style="color: #c084fc;">MA30</span><div class="font-bold" style="margin-top: 2px;">${ma.ma30 || '-'}</div></div>
+            <div><span style="color: #fbbf24;">MA50</span><div class="font-bold" style="margin-top: 2px;">${ma.ma50 || '-'}</div></div>
+          </div>
+        </div>
+
+        <!-- AI Valuation Simulator Slider -->
+        <div style="margin-top: 12px; background: var(--bg-subtle); border-radius: 10px; padding: 12px; border: 1px solid var(--border-subtle);">
+          <div style="font-size: 11.5px; font-family: var(--font-mono); color: var(--accent-gold); font-weight: 800; margin-bottom: 8px;">
+            🧮 AI 投信目標價與本益比動態試算器
+          </div>
+          <div style="display: grid; gap: 8px; font-size: 11px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; color:var(--text-secondary);">
+                <span>預估 2026 EPS: <b class="mono text-primary" id="sim-eps-val">${baseEPS} 元</b></span>
+              </div>
+              <input type="range" id="sim-eps-range" min="1" max="150" step="0.5" value="${baseEPS}" style="width:100%;">
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; color:var(--text-secondary);">
+                <span>預估本益比 (P/E): <b class="mono text-primary" id="sim-pe-val">${basePE} x</b></span>
+              </div>
+              <input type="range" id="sim-pe-range" min="5" max="50" step="0.5" value="${basePE}" style="width:100%;">
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:6px; margin-top:4px;">
+              <span style="color:var(--text-muted);">試算目標價: <b class="mono text-green" id="sim-target-val" style="font-size:14px;">${Math.round(baseEPS * basePE)} 元</b></span>
+              <span style="color:var(--text-muted);">預期 ROI: <b class="mono text-cyan" id="sim-roi-val">+${(((baseEPS * basePE - currentP) / currentP) * 100).toFixed(1)}%</b></span>
+            </div>
           </div>
         </div>
 
@@ -268,19 +336,71 @@
           <p style="font-size: 12.5px; line-height: 1.55; color: var(--text-primary);">${stock.takeaway}</p>
         </div>
 
-        <button class="open-modal-btn" onclick="window.AppModule.openStockModal('${stock.symbol}')">
-          📖 查看完整 3 頁機構研報 (基本面 / 30D K線均線 / 策略)
-        </button>
+        <!-- Institutional Note Input -->
+        <div style="margin-top: 10px;">
+          <textarea id="stock-user-note" placeholder="✏️ 輸入對 ${stock.name} 的研究筆記..." style="width:100%; height:45px; background:var(--bg-subtle); border:1px solid var(--border-subtle); border-radius:8px; padding:8px; color:var(--text-primary); font-size:11px; outline:none; resize:none;">${savedNote}</textarea>
+        </div>
+
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button class="open-modal-btn" style="flex:1;" onclick="window.AppModule.openStockModal('${stock.symbol}')">
+            📖 完整 3 頁機構研報
+          </button>
+          <button class="manual-refresh-btn" style="padding:0 14px;" onclick="window.AppModule.copyStockSummary('${stock.symbol}')" title="一鍵複製研報摘要">
+            📋 複製摘要
+          </button>
+        </div>
       `;
+
+      // Wire Valuation Simulator Events
+      const epsRange = document.getElementById('sim-eps-range');
+      const peRange = document.getElementById('sim-pe-range');
+      if (epsRange && peRange) {
+        const updateSim = () => {
+          const eps = parseFloat(epsRange.value);
+          const pe = parseFloat(peRange.value);
+          document.getElementById('sim-eps-val').textContent = `${eps} 元`;
+          document.getElementById('sim-pe-val').textContent = `${pe} x`;
+
+          const simTarget = Math.round(eps * pe);
+          const roi = (((simTarget - currentP) / currentP) * 100).toFixed(1);
+          document.getElementById('sim-target-val').textContent = `${simTarget} 元`;
+          document.getElementById('sim-roi-val').textContent = `${roi >= 0 ? '+' : ''}${roi}%`;
+        };
+        epsRange.addEventListener('input', updateSim);
+        peRange.addEventListener('input', updateSim);
+      }
+
+      // Wire Note Save Event
+      const noteInput = document.getElementById('stock-user-note');
+      if (noteInput) {
+        noteInput.addEventListener('input', (e) => {
+          localStorage.setItem('notes_' + stock.symbol, e.target.value);
+        });
+      }
     }
 
-    if (window.ChartsManager) {
-      window.ChartsManager.renderRadarChart('radar-chart', stock);
-      window.ChartsManager.renderTechnicalChart('technical-chart', stock);
+    renderActiveChart(stock);
+  }
+
+  /**
+   * Render Active Selected Chart Mode
+   */
+  function renderActiveChart(stock) {
+    if (!stock || !window.ChartsManager) return;
+
+    if (activeChartMode === 'kline') {
+      window.ChartsManager.renderTechnicalChart('main-chart-canvas', stock);
+    } else if (activeChartMode === 'profile') {
+      window.ChartsManager.renderVolumeProfileChart('main-chart-canvas', stock);
+    } else if (activeChartMode === 'radar') {
+      window.ChartsManager.renderRadarChart('main-chart-canvas', stock);
+    } else if (activeChartMode === 'oscillator') {
+      window.ChartsManager.renderOscillatorChart('main-chart-canvas', stock, activeOscillatorTab);
     }
   }
 
   function setupEventListeners() {
+    // Category Filter Buttons
     const themeGroup = document.getElementById('filter-theme-btns');
     if (themeGroup) {
       themeGroup.querySelectorAll('.filter-btn').forEach(btn => {
@@ -293,6 +413,7 @@
       });
     }
 
+    // Action Filter Buttons
     const actionGroup = document.getElementById('filter-action-btns');
     if (actionGroup) {
       actionGroup.querySelectorAll('.filter-btn').forEach(btn => {
@@ -305,6 +426,36 @@
       });
     }
 
+    // Watchlist Filter Button
+    const watchlistFilterBtn = document.getElementById('filter-watchlist-btn');
+    if (watchlistFilterBtn) {
+      watchlistFilterBtn.addEventListener('click', () => {
+        filters.onlyWatchlist = !filters.onlyWatchlist;
+        watchlistFilterBtn.classList.toggle('active', filters.onlyWatchlist);
+        applyFilters();
+      });
+    }
+
+    // Screener Sliders
+    const minUpsideSlider = document.getElementById('screener-upside');
+    if (minUpsideSlider) {
+      minUpsideSlider.addEventListener('input', (e) => {
+        filters.minUpside = parseFloat(e.target.value);
+        document.getElementById('screener-upside-val').textContent = `${filters.minUpside}%`;
+        applyFilters();
+      });
+    }
+
+    const maxPESlider = document.getElementById('screener-pe');
+    if (maxPESlider) {
+      maxPESlider.addEventListener('input', (e) => {
+        filters.maxPE = parseFloat(e.target.value);
+        document.getElementById('screener-pe-val').textContent = `${filters.maxPE}x`;
+        applyFilters();
+      });
+    }
+
+    // Search Input
     const searchInput = document.getElementById('stock-search-input');
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
@@ -313,6 +464,35 @@
       });
     }
 
+    // Chart Mode Segmented Control Tabs
+    const chartTabs = document.querySelectorAll('.chart-mode-tab');
+    chartTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        chartTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeChartMode = tab.getAttribute('data-mode');
+
+        const subBar = document.getElementById('oscillator-sub-bar');
+        if (subBar) {
+          subBar.style.display = activeChartMode === 'oscillator' ? 'flex' : 'none';
+        }
+
+        if (activeStock) renderActiveChart(activeStock);
+      });
+    });
+
+    // Oscillator Sub Tabs (RSI / MACD / KD)
+    const oscTabs = document.querySelectorAll('.osc-sub-tab');
+    oscTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        oscTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeOscillatorTab = tab.getAttribute('data-osc');
+        if (activeStock) renderActiveChart(activeStock);
+      });
+    });
+
+    // Modal Close
     const closeBtn = document.getElementById('close-modal-btn');
     const modal = document.getElementById('stock-modal');
     if (closeBtn && modal) {
@@ -322,6 +502,7 @@
       });
     }
 
+    // Manual Refresh Button
     const manualBtn = document.getElementById('manual-refresh-btn');
     if (manualBtn) {
       manualBtn.addEventListener('click', () => {
@@ -331,11 +512,13 @@
           const delta = (Math.random() - 0.48) * (s.price * 0.002);
           s.price = Number(Math.max(1, s.price + delta).toFixed(1));
         });
+        renderTickerBar();
         renderMasterTable();
         if (activeStock) renderDeepDivePanel(activeStock);
       });
     }
 
+    // Modal Tabs
     const modalTabs = document.querySelectorAll('.modal-tab-btn');
     modalTabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -353,6 +536,17 @@
         return false;
       }
       if (filters.actionTag !== 'all' && stock.actionTag !== filters.actionTag) {
+        return false;
+      }
+      if (filters.onlyWatchlist && !watchlist.has(stock.symbol)) {
+        return false;
+      }
+      const rawUpside = parseFloat((stock.upsidePercent || '').replace(/[^0-9.]/g, '')) || 0;
+      if (rawUpside < filters.minUpside) {
+        return false;
+      }
+      const pe = stock.peRatio2026 || 20;
+      if (pe > filters.maxPE) {
         return false;
       }
       if (filters.search) {
@@ -431,12 +625,12 @@
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
-          <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.2); padding: 16px; border-radius: 12px;">
+          <div style="background: rgba(52, 211, 153, 0.06); border: 1px solid rgba(52, 211, 153, 0.2); padding: 16px; border-radius: 12px;">
             <div style="color: var(--accent-green); font-weight: 800; font-size: 13px;" class="mono">🚀 產業營運催化劑 (Catalysts)</div>
             <ul class="bullet-list">${catalystsHtml}</ul>
           </div>
 
-          <div style="background: rgba(244, 63, 94, 0.06); border: 1px solid rgba(244, 63, 94, 0.2); padding: 16px; border-radius: 12px;">
+          <div style="background: rgba(251, 113, 133, 0.06); border: 1px solid rgba(251, 113, 133, 0.2); padding: 16px; border-radius: 12px;">
             <div style="color: var(--accent-rose); font-weight: 800; font-size: 13px;" class="mono">⚠️ 潛在風險點 (Risks)</div>
             <ul class="bullet-list">${risksHtml}</ul>
           </div>
@@ -457,9 +651,9 @@
           <tr><th>移動平均線 (MA)</th><th>價格 (元)</th><th>均線戰術型態與防守意涵</th></tr>
           <tr><td style="color:#f59e0b;" class="font-bold">MA5 5日均線</td><td class="mono font-bold">${ma.ma5 || '-'}</td><td>極短線攻擊發散線，守穩代表強勢主升段持續發揮</td></tr>
           <tr><td style="color:#38bdf8;" class="font-bold">MA10 10日均線</td><td class="mono font-bold">${ma.ma10 || '-'}</td><td>短線洗盤防守支撐線，逢低回檔首要觀察買點</td></tr>
-          <tr><td style="color:#22c55e;" class="font-bold">MA20 20日均線 (月線)</td><td class="mono font-bold">${ma.ma20 || '-'}</td><td>法人中短線波段生命線，站穩月線維持多頭架構</td></tr>
-          <tr><td style="color:#a855f7;" class="font-bold">MA30 30日均線</td><td class="mono font-bold">${ma.ma30 || '-'}</td><td>季前中期支撐防守線，強烈支撐區域</td></tr>
-          <tr><td style="color:#d97706;" class="font-bold">MA50 50日均線 (季線)</td><td class="mono font-bold">${ma.ma50 || '-'}</td><td>中長線趨勢方向線，突破防守即引發機構加碼潮</td></tr>
+          <tr><td style="color:#34d399;" class="font-bold">MA20 20日均線 (月線)</td><td class="mono font-bold">${ma.ma20 || '-'}</td><td>法人中短線波段生命線，站穩月線維持多頭架構</td></tr>
+          <tr><td style="color:#c084fc;" class="font-bold">MA30 30日均線</td><td class="mono font-bold">${ma.ma30 || '-'}</td><td>季前中期支撐防守線，強烈支撐區域</td></tr>
+          <tr><td style="color:#fbbf24;" class="font-bold">MA50 50日均線 (季線)</td><td class="mono font-bold">${ma.ma50 || '-'}</td><td>中長線趨勢方向線，突破防守即引發機構加碼潮</td></tr>
         </table>
       `;
 
@@ -471,6 +665,25 @@
     }
   }
 
+  function copyStockSummary(symbol) {
+    const s = allStocks.find(st => st.symbol === symbol);
+    if (!s) return;
+
+    const summaryText = `【台股投信機構精準研報】\n` +
+      `📌 標的：${s.symbol} ${s.name} (${s.category})\n` +
+      `現價：${s.price.toFixed(1)}元 | 決策：${s.actionTag}\n` +
+      `進場區間：${s.entryRange}\n` +
+      `第一目標價：${s.targetPrice}元 (${s.upsidePercent})\n` +
+      `停損點：${s.stopLoss}元\n` +
+      `核心理由：${s.takeaway}`;
+
+    navigator.clipboard.writeText(summaryText).then(() => {
+      alert(`✅ 已複製 ${s.symbol} ${s.name} 研報摘要至剪貼簿！`);
+    }).catch(err => {
+      console.warn('Copy failed:', err);
+    });
+  }
+
   function showErrorMessage(msg) {
     const container = document.querySelector('.dashboard-container');
     if (container) {
@@ -478,9 +691,10 @@
     }
   }
 
-  // Global Export
+  // Global Exports
   window.AppModule = {
-    openStockModal: openStockModal
+    openStockModal: openStockModal,
+    copyStockSummary: copyStockSummary
   };
 
   if (document.readyState === 'loading') {
