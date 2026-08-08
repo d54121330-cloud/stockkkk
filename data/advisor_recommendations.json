@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-08-08 12:41:30",
+    "generatedAt": "2026-08-08 13:15:15",
     "advisorName": "投信資深策略分析師 (Institutional Senior Analyst)",
     "qaInspectorName": "即時功能檢查員 (QA Inspector)",
     "systemTitle": "Taiwan Stock Institutional Research & Analytics Terminal",
@@ -436,6 +436,13 @@
         "ma20": 204.75,
         "ma30": 211.65,
         "ma50": 230.49
+      },
+      "radarScores": {
+        "revenueGrowth": 82,
+        "technicalPattern": 92,
+        "institutionalFlow": 90,
+        "industryOutlook": 94,
+        "safetyMargin": 87
       }
     },
     {
@@ -864,6 +871,13 @@
         "ma20": 242.95,
         "ma30": 246.47,
         "ma50": 259.07
+      },
+      "radarScores": {
+        "revenueGrowth": 83,
+        "technicalPattern": 78,
+        "institutionalFlow": 90,
+        "industryOutlook": 94,
+        "safetyMargin": 89
       }
     },
     {
@@ -1292,6 +1306,13 @@
         "ma20": 191.38,
         "ma30": 214.87,
         "ma50": 225.68
+      },
+      "radarScores": {
+        "revenueGrowth": 82,
+        "technicalPattern": 92,
+        "institutionalFlow": 90,
+        "industryOutlook": 94,
+        "safetyMargin": 81
       }
     },
     {
@@ -1720,6 +1741,13 @@
         "ma20": 1188.85,
         "ma30": 1219.73,
         "ma50": 1411.84
+      },
+      "radarScores": {
+        "revenueGrowth": 94,
+        "technicalPattern": 92,
+        "institutionalFlow": 90,
+        "industryOutlook": 94,
+        "safetyMargin": 87
       }
     },
     {
@@ -2148,6 +2176,13 @@
         "ma20": 2361.75,
         "ma30": 2387.5,
         "ma50": 2379.9
+      },
+      "radarScores": {
+        "revenueGrowth": 97,
+        "technicalPattern": 92,
+        "institutionalFlow": 90,
+        "industryOutlook": 88,
+        "safetyMargin": 82
       }
     },
     {
@@ -2576,6 +2611,13 @@
         "ma20": 271.9,
         "ma30": 290.65,
         "ma50": 310.6
+      },
+      "radarScores": {
+        "revenueGrowth": 83,
+        "technicalPattern": 78,
+        "institutionalFlow": 76,
+        "industryOutlook": 88,
+        "safetyMargin": 80
       }
     },
     {
@@ -3004,6 +3046,13 @@
         "ma20": 50.08,
         "ma30": 55.58,
         "ma50": 56.04
+      },
+      "radarScores": {
+        "revenueGrowth": 80,
+        "technicalPattern": 78,
+        "institutionalFlow": 90,
+        "industryOutlook": 88,
+        "safetyMargin": 91
       }
     },
     {
@@ -3432,6 +3481,13 @@
         "ma20": 2224.5,
         "ma30": 2330.83,
         "ma50": 2375.8
+      },
+      "radarScores": {
+        "revenueGrowth": 98,
+        "technicalPattern": 78,
+        "institutionalFlow": 90,
+        "industryOutlook": 88,
+        "safetyMargin": 90
       }
     },
     {
@@ -3860,6 +3916,13 @@
         "ma20": 550.65,
         "ma30": 560.73,
         "ma50": 636.34
+      },
+      "radarScores": {
+        "revenueGrowth": 84,
+        "technicalPattern": 92,
+        "institutionalFlow": 90,
+        "industryOutlook": 94,
+        "safetyMargin": 86
       }
     },
     {
@@ -4288,6 +4351,13 @@
         "ma20": 418.43,
         "ma30": 455.57,
         "ma50": 511.97
+      },
+      "radarScores": {
+        "revenueGrowth": 84,
+        "technicalPattern": 92,
+        "institutionalFlow": 90,
+        "industryOutlook": 94,
+        "safetyMargin": 88
       }
     },
     {
@@ -4716,6 +4786,13 @@
         "ma20": 2362.25,
         "ma30": 2411.17,
         "ma50": 2450.9
+      },
+      "radarScores": {
+        "revenueGrowth": 98,
+        "technicalPattern": 92,
+        "institutionalFlow": 90,
+        "industryOutlook": 94,
+        "safetyMargin": 82
       }
     },
     {
@@ -5144,6 +5221,13 @@
         "ma20": 917.15,
         "ma30": 938.77,
         "ma50": 994.82
+      },
+      "radarScores": {
+        "revenueGrowth": 92,
+        "technicalPattern": 92,
+        "institutionalFlow": 90,
+        "industryOutlook": 94,
+        "safetyMargin": 81
       }
     },
     {
@@ -5572,6 +5656,13 @@
         "ma20": 147.72,
         "ma30": 157.28,
         "ma50": 166.12
+      },
+      "radarScores": {
+        "revenueGrowth": 83,
+        "technicalPattern": 78,
+        "institutionalFlow": 90,
+        "industryOutlook": 88,
+        "safetyMargin": 91
       }
     }
   ]
