@@ -1,6 +1,6 @@
 window.EMBEDDED_STOCK_DATA = {
   "metadata": {
-    "generatedAt": "2026-08-08 13:29:15",
+    "generatedAt": "2026-08-08 14:00:02",
     "advisorName": "投信資深策略分析師 (Institutional Senior Analyst)",
     "systemTitle": "Taiwan Stock Institutional Research & Analytics Terminal",
     "totalDefaultStocks": 13,
