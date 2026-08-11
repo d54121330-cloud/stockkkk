@@ -17,9 +17,9 @@
 /* Authentic Apple Cupertino Design System - Premium Typography & Clean UI */
 :root {
   --bg-main: #f5f5f7;
-  --bg-card: rgba(255, 255, 255, 0.92);
-  --bg-subtle: rgba(0, 0, 0, 0.035);
-  --bg-modal: rgba(255, 255, 255, 0.96);
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-subtle: rgba(0, 0, 0, 0.04);
+  --bg-modal: rgba(255, 255, 255, 0.98);
   --bg-segmented: #e3e3e8;
 
   --text-primary: #1d1d1f;
@@ -45,9 +45,9 @@
 
 [data-theme="dark"] {
   --bg-main: #000000;
-  --bg-card: rgba(28, 28, 30, 0.88);
+  --bg-card: rgba(28, 28, 30, 0.92);
   --bg-subtle: rgba(255, 255, 255, 0.06);
-  --bg-modal: rgba(28, 28, 30, 0.96);
+  --bg-modal: rgba(28, 28, 30, 0.98);
   --bg-segmented: rgba(118, 118, 128, 0.24);
 
   --text-primary: #f5f5f7;
@@ -270,6 +270,7 @@ body {
   border-radius: 14px;
   overflow-x: auto;
   box-shadow: var(--card-shadow);
+  min-height: 200px;
 }
 
 .master-table {
@@ -301,7 +302,7 @@ body {
   transition: var(--transition-smooth);
 }
 .master-table-row:hover, .master-table-row.selected-row {
-  background: rgba(0, 113, 227, 0.06);
+  background: rgba(0, 113, 227, 0.08);
 }
 
 .symbol-code {
@@ -398,6 +399,7 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: var(--card-shadow);
+  min-height: 360px;
 }
 
 .price-target-widget {
@@ -565,28 +567,6 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.bullet-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
-}
-.bullet-list li {
-  position: relative;
-  padding-left: 18px;
-  font-size: 13px;
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-.bullet-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: var(--apple-blue);
-  font-weight: bold;
 }
 
 .key-level-table {
@@ -771,14 +751,14 @@ body {
   </div>
 
   <footer class="terminal-footer">
-    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v8.0 Standalone</p>
+    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v9.0 Bulletproof</p>
   </footer>
 
   <!-- Complete Inlined Fail-Safe Dataset, DataLoader, ChartsManager & AppModule -->
   <script>
     // 1. Embedded Stock Data (14 Stocks Complete Dataset)
     window.EMBEDDED_STOCK_DATA = {
-      "metadata": { "generatedAt": "2026-08-11 15:00:00", "systemTitle": "Taiwan Stock Institutional Terminal" },
+      "metadata": { "generatedAt": "2026-08-11 15:15:00", "systemTitle": "Taiwan Stock Institutional Terminal" },
       "recommendations": [
         { "symbol": "2330", "name": "台積電", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "LONG", "currentPrice": 2405.0, "changePercent": 3.66, "targetPrice": 2800.0, "stopLoss": 2180.0, "entryRange": "2,330 - 2,370 元", "upsidePercent": "+16.4%", "takeaway": "★ A16/N2 先進製程與 CoWoS 產能預約至 2027 年，代工價調漲，預估 2026 EPS NT$70.0。", "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 70.0, "peRatio2026": 34.3 } },
         { "symbol": "3217", "name": "優群", "category": "SOCAMM2 次世代記憶體", "categoryKey": "socamm2", "actionTag": "LONG", "currentPrice": 143.5, "changePercent": 1.77, "targetPrice": 185.0, "stopLoss": 122.0, "entryRange": "136.0 - 141.0 元", "upsidePercent": "+28.9%", "takeaway": "★ AI PC / NB 與伺服器 SOCAMM2 / CAMM2 新型高頻記憶體插槽連接器全球龍頭，毛利率逾 48%，預估 2026 EPS NT$12.50。", "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 12.5, "peRatio2026": 14.8 } },
@@ -845,28 +825,38 @@ body {
       return { loadAllData };
     })();
 
-    // 3. ECharts Manager Module
+    // 3. ECharts Manager Module with Fail-Safe Fallbacks
     window.ChartsManager = (function () {
       'use strict';
       let radarInstance = null, techInstance = null;
 
       function renderRadarChart(domId, stock) {
         const dom = document.getElementById(domId);
-        if (!dom || typeof echarts === 'undefined') return;
-        if (radarInstance) radarInstance.dispose();
-        radarInstance = echarts.init(dom);
-        const option = {
-          backgroundColor: 'transparent',
-          tooltip: { trigger: 'item', backgroundColor: '#1c1c1e', textStyle: { color: '#f5f5f7', fontSize: 12 } },
-          radar: {
-            indicator: [ { name: '營收成長', max: 100 }, { name: '技術型態', max: 100 }, { name: '法人籌碼', max: 100 }, { name: '產業前景', max: 100 }, { name: '估值邊際', max: 100 } ],
-            shape: 'polygon', splitNumber: 4, axisName: { color: '#86868b', fontSize: 11, fontWeight: '600' },
-            splitLine: { lineStyle: { color: ['rgba(0,0,0,0.08)', 'rgba(0,0,0,0.04)'] } },
-            splitArea: { areaStyle: { color: ['transparent', 'rgba(0,113,227,0.02)'] } }
-          },
-          series: [{ type: 'radar', data: [{ value: [88, 85, 88, 90, 82], name: stock.name }], symbol: 'circle', symbolSize: 5, itemStyle: { color: '#0071e3' }, lineStyle: { color: '#0071e3', width: 2 }, areaStyle: { color: 'rgba(0, 113, 227, 0.2)' } }]
-        };
-        radarInstance.setOption(option);
+        if (!dom) return;
+
+        if (typeof echarts === 'undefined') {
+          dom.innerHTML = `<div style="padding:20px; font-size:12px; color:var(--text-muted); text-align:center;">📊 投信 5 維度能力評估<br/><b style="color:var(--apple-blue);">${stock.symbol} ${stock.name}</b><br/>營收: 88 | 技術: 85 | 法人: 88 | 前景: 90 | 估值: 82</div>`;
+          return;
+        }
+
+        try {
+          if (radarInstance) radarInstance.dispose();
+          radarInstance = echarts.init(dom);
+          const option = {
+            backgroundColor: 'transparent',
+            tooltip: { trigger: 'item', backgroundColor: '#1c1c1e', textStyle: { color: '#f5f5f7', fontSize: 12 } },
+            radar: {
+              indicator: [ { name: '營收成長', max: 100 }, { name: '技術型態', max: 100 }, { name: '法人籌碼', max: 100 }, { name: '產業前景', max: 100 }, { name: '估值邊際', max: 100 } ],
+              shape: 'polygon', splitNumber: 4, axisName: { color: '#86868b', fontSize: 11, fontWeight: '600' },
+              splitLine: { lineStyle: { color: ['rgba(0,0,0,0.08)', 'rgba(0,0,0,0.04)'] } },
+              splitArea: { areaStyle: { color: ['transparent', 'rgba(0,113,227,0.02)'] } }
+            },
+            series: [{ type: 'radar', data: [{ value: [88, 85, 88, 90, 82], name: stock.name }], symbol: 'circle', symbolSize: 5, itemStyle: { color: '#0071e3' }, lineStyle: { color: '#0071e3', width: 2 }, areaStyle: { color: 'rgba(0, 113, 227, 0.2)' } }]
+          };
+          radarInstance.setOption(option);
+        } catch (err) {
+          console.warn('Radar chart render fallback:', err);
+        }
       }
 
       function calcMovingAverage(dayCount, priceHist) {
@@ -882,43 +872,65 @@ body {
 
       function renderTechnicalChart(domId, stock) {
         const dom = document.getElementById(domId);
-        if (!dom || typeof echarts === 'undefined') return;
-        if (techInstance) techInstance.dispose();
-        techInstance = echarts.init(dom);
+        if (!dom) return;
 
-        const fullHist = stock.priceHistory || [];
-        const startIdx = Math.max(0, fullHist.length - 30);
-        const priceHist30 = fullHist.slice(startIdx);
+        const ma = stock.maMetrics || {};
 
-        const dates = priceHist30.map(item => item.date);
-        const kData = priceHist30.map(item => [item.open, item.close, item.low, item.high]);
+        if (typeof echarts === 'undefined') {
+          dom.innerHTML = `
+            <div style="padding:16px; font-size:12px; color:var(--text-secondary);">
+              <div style="font-weight:bold; color:var(--apple-blue); margin-bottom:8px;">📈 ${stock.symbol} ${stock.name} — 5 大均線價位</div>
+              <div style="display:grid; grid-template-columns:repeat(5,1fr); text-align:center; font-family:monospace;">
+                <div><span style="color:#ff9500;">MA5</span><br/><b>${ma.ma5||'-'}</b></div>
+                <div><span style="color:#0071e3;">MA10</span><br/><b>${ma.ma10||'-'}</b></div>
+                <div><span style="color:#34c759;">MA20</span><br/><b>${ma.ma20||'-'}</b></div>
+                <div><span style="color:#af52de;">MA30</span><br/><b>${ma.ma30||'-'}</b></div>
+                <div><span style="color:#ff3b30;">MA50</span><br/><b>${ma.ma50||'-'}</b></div>
+              </div>
+            </div>`;
+          return;
+        }
 
-        const ma5Data = calcMovingAverage(5, fullHist).slice(startIdx);
-        const ma10Data = calcMovingAverage(10, fullHist).slice(startIdx);
-        const ma20Data = calcMovingAverage(20, fullHist).slice(startIdx);
-        const ma30Data = calcMovingAverage(30, fullHist).slice(startIdx);
-        const ma50Data = calcMovingAverage(50, fullHist).slice(startIdx);
+        try {
+          if (techInstance) techInstance.dispose();
+          techInstance = echarts.init(dom);
 
-        const volumes = priceHist30.map((item, idx) => [idx, item.volume, item.close >= item.open ? 1 : -1]);
+          const fullHist = stock.priceHistory || [];
+          const startIdx = Math.max(0, fullHist.length - 30);
+          const priceHist30 = fullHist.slice(startIdx);
 
-        const option = {
-          backgroundColor: 'transparent',
-          legend: { data: ['K線', 'MA5', 'MA10', 'MA20', 'MA30', 'MA50'], top: '0%', right: '2%', textStyle: { color: '#86868b', fontSize: 10 } },
-          tooltip: { trigger: 'axis', axisPointer: { type: 'cross' }, backgroundColor: '#1c1c1e', textStyle: { color: '#f5f5f7', fontSize: 11 } },
-          grid: [ { left: '6%', right: '3%', top: '12%', height: '62%' }, { left: '6%', right: '3%', top: '78%', height: '18%' } ],
-          xAxis: [ { type: 'category', data: dates, boundaryGap: true, axisLine: { lineStyle: { color: '#86868b' } } }, { type: 'category', gridIndex: 1, data: dates, boundaryGap: true, axisLabel: { show: false } } ],
-          yAxis: [ { scale: true, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } }, { scale: true, gridIndex: 1, splitLine: { show: false }, axisLabel: { show: false } } ],
-          series: [
-            { name: 'K線', type: 'candlestick', data: kData, itemStyle: { color: '#34c759', color0: '#ff3b30', borderColor: '#34c759', borderColor0: '#ff3b30' } },
-            { name: 'MA5', type: 'line', data: ma5Data, smooth: true, showSymbol: false, lineStyle: { color: '#ff9500', width: 1.5 } },
-            { name: 'MA10', type: 'line', data: ma10Data, smooth: true, showSymbol: false, lineStyle: { color: '#0071e3', width: 1.5 } },
-            { name: 'MA20', type: 'line', data: ma20Data, smooth: true, showSymbol: false, lineStyle: { color: '#34c759', width: 1.5 } },
-            { name: 'MA30', type: 'line', data: ma30Data, smooth: true, showSymbol: false, lineStyle: { color: '#af52de', width: 1.5 } },
-            { name: 'MA50', type: 'line', data: ma50Data, smooth: true, showSymbol: false, lineStyle: { color: '#ff3b30', width: 2 } },
-            { name: '成交量', type: 'bar', xAxisIndex: 1, yAxisIndex: 1, data: volumes.map(v => v[1]), itemStyle: { color: function(p) { return volumes[p.dataIndex][2] > 0 ? '#34c759' : '#ff3b30'; } } }
-          ]
-        };
-        techInstance.setOption(option);
+          const dates = priceHist30.map(item => item.date);
+          const kData = priceHist30.map(item => [item.open, item.close, item.low, item.high]);
+
+          const ma5Data = calcMovingAverage(5, fullHist).slice(startIdx);
+          const ma10Data = calcMovingAverage(10, fullHist).slice(startIdx);
+          const ma20Data = calcMovingAverage(20, fullHist).slice(startIdx);
+          const ma30Data = calcMovingAverage(30, fullHist).slice(startIdx);
+          const ma50Data = calcMovingAverage(50, fullHist).slice(startIdx);
+
+          const volumes = priceHist30.map((item, idx) => [idx, item.volume, item.close >= item.open ? 1 : -1]);
+
+          const option = {
+            backgroundColor: 'transparent',
+            legend: { data: ['K線', 'MA5', 'MA10', 'MA20', 'MA30', 'MA50'], top: '0%', right: '2%', textStyle: { color: '#86868b', fontSize: 10 } },
+            tooltip: { trigger: 'axis', axisPointer: { type: 'cross' }, backgroundColor: '#1c1c1e', textStyle: { color: '#f5f5f7', fontSize: 11 } },
+            grid: [ { left: '6%', right: '3%', top: '12%', height: '62%' }, { left: '6%', right: '3%', top: '78%', height: '18%' } ],
+            xAxis: [ { type: 'category', data: dates, boundaryGap: true, axisLine: { lineStyle: { color: '#86868b' } } }, { type: 'category', gridIndex: 1, data: dates, boundaryGap: true, axisLabel: { show: false } } ],
+            yAxis: [ { scale: true, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } }, { scale: true, gridIndex: 1, splitLine: { show: false }, axisLabel: { show: false } } ],
+            series: [
+              { name: 'K線', type: 'candlestick', data: kData, itemStyle: { color: '#34c759', color0: '#ff3b30', borderColor: '#34c759', borderColor0: '#ff3b30' } },
+              { name: 'MA5', type: 'line', data: ma5Data, smooth: true, showSymbol: false, lineStyle: { color: '#ff9500', width: 1.5 } },
+              { name: 'MA10', type: 'line', data: ma10Data, smooth: true, showSymbol: false, lineStyle: { color: '#0071e3', width: 1.5 } },
+              { name: 'MA20', type: 'line', data: ma20Data, smooth: true, showSymbol: false, lineStyle: { color: '#34c759', width: 1.5 } },
+              { name: 'MA30', type: 'line', data: ma30Data, smooth: true, showSymbol: false, lineStyle: { color: '#af52de', width: 1.5 } },
+              { name: 'MA50', type: 'line', data: ma50Data, smooth: true, showSymbol: false, lineStyle: { color: '#ff3b30', width: 2 } },
+              { name: '成交量', type: 'bar', xAxisIndex: 1, yAxisIndex: 1, data: volumes.map(v => v[1]), itemStyle: { color: function(p) { return volumes[p.dataIndex][2] > 0 ? '#34c759' : '#ff3b30'; } } }
+            ]
+          };
+          techInstance.setOption(option);
+        } catch (err) {
+          console.warn('Technical chart render fallback:', err);
+        }
       }
       return { renderRadarChart, renderTechnicalChart };
     })();
@@ -935,6 +947,11 @@ body {
           defaultStocks = data.stocks || [];
           vaultStocks = data.vaultStocks || [];
           allStocks = data.allCombined || [...defaultStocks, ...vaultStocks];
+          
+          filters.categoryKey = 'all';
+          filters.actionTag = 'all';
+          filters.search = '';
+
           filteredStocks = [...defaultStocks];
           activeStock = defaultStocks.find(s => s.symbol === '2330') || defaultStocks[0];
 
@@ -950,7 +967,7 @@ body {
         const tbody = document.getElementById('master-table-body');
         if (!tbody) return;
         if (filteredStocks.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:30px; color:#86868b;">無符合條件標的</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:40px; color:var(--text-muted); font-size:13px;">無符合條件標的</td></tr>`;
           return;
         }
 
@@ -1173,7 +1190,6 @@ body {
         if (!container || !activeStock) return;
         const s = activeStock;
         const fh = s.fundamentalHighlights || {};
-        const ma = s.maMetrics || {};
 
         if (activeModalTab === 'advisor') {
           container.innerHTML = `
