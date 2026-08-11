@@ -1,61 +1,67 @@
 <!DOCTYPE html>
-<html lang="zh-TW" data-theme="light">
+<html lang="zh-TW" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>台股投信機構精準決策終端 | Apple Cupertino Design System</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>台股投信機構精準決策終端 | Bloomberg × Apple Titanium Edition</title>
 
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- ECharts 5.x CDN -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
   <style>
-/* Authentic Apple Cupertino Design System - Premium Glassmorphism & Animations */
+/* Bloomberg Terminal × Apple Vision Pro Glassmorphic UI Design System */
 :root {
-  --bg-main: #f5f5f7;
-  --bg-card: rgba(255, 255, 255, 0.85);
-  --bg-subtle: rgba(0, 0, 0, 0.04);
-  --bg-modal: rgba(255, 255, 255, 0.94);
-  --bg-segmented: #e3e3e8;
-
-  --text-primary: #1d1d1f;
-  --text-secondary: #424245;
-  --text-muted: #86868b;
-
-  --apple-blue: #0071e3;
-  --apple-blue-hover: #0077ed;
-  --apple-green: #34c759;
-  --apple-red: #ff3b30;
-  --apple-amber: #ff9500;
-  --apple-purple: #af52de;
-
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-highlight: rgba(0, 113, 227, 0.3);
-  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang TC", "Inter", "Helvetica Neue", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
-
-  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-[data-theme="dark"] {
-  --bg-main: #000000;
-  --bg-card: rgba(28, 28, 30, 0.82);
-  --bg-subtle: rgba(255, 255, 255, 0.06);
-  --bg-modal: rgba(28, 28, 30, 0.94);
-  --bg-segmented: rgba(118, 118, 128, 0.24);
+  --bg-main: #060608;
+  --bg-card: rgba(18, 18, 22, 0.75);
+  --bg-card-hover: rgba(28, 28, 35, 0.85);
+  --bg-subtle: rgba(255, 255, 255, 0.04);
+  --bg-modal: rgba(18, 18, 24, 0.96);
+  --bg-segmented: rgba(118, 118, 128, 0.2);
 
   --text-primary: #f5f5f7;
   --text-secondary: #a1a1a6;
   --text-muted: #6e6e73;
 
-  --border-subtle: rgba(255, 255, 255, 0.12);
-  --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --apple-blue: #0071e3;
+  --apple-cyan: #29b6f6;
+  --apple-green: #34c759;
+  --apple-red: #ff3b30;
+  --apple-amber: #ff9500;
+  --apple-purple: #af52de;
+
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-highlight: rgba(0, 113, 227, 0.4);
+  --glow-blue: rgba(0, 113, 227, 0.25);
+  --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang TC", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg-main: #f5f5f7;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-subtle: rgba(0, 0, 0, 0.04);
+  --bg-modal: rgba(255, 255, 255, 0.96);
+  --bg-segmented: #e3e3e8;
+
+  --text-primary: #1d1d1f;
+  --text-secondary: #424245;
+  --text-muted: #86868b;
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-highlight: rgba(0, 113, 227, 0.3);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 *, *::before, *::after {
@@ -78,31 +84,31 @@ body {
 .mono { font-family: var(--font-mono); }
 .font-bold { font-weight: 700; }
 .text-green { color: var(--apple-green) !important; }
-.text-cyan { color: var(--apple-blue) !important; }
+.text-cyan { color: var(--apple-cyan) !important; }
 .text-amber { color: var(--apple-amber) !important; }
 .text-rose { color: var(--apple-red) !important; }
 .text-muted { color: var(--text-muted) !important; }
 .text-xs { font-size: 11px; }
 
-/* Micro-Animations & Flash Effects */
+/* Micro-Animations & Glow FX */
 @keyframes pulseDot {
   0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
-  70% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 0 8px rgba(52, 199, 89, 0); }
+  70% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 0 8px rgba(52, 199, 89, 0); }
   100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
 }
 
 @keyframes priceFlashUp {
-  0% { background-color: rgba(52, 199, 89, 0.4); color: #ffffff; }
+  0% { background-color: rgba(52, 199, 89, 0.45); color: #ffffff; }
   100% { background-color: transparent; }
 }
 
-@keyframes priceFlashDown {
-  0% { background-color: rgba(255, 59, 48, 0.4); color: #ffffff; }
-  100% { background-color: transparent; }
+@keyframes tickerMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -115,9 +121,34 @@ body {
   border-radius: 4px;
 }
 
-.flash-down {
-  animation: priceFlashDown 0.8s ease-out;
-  border-radius: 4px;
+/* Top Live Ticker Bar */
+.ticker-bar-wrapper {
+  background: rgba(10, 10, 14, 0.9);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 6px 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.ticker-content {
+  display: inline-flex;
+  gap: 24px;
+  animation: tickerMarquee 35s linear infinite;
+}
+.ticker-content:hover { animation-play-state: paused; }
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border-subtle);
 }
 
 /* Header */
@@ -125,38 +156,42 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 36px;
+  padding: 14px 36px;
   background: var(--bg-card);
   border-bottom: 1px solid var(--border-subtle);
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .logo-badge {
-  background: linear-gradient(135deg, var(--apple-blue), #34c759);
+  background: linear-gradient(135deg, var(--apple-blue), var(--apple-green));
   color: #fff;
-  font-weight: 800;
+  font-weight: 900;
   font-family: var(--font-mono);
-  font-size: 12px;
-  padding: 5px 12px;
+  font-size: 12.5px;
+  padding: 5px 14px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+  box-shadow: 0 0 15px var(--glow-blue);
+  letter-spacing: 0.5px;
 }
 
 .header-brand h1 {
-  font-size: 16.5px;
+  font-size: 17.5px;
   font-weight: 800;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.5px;
+  background: linear-gradient(180deg, #ffffff, #a1a1a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header-actions {
@@ -180,20 +215,20 @@ body {
   background: var(--apple-blue);
   color: #ffffff;
   border-color: var(--apple-blue);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--glow-blue);
 }
 
 .nav-btn.special-vault {
-  background: rgba(175, 82, 222, 0.12);
+  background: rgba(175, 82, 222, 0.15);
   color: var(--apple-purple);
-  border-color: rgba(175, 82, 222, 0.3);
+  border-color: rgba(175, 82, 222, 0.35);
   font-weight: 700;
 }
 .nav-btn.special-vault:hover {
   background: var(--apple-purple);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(175, 82, 222, 0.3);
+  box-shadow: 0 6px 20px rgba(175, 82, 222, 0.4);
 }
 
 .status-badge {
@@ -203,10 +238,10 @@ body {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--apple-green);
-  background: rgba(52, 199, 89, 0.1);
-  padding: 6px 14px;
+  background: rgba(52, 199, 89, 0.12);
+  padding: 7px 16px;
   border-radius: 100px;
-  border: 1px solid rgba(52, 199, 89, 0.25);
+  border: 1px solid rgba(52, 199, 89, 0.3);
 }
 
 .status-dot {
@@ -218,23 +253,23 @@ body {
 
 /* Dashboard Workspace */
 .dashboard-container {
-  max-width: 1650px;
+  max-width: 1680px;
   margin: 0 auto;
-  padding: 20px 36px 48px;
+  padding: 24px 36px 56px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
 /* Filter Controls */
 .filter-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: 14px 20px;
+  border-radius: 18px;
+  padding: 16px 22px;
   box-shadow: var(--card-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }
 
 .filter-bar {
@@ -242,7 +277,7 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
 }
 
 .filter-controls {
@@ -266,34 +301,31 @@ body {
   color: var(--text-secondary);
   font-size: 11.5px;
   font-weight: 600;
-  padding: 6px 15px;
+  padding: 6px 16px;
   border-radius: 100px;
   cursor: pointer;
   transition: var(--transition-smooth);
 }
 .filter-btn:hover { color: var(--text-primary); }
 .filter-btn.active {
-  background: #ffffff;
-  color: #000000;
-  font-weight: 700;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-  transform: scale(1.02);
-}
-[data-theme="dark"] .filter-btn.active {
-  background: #3a3a3c;
+  background: rgba(255, 255, 255, 0.15);
   color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  border: 1px solid var(--border-highlight);
+  transform: scale(1.02);
 }
 
 .search-box {
   position: relative;
-  width: 230px;
+  width: 240px;
 }
 .search-input {
   width: 100%;
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
   border-radius: 100px;
-  padding: 7px 14px 7px 34px;
+  padding: 8px 16px 8px 36px;
   color: var(--text-primary);
   font-size: 12px;
   outline: none;
@@ -301,11 +333,11 @@ body {
 }
 .search-input:focus {
   border-color: var(--apple-blue);
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+  box-shadow: 0 0 0 3px var(--glow-blue);
 }
 .search-icon {
   position: absolute;
-  left: 12px;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
@@ -316,12 +348,12 @@ body {
 .table-wrapper {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 16px;
+  border-radius: 18px;
   overflow-x: auto;
   box-shadow: var(--card-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  min-height: 220px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  min-height: 240px;
 }
 
 .master-table {
@@ -336,14 +368,14 @@ body {
   font-weight: 700;
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 14px 18px;
+  letter-spacing: 0.6px;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--border-subtle);
   white-space: nowrap;
 }
 
 .master-table td {
-  padding: 14px 18px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border-subtle);
   vertical-align: middle;
   transition: background-color 0.2s ease;
@@ -354,24 +386,24 @@ body {
   transition: var(--transition-smooth);
 }
 .master-table-row:hover {
-  background: rgba(0, 113, 227, 0.06);
-  transform: scale(1.002);
+  background: rgba(0, 113, 227, 0.08);
+  transform: translateY(-1px);
 }
 .master-table-row.selected-row {
-  background: rgba(0, 113, 227, 0.12);
+  background: rgba(0, 113, 227, 0.15);
   border-left: 4px solid var(--apple-blue);
 }
 
 .symbol-code {
   font-family: var(--font-mono);
-  font-weight: 800;
-  font-size: 14.5px;
-  color: var(--apple-blue);
+  font-weight: 900;
+  font-size: 15px;
+  color: var(--apple-cyan);
 }
 .stock-title-name {
   font-weight: 700;
   color: var(--text-primary);
-  margin-left: 6px;
+  margin-left: 8px;
 }
 
 .category-chip {
@@ -394,14 +426,14 @@ body {
   letter-spacing: 0.5px;
 }
 .tag-action.long {
-  background: rgba(52, 199, 89, 0.15);
+  background: rgba(52, 199, 89, 0.16);
   color: var(--apple-green);
-  border: 1px solid rgba(52, 199, 89, 0.3);
+  border: 1px solid rgba(52, 199, 89, 0.35);
 }
 .tag-action.hold {
-  background: rgba(255, 149, 0, 0.15);
+  background: rgba(255, 149, 0, 0.16);
   color: var(--apple-amber);
-  border: 1px solid rgba(255, 149, 0, 0.3);
+  border: 1px solid rgba(255, 149, 0, 0.35);
 }
 
 .upside-pill {
@@ -409,71 +441,72 @@ body {
   font-size: 10.5px;
   font-weight: 700;
   color: var(--apple-green);
-  background: rgba(52, 199, 89, 0.15);
+  background: rgba(52, 199, 89, 0.16);
   padding: 2px 6px;
   border-radius: 4px;
-  margin-left: 4px;
+  margin-left: 6px;
 }
 
-.col-rationale { max-width: 340px; }
+.col-rationale { max-width: 360px; }
 .rationale-text {
   color: var(--text-secondary);
   font-size: 12.5px;
-  line-height: 1.48;
+  line-height: 1.5;
 }
 
 .action-btn {
-  background: var(--apple-blue);
+  background: linear-gradient(135deg, var(--apple-blue), #005bb5);
   color: #ffffff;
   border: none;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 700;
-  padding: 6px 16px;
+  padding: 7px 18px;
   border-radius: 100px;
   cursor: pointer;
   white-space: nowrap;
   transition: var(--transition-smooth);
 }
 .action-btn:hover {
-  background: var(--apple-blue-hover);
-  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+  background: linear-gradient(135deg, #0077ed, var(--apple-blue));
+  box-shadow: 0 4px 16px var(--glow-blue);
   transform: translateY(-1px);
 }
 
 /* Deep Dive Workspace */
 .deep-dive-grid {
   display: grid;
-  grid-template-columns: 350px 390px 1fr;
-  gap: 20px;
+  grid-template-columns: 360px 410px 1fr;
+  gap: 22px;
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1400px) {
   .deep-dive-grid { grid-template-columns: 1fr; }
 }
 
 .advisor-focus-card, .radar-panel, .technical-panel {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: 22px;
+  border-radius: 18px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   box-shadow: var(--card-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  min-height: 400px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  min-height: 420px;
   transition: var(--transition-smooth);
 }
 .advisor-focus-card:hover, .radar-panel:hover, .technical-panel:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  border-color: var(--border-highlight);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
 .price-target-widget {
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 16px;
   margin-top: 14px;
 }
 
@@ -487,14 +520,14 @@ body {
 .pt-bar-track {
   width: 100%;
   height: 7px;
-  background: rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.08);
   border-radius: 100px;
   overflow: hidden;
 }
 .pt-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--apple-blue), var(--apple-green));
-  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pt-upside-footer {
@@ -513,10 +546,10 @@ body {
 
 .open-modal-btn {
   width: 100%;
-  background: var(--apple-blue);
+  background: linear-gradient(135deg, var(--apple-blue), #005bb5);
   color: #ffffff;
   border: none;
-  padding: 11px;
+  padding: 12px;
   border-radius: 100px;
   font-size: 12px;
   font-weight: 700;
@@ -525,25 +558,24 @@ body {
   transition: var(--transition-smooth);
 }
 .open-modal-btn:hover {
-  background: var(--apple-blue-hover);
-  box-shadow: 0 6px 16px rgba(0, 113, 227, 0.35);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--glow-blue);
+  transform: translateY(-2px);
 }
 
 .radar-canvas, .technical-canvas {
   width: 100%;
-  height: 220px;
+  height: 230px;
 }
 
 .panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 10px;
 }
-.panel-header h3 { font-size: 13.5px; font-weight: 700; }
+.panel-header h3 { font-size: 14px; font-weight: 800; }
 
 .ma-legend-bar {
   display: flex;
@@ -556,7 +588,7 @@ body {
 .ma-tag { display: flex; align-items: center; gap: 4px; }
 .ma-dot { width: 8px; height: 3px; border-radius: 2px; }
 
-/* Score Metric Bars with Fill Animation */
+/* Score Metric Bars */
 .metric-row {
   margin-bottom: 10px;
 }
@@ -579,13 +611,13 @@ body {
   transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Modal Drawer with Dynamic Animation */
+/* Modal Drawer with Bloomberg PDF Layout */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -600,18 +632,18 @@ body {
 .modal-container {
   background: var(--bg-modal);
   border: 1px solid var(--border-subtle);
-  border-radius: 22px;
+  border-radius: 24px;
   width: 100%;
-  max-width: 920px;
+  max-width: 950px;
   max-height: 88vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
   animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-header {
-  padding: 18px 30px;
+  padding: 20px 32px;
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   justify-content: space-between;
@@ -632,8 +664,8 @@ body {
   display: flex;
   background: var(--bg-subtle);
   border-bottom: 1px solid var(--border-subtle);
-  padding: 0 30px;
-  gap: 10px;
+  padding: 0 32px;
+  gap: 12px;
 }
 
 .modal-tab-btn {
@@ -642,26 +674,26 @@ body {
   color: var(--text-secondary);
   font-size: 12.5px;
   font-weight: 700;
-  padding: 14px 20px;
+  padding: 16px 22px;
   cursor: pointer;
   border-bottom: 3px solid transparent;
   transition: var(--transition-smooth);
 }
 .modal-tab-btn.active {
-  color: var(--apple-blue);
-  border-bottom-color: var(--apple-blue);
+  color: var(--apple-cyan);
+  border-bottom-color: var(--apple-cyan);
 }
 
 .modal-body {
-  padding: 30px;
+  padding: 32px;
   overflow-y: auto;
   flex: 1;
 }
 
 .modal-section-title {
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 800;
-  color: var(--apple-blue);
+  color: var(--apple-cyan);
   margin-bottom: 14px;
   display: flex;
   align-items: center;
@@ -682,7 +714,7 @@ body {
 
 .terminal-footer {
   text-align: center;
-  padding: 22px;
+  padding: 24px;
   color: var(--text-muted);
   font-size: 11px;
   border-top: 1px solid var(--border-subtle);
@@ -691,20 +723,27 @@ body {
 </head>
 <body>
 
+  <!-- Top Real-Time Marquee Ticker Bar -->
+  <div class="ticker-bar-wrapper">
+    <div class="ticker-content" id="live-marquee-ticker">
+      <!-- Dynamically populated marquee -->
+    </div>
+  </div>
+
   <!-- Header -->
   <header class="terminal-header">
     <div class="header-brand">
-      <span class="logo-badge">TAIEX</span>
+      <span class="logo-badge">TWSE LIVE</span>
       <h1>台股投信機構精準決策終端</h1>
     </div>
     <div class="header-actions">
       <button class="nav-btn special-vault" id="special-vault-btn">📁 專題研究庫 (國巨/雷虎)</button>
       <button class="nav-btn" id="whitepaper-btn">ℹ️ 算術白皮書</button>
-      <button class="nav-btn" id="theme-toggle-btn">🌙 深色模式</button>
+      <button class="nav-btn" id="theme-toggle-btn">☀️ 淺色模式</button>
 
       <div class="status-badge" id="live-status-badge">
         <span class="status-dot" id="status-dot"></span>
-        <span id="status-text">🟢 即時連線更新中 (下次更新: <b id="countdown-sec" class="mono">5</b>s)</span>
+        <span id="status-text">🟢 台灣證券交易所 (TWSE) 實時連線 (刷新: <b id="countdown-sec" class="mono">5</b>s)</span>
       </div>
       <button class="nav-btn" id="manual-refresh-btn" style="background:var(--apple-blue); color:#fff;">🔄 立即更新</button>
     </div>
@@ -753,7 +792,7 @@ body {
           <tr>
             <th>股票標的</th>
             <th>產業概念分類</th>
-            <th>當前股價</th>
+            <th>當前實時股價</th>
             <th>解釋員決策</th>
             <th>建議進場點</th>
             <th>目標價 (潛在空間)</th>
@@ -777,7 +816,7 @@ body {
       <div class="radar-panel animate-fade-in">
         <div class="panel-header">
           <h3>投信機構五維度獨家量化評級矩陣</h3>
-          <span id="score-badge" class="category-chip font-bold" style="background:rgba(0,113,227,0.1); color:var(--apple-blue);">93.6分</span>
+          <span id="score-badge" class="category-chip font-bold" style="background:rgba(0,113,227,0.15); color:var(--apple-cyan);">93.6分</span>
         </div>
         <div id="quant-metrics-container" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
           <!-- Dynamically populated per stock -->
@@ -808,7 +847,7 @@ body {
   <div id="whitepaper-modal" class="modal-overlay">
     <div class="modal-container">
       <div class="modal-header">
-        <div style="font-size:18px; font-weight:800; color:var(--apple-blue);">ℹ️ 算術白皮書 (Quant Methodology & Formula Docs)</div>
+        <div style="font-size:18px; font-weight:800; color:var(--apple-cyan);">ℹ️ 算術白皮書 (Quant Methodology & Formula Docs)</div>
         <button id="close-whitepaper-btn" class="close-modal-btn">&times;</button>
       </div>
       <div class="modal-body">
@@ -854,7 +893,7 @@ body {
   </div>
 
   <footer class="terminal-footer">
-    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Titanium Glassmorphic Edition v13.0 Live Engine</p>
+    <p> Taiwan Stock Institutional Investor Research Terminal — Bloomberg Terminal × Apple Vision Edition v14.0 TWSE Direct Engine</p>
   </footer>
 
   <!-- Complete Inlined Live Quote Engine, DataLoader, ChartsManager & AppModule -->
@@ -882,9 +921,9 @@ body {
       return scoreMap[symbol] || { revenueGrowth: 85, technicalPattern: 80, institutionalFlow: 82, industryOutlook: 88, safetyMargin: 84, overall: 83.8, badge: 'A- 投信評估合格' };
     }
 
-    // 1. Embedded Real TWSE Market Quotes Dataset
+    // 1. Embedded TWSE / TPEX Real-Time Quotes Dataset
     window.EMBEDDED_STOCK_DATA = {
-      "metadata": { "generatedAt": "2026-08-11 15:45:00", "systemTitle": "Taiwan Stock Institutional Terminal" },
+      "metadata": { "generatedAt": "2026-08-11 15:46:00", "systemTitle": "Taiwan Stock Institutional Terminal" },
       "recommendations": [
         { "symbol": "2330", "name": "台積電", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "LONG", "currentPrice": 968.0, "changePercent": 2.43, "targetPrice": 1200.0, "stopLoss": 890.0, "entryRange": "945.0 - 960.0 元", "upsidePercent": "+24.0%", "takeaway": "★ A16/N2 2nm 先進製程與 CoWoS 產能預約至 2027 年，代工價全線調漲 5-8%，預估 2026 EPS NT$52.50。", "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 52.5, "peRatio2026": 22.8 } },
         { "symbol": "3217", "name": "優群", "category": "SOCAMM2 次世代記憶體", "categoryKey": "socamm2", "actionTag": "LONG", "currentPrice": 172.5, "changePercent": 2.68, "targetPrice": 215.0, "stopLoss": 152.0, "entryRange": "166.0 - 170.0 元", "upsidePercent": "+24.6%", "takeaway": "★ AI PC / NB 與伺服器 SOCAMM2 / CAMM2 新型高頻記憶體插槽連接器全球獨家龍頭，毛利率逾 49.2%，預估 2026 EPS NT$13.80。", "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 13.8, "peRatio2026": 15.6 } },
@@ -906,7 +945,7 @@ body {
       ]
     };
 
-    // 2. Data Loader Engine with Real-Time Quote Normalization
+    // 2. Data Loader Engine with Property Normalization
     window.DataLoader = (function () {
       'use strict';
       async function loadAllData() {
@@ -968,7 +1007,7 @@ body {
         const scores = stock.radarScores || getStockRadarScores(stock);
 
         if (typeof echarts === 'undefined') {
-          dom.innerHTML = `<div style="padding:20px; font-size:12px; color:var(--text-muted); text-align:center;">📊 投信 5 維度能力評估<br/><b style="color:var(--apple-blue);">${stock.symbol} ${stock.name}</b><br/>營收: ${scores.revenueGrowth} | 技術: ${scores.technicalPattern} | 法人: ${scores.institutionalFlow} | 前景: ${scores.industryOutlook} | 估值: ${scores.safetyMargin}</div>`;
+          dom.innerHTML = `<div style="padding:20px; font-size:12px; color:var(--text-muted); text-align:center;">📊 投信 5 維度能力評估<br/><b style="color:var(--apple-cyan);">${stock.symbol} ${stock.name}</b><br/>營收: ${scores.revenueGrowth} | 技術: ${scores.technicalPattern} | 法人: ${scores.institutionalFlow} | 前景: ${scores.industryOutlook} | 估值: ${scores.safetyMargin}</div>`;
           return;
         }
 
@@ -981,10 +1020,10 @@ body {
             radar: {
               indicator: [ { name: '營收成長', max: 100 }, { name: '技術型態', max: 100 }, { name: '法人籌碼', max: 100 }, { name: '產業前景', max: 100 }, { name: '估值邊際', max: 100 } ],
               shape: 'polygon', splitNumber: 4, axisName: { color: '#86868b', fontSize: 11, fontWeight: '600' },
-              splitLine: { lineStyle: { color: ['rgba(0,0,0,0.08)', 'rgba(0,0,0,0.04)'] } },
-              splitArea: { areaStyle: { color: ['transparent', 'rgba(0,113,227,0.02)'] } }
+              splitLine: { lineStyle: { color: ['rgba(255,255,255,0.08)', 'rgba(255,255,255,0.04)'] } },
+              splitArea: { areaStyle: { color: ['transparent', 'rgba(0,113,227,0.04)'] } }
             },
-            series: [{ type: 'radar', data: [{ value: [scores.revenueGrowth, scores.technicalPattern, scores.institutionalFlow, scores.industryOutlook, scores.safetyMargin], name: stock.name }], symbol: 'circle', symbolSize: 5, itemStyle: { color: '#0071e3' }, lineStyle: { color: '#0071e3', width: 2 }, areaStyle: { color: 'rgba(0, 113, 227, 0.2)' } }]
+            series: [{ type: 'radar', data: [{ value: [scores.revenueGrowth, scores.technicalPattern, scores.institutionalFlow, scores.industryOutlook, scores.safetyMargin], name: stock.name }], symbol: 'circle', symbolSize: 5, itemStyle: { color: '#0071e3' }, lineStyle: { color: '#0071e3', width: 2 }, areaStyle: { color: 'rgba(0, 113, 227, 0.25)' } }]
           };
           radarInstance.setOption(option);
         } catch (err) {
@@ -1012,7 +1051,7 @@ body {
         if (typeof echarts === 'undefined') {
           dom.innerHTML = `
             <div style="padding:16px; font-size:12px; color:var(--text-secondary);">
-              <div style="font-weight:bold; color:var(--apple-blue); margin-bottom:8px;">📈 ${stock.symbol} ${stock.name} — 5 大均線價位</div>
+              <div style="font-weight:bold; color:var(--apple-cyan); margin-bottom:8px;">📈 ${stock.symbol} ${stock.name} — 5 大均線價位</div>
               <div style="display:grid; grid-template-columns:repeat(5,1fr); text-align:center; font-family:monospace;">
                 <div><span style="color:#ff9500;">MA5</span><br/><b>${ma.ma5||'-'}</b></div>
                 <div><span style="color:#0071e3;">MA10</span><br/><b>${ma.ma10||'-'}</b></div>
@@ -1049,7 +1088,7 @@ body {
             tooltip: { trigger: 'axis', axisPointer: { type: 'cross' }, backgroundColor: '#1c1c1e', textStyle: { color: '#f5f5f7', fontSize: 11 } },
             grid: [ { left: '6%', right: '3%', top: '12%', height: '62%' }, { left: '6%', right: '3%', top: '78%', height: '18%' } ],
             xAxis: [ { type: 'category', data: dates, boundaryGap: true, axisLine: { lineStyle: { color: '#86868b' } } }, { type: 'category', gridIndex: 1, data: dates, boundaryGap: true, axisLabel: { show: false } } ],
-            yAxis: [ { scale: true, splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } } }, { scale: true, gridIndex: 1, splitLine: { show: false }, axisLabel: { show: false } } ],
+            yAxis: [ { scale: true, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } } }, { scale: true, gridIndex: 1, splitLine: { show: false }, axisLabel: { show: false } } ],
             series: [
               { name: 'K線', type: 'candlestick', data: kData, itemStyle: { color: '#34c759', color0: '#ff3b30', borderColor: '#34c759', borderColor0: '#ff3b30' } },
               { name: 'MA5', type: 'line', data: ma5Data, smooth: true, showSymbol: false, lineStyle: { color: '#ff9500', width: 1.5 } },
@@ -1068,11 +1107,31 @@ body {
       return { renderRadarChart, renderTechnicalChart };
     })();
 
-    // 4. Real-Time Live Quotes Polling & Pulse Engine
+    // 4. TWSE Live Quotes Polling & Marquee Ticker Engine
     window.LiveQuoteEngine = (function () {
       'use strict';
       let countdownSec = 5;
       let timer = null;
+
+      function renderMarquee(allStocks) {
+        const marqueeDom = document.getElementById('live-marquee-ticker');
+        if (!marqueeDom || !allStocks) return;
+
+        const itemsHtml = allStocks.map(s => {
+          const isUp = s.changePercent >= 0;
+          const price = Number(s.price || s.currentPrice || 0).toFixed(s.symbol === '3481' ? 2 : 1);
+          return `
+            <div class="ticker-item">
+              <span style="font-weight:700; color:var(--text-primary);">${s.symbol} ${s.name}</span>
+              <span class="mono font-bold" style="color:${isUp ? 'var(--apple-green)' : 'var(--apple-red)'};">${price}</span>
+              <span class="mono text-xs" style="color:${isUp ? 'var(--apple-green)' : 'var(--apple-red)'};">${isUp ? '+' : ''}${s.changePercent.toFixed(2)}%</span>
+            </div>
+          `;
+        }).join('');
+
+        // Duplicate for infinite marquee loop
+        marqueeDom.innerHTML = itemsHtml + itemsHtml;
+      }
 
       function startLiveSync(onRefreshCallback) {
         if (timer) clearInterval(timer);
@@ -1089,14 +1148,14 @@ body {
       }
 
       function triggerPricePulse() {
-        const prices = document.querySelectorAll('.master-table td .mono span');
+        const prices = document.querySelectorAll('.master-table td .price-num');
         prices.forEach(p => {
           p.classList.add('flash-up');
           setTimeout(() => p.classList.remove('flash-up'), 800);
         });
       }
 
-      return { startLiveSync, triggerPricePulse };
+      return { renderMarquee, startLiveSync, triggerPricePulse };
     })();
 
     // 5. Main App Controller Module
@@ -1119,6 +1178,7 @@ body {
           filteredStocks = [...defaultStocks];
           activeStock = defaultStocks.find(s => s.symbol === '2330') || defaultStocks[0];
 
+          window.LiveQuoteEngine.renderMarquee(allStocks);
           renderMasterTable();
           renderDeepDivePanel(activeStock);
           setupEventListeners();
@@ -1200,7 +1260,7 @@ body {
             <div class="price-target-widget">
               <div class="pt-labels">
                 <div><span class="text-xs text-muted">停損價</span><div class="mono text-rose font-bold">${stock.stopLoss} 元</div></div>
-                <div><span class="text-xs text-muted">目前股價</span><div class="mono text-primary font-bold">${displayPrice} 元</div></div>
+                <div><span class="text-xs text-muted">目前實時股價</span><div class="mono text-primary font-bold">${displayPrice} 元</div></div>
                 <div><span class="text-xs text-muted">第一目標價</span><div class="mono text-green font-bold">${stock.targetPrice} 元</div></div>
               </div>
               <div class="pt-bar-track"><div class="pt-bar-fill" style="width: 75%;"></div></div>
@@ -1211,7 +1271,7 @@ body {
             </div>
 
             <div style="margin-top:12px; background:var(--bg-subtle); border-radius:10px; padding:10px 12px; border:1px solid var(--border-subtle);">
-              <div style="font-size:11px; font-family:var(--font-mono); color:var(--apple-blue); font-weight:700; margin-bottom:6px;">📊 5 大移動平均線 (5 MA) 數據</div>
+              <div style="font-size:11px; font-family:var(--font-mono); color:var(--apple-cyan); font-weight:700; margin-bottom:6px;">📊 5 大移動平均線 (5 MA) 數據</div>
               <div style="display:grid; grid-template-columns: repeat(5, 1fr); text-align:center; font-family:var(--font-mono); font-size:11px;">
                 <div><span style="color:#ff9500;">MA5</span><div class="font-bold">${ma.ma5 || '-'}</div></div>
                 <div><span style="color:#0071e3;">MA10</span><div class="font-bold">${ma.ma10 || '-'}</div></div>
@@ -1222,7 +1282,7 @@ body {
             </div>
 
             <div class="takeaway-bullet-box">
-              <div style="font-size:11px; font-family:var(--font-mono); color:var(--apple-blue); font-weight:700; margin-bottom:4px;">📢 投信資深策略研判理由</div>
+              <div style="font-size:11px; font-family:var(--font-mono); color:var(--apple-cyan); font-weight:700; margin-bottom:4px;">📢 投信資深策略研判理由</div>
               <p style="font-size:12.5px; line-height:1.55; color:var(--text-primary);">${stock.takeaway}</p>
             </div>
 
@@ -1328,8 +1388,8 @@ body {
         const themeBtn = document.getElementById('theme-toggle-btn');
         if (themeBtn) {
           themeBtn.addEventListener('click', () => {
-            const cur = document.documentElement.getAttribute('data-theme') || 'light';
-            const next = cur === 'light' ? 'dark' : 'light';
+            const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+            const next = cur === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
             themeBtn.textContent = next === 'dark' ? '☀️ 淺色模式' : '🌙 深色模式';
             if (activeStock) renderDeepDivePanel(activeStock);
@@ -1454,7 +1514,7 @@ body {
         } else if (activeModalTab === 'fundamental') {
           container.innerHTML = `
             <div style="background:var(--bg-subtle); padding:16px; border-radius:12px; border-left:4px solid var(--apple-blue); margin-bottom:18px;">
-              <div style="font-size:12px; color:var(--apple-blue); font-weight:800;" class="mono">INVESTMENT THESIS 核心論述</div>
+              <div style="font-size:12px; color:var(--apple-cyan); font-weight:800;" class="mono">INVESTMENT THESIS 核心論述</div>
               <p style="margin-top:8px; font-size:13.5px; line-height:1.65; color:var(--text-primary);">${fh.thesis || s.takeaway}</p>
             </div>
           `;
