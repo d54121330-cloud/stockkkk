@@ -6156,6 +6156,26 @@ window.EMBEDDED_STOCK_DATA = {
         "ma30": 756.28,
         "ma50": 814.33
       }
+    },
+    {
+      "symbol": "8033",
+      "name": "雷虎",
+      "category": "專題研究庫 (國防軍工與無人機)",
+      "categoryKey": "special_vault",
+      "actionTag": "LONG",
+      "currentPrice": 78.5,
+      "changePercent": 4.67,
+      "targetPrice": 105.0,
+      "stopLoss": 68.0,
+      "entryRange": "74.0 - 77.5 元",
+      "upsidePercent": "+33.8%",
+      "takeaway": "★ 美國 DoD 國防部非紅供應鏈認證，軍用商規無人機與水下無人艇標案大增，預估 2026 EPS NT$3.80 (YoY +85%)。",
+      "fundamentalHighlights": {
+        "rating": "Strong Buy",
+        "eps2026": 3.8,
+        "peRatio2026": 20.6,
+        "thesis": "雷虎科技 (8033) 為台灣國防軍用商規無人機與無人艇龍頭，去紅化供應鏈效益明確，通過美軍國防授權法案 (NDAA) 驗證，取得多項微型無人機標案與水下無人艇專案訂單。"
+      }
     }
   ]
 };
