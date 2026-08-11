@@ -1152,7 +1152,14 @@ body {
 
       function applyFilters() {
         if (filters.categoryKey === 'special_vault') {
-          filteredStocks = [...vaultStocks];
+          filteredStocks = vaultStocks.filter(stock => {
+            if (filters.actionTag !== 'all' && stock.actionTag !== filters.actionTag) return false;
+            if (filters.search) {
+              const q = filters.search;
+              if (!stock.symbol.toLowerCase().includes(q) && !stock.name.toLowerCase().includes(q)) return false;
+            }
+            return true;
+          });
         } else {
           filteredStocks = defaultStocks.filter(stock => {
             if (filters.categoryKey !== 'all' && stock.categoryKey !== filters.categoryKey) return false;
