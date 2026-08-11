@@ -94,6 +94,86 @@ body {
 .text-muted { color: var(--text-muted) !important; }
 .text-xs { font-size: 11px; }
 
+/* Universal Plain-Language Tooltip & Info Badge System */
+.info-badge {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 11px;
+  color: var(--apple-cyan);
+  cursor: help;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.info-badge:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(12, 12, 18, 0.96);
+  color: #f5f5f7;
+  border: 1px solid var(--border-highlight);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85), 0 0 20px rgba(0, 113, 227, 0.25);
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: normal;
+  width: max-content;
+  max-width: 290px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 99999;
+  text-align: left;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-tooltip]::after {
+  content: '';
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: var(--border-highlight) transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 99999;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Light Mode Tooltips */
+[data-theme="light"] [data-tooltip]::before {
+  background: rgba(255, 255, 255, 0.98);
+  color: #1d1d1f;
+  border-color: rgba(0, 113, 227, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+[data-theme="light"] [data-tooltip]::after {
+  border-color: rgba(0, 113, 227, 0.4) transparent transparent transparent;
+}
+
 /* Animations & Micro FX */
 @keyframes pulseDot {
   0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
@@ -165,7 +245,7 @@ body {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .nav-btn {
@@ -178,6 +258,9 @@ body {
   border-radius: 100px;
   cursor: pointer;
   transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .nav-btn:hover {
   background: var(--apple-blue);
@@ -197,6 +280,18 @@ body {
   background: var(--apple-purple);
   color: #ffffff;
   box-shadow: 0 6px 20px rgba(175, 82, 222, 0.4);
+}
+
+.nav-btn.plain-guide-btn {
+  background: rgba(52, 199, 89, 0.15);
+  color: var(--apple-green);
+  border-color: rgba(52, 199, 89, 0.35);
+  font-weight: 700;
+}
+.nav-btn.plain-guide-btn:hover {
+  background: var(--apple-green);
+  color: #000;
+  box-shadow: 0 6px 20px rgba(52, 199, 89, 0.4);
 }
 
 .status-badge {
@@ -226,7 +321,7 @@ body {
   padding: 24px 32px 56px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 /* Filter Controls */
@@ -334,7 +429,7 @@ body {
   background: var(--bg-subtle);
   color: var(--text-muted);
   font-weight: 700;
-  font-size: 10.5px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.6px;
   padding: 14px 18px;
@@ -390,7 +485,9 @@ body {
   font-weight: 800;
   padding: 4px 12px;
   border-radius: 100px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   letter-spacing: 0.5px;
 }
 .tag-action.long {
@@ -415,7 +512,7 @@ body {
   margin-left: 4px;
 }
 
-.col-rationale { max-width: 320px; }
+.col-rationale { max-width: 340px; }
 .rationale-text {
   color: var(--text-secondary);
   font-size: 12px;
@@ -722,9 +819,10 @@ body {
       <h1>台股投信機構精準決策終端</h1>
     </div>
     <div class="header-actions">
-      <button class="nav-btn special-vault" id="special-vault-btn">📁 專題研究庫 (國巨/雷虎)</button>
-      <button class="nav-btn" id="whitepaper-btn">ℹ️ 華爾街量化白皮書</button>
-      <button class="nav-btn" id="theme-toggle-btn">☀️ 淺色模式</button>
+      <button class="nav-btn plain-guide-btn" id="open-glossary-btn" data-tooltip="零金融門檻！為無背景投資人提供白話解釋">💡 零金融門檻白話指南</button>
+      <button class="nav-btn special-vault" id="special-vault-btn" data-tooltip="查看國巨與雷虎兩大深度專題">📁 專題研究庫 (國巨/雷虎)</button>
+      <button class="nav-btn" id="whitepaper-btn" data-tooltip="瞭解華爾街風控模型與量化公式算式">ℹ️ 華爾街量化白皮書</button>
+      <button class="nav-btn" id="theme-toggle-btn" data-tooltip="一鍵切換深色或淺色閱讀介面">☀️ 淺色模式</button>
 
       <div class="status-badge" id="live-status-badge">
         <span class="status-dot" id="status-dot"></span>
@@ -744,21 +842,21 @@ body {
           <div class="filter-group">
             <div id="filter-theme-btns" class="filter-btn-group">
               <button class="filter-btn active" data-value="all">全部 (13)</button>
-              <button class="filter-btn" data-value="leo_sat">低軌衛星 (4)</button>
-              <button class="filter-btn" data-value="adv_pkg">先進封裝 (3)</button>
-              <button class="filter-btn" data-value="cpo_photonics">矽光子 CPO (2)</button>
-              <button class="filter-btn" data-value="liquid_cooling">水冷散熱 (2)</button>
-              <button class="filter-btn" data-value="ai_dpu">AI 網通 DPU (1)</button>
-              <button class="filter-btn" data-value="socamm2">SOCAMM2 優群 (1)</button>
-              <button class="filter-btn" data-value="special_vault" style="color:var(--apple-purple); font-weight:700;">專題研究庫 (2)</button>
+              <button class="filter-btn" data-value="leo_sat" data-tooltip="星鏈與衛星射頻通訊板族群">低軌衛星 (4)</button>
+              <button class="filter-btn" data-value="adv_pkg" data-tooltip="CoWoS 與 FOPOL 板級扇出封裝">先進封裝 (3)</button>
+              <button class="filter-btn" data-value="cpo_photonics" data-tooltip="矽光子共封裝高頻傳輸技術">矽光子 CPO (2)</button>
+              <button class="filter-btn" data-value="liquid_cooling" data-tooltip="NVIDIA Blackwell 伺服器水冷板">水冷散熱 (2)</button>
+              <button class="filter-btn" data-value="ai_dpu" data-tooltip="800G 交換器與資料處理器">AI 網通 DPU (1)</button>
+              <button class="filter-btn" data-value="socamm2" data-tooltip="獨家高頻記憶體插槽連接器">SOCAMM2 優群 (1)</button>
+              <button class="filter-btn" data-value="special_vault" style="color:var(--apple-purple); font-weight:700;" data-tooltip="國巨被動元件與雷虎國防無人機">專題研究庫 (2)</button>
             </div>
           </div>
 
           <div class="filter-group">
             <div id="filter-action-btns" class="filter-btn-group">
               <button class="filter-btn active" data-value="all">全部</button>
-              <button class="filter-btn text-green" data-value="LONG">做多 LONG</button>
-              <button class="filter-btn text-amber" data-value="HOLD">觀望 HOLD</button>
+              <button class="filter-btn text-green" data-value="LONG" data-tooltip="機構量化模型篩選之建議買進標的">做多 LONG</button>
+              <button class="filter-btn text-amber" data-value="HOLD" data-tooltip="區間觀察、暫不追高標的">觀望 HOLD</button>
             </div>
           </div>
         </div>
@@ -770,22 +868,49 @@ body {
       </div>
     </div>
 
+    <!-- Plain-Language Quick Reference Banner (零金融門檻白話速查卡片) -->
+    <div class="filter-card" style="padding: 14px 20px; background: rgba(52, 199, 89, 0.06); border-color: rgba(52, 199, 89, 0.25);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 15px;">🔰</span>
+          <span style="font-weight: 800; font-size: 12.5px; color: var(--apple-green);">零金融門檻 · 普通投資人白話速查指引</span>
+          <span style="font-size: 11px; color: var(--text-muted);">(滑鼠懸停下方表格任何項目的 ℹ️ 圖示，即可即時查看超白話說明)</span>
+        </div>
+        <button class="nav-btn plain-guide-btn" id="banner-glossary-btn" style="font-size:11px; padding:4px 12px;">📖 查看完整白話字典</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+        <div style="font-size: 11.5px; color: var(--text-secondary);" data-tooltip="公式：本益比÷成長率。＜1.0代表「高成長、便宜俗擱大碗」">
+          <b style="color: var(--apple-green);">PEG 比率</b>: 本益成長比。＜ 1.0 代表「高成長、價格便宜」
+        </div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);" data-tooltip="每承受1單位風險帶來的報酬。＞2.0代表性價比極高">
+          <b style="color: var(--wallstreet-gold);">Sharpe 夏普值</b>: 風險報酬 CP 值。＞ 2.0 代表風險低報酬高
+        </div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);" data-tooltip="歷史最高點跌到最低點的最大幅度的失血%數">
+          <b style="color: var(--apple-cyan);">MDD 最大回撤</b>: 歷史最慘跌幅。用來估算心臟承受度
+        </div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);" data-tooltip="近20日每日平均成交張數。法人單日買超不超過5%">
+          <b style="color: var(--apple-purple);">20D ADV / 建倉上限</b>: 日均成交張數與法人單日買進上限
+        </div>
+      </div>
+    </div>
+
     <!-- Master Institutional Executive Decision Table -->
     <div class="table-wrapper">
       <table class="master-table">
         <thead>
           <tr>
-            <th>股票標的</th>
-            <th>產業概念分類</th>
-            <th>PEG 比率 (P/E÷Growth)</th>
-            <th>30D EPS Revision 趨勢</th>
-            <th>Sharpe Ratio (夏普值)</th>
-            <th>Max Drawdown (MDD)</th>
-            <th>三大法人 5日買賣超 (張)</th>
-            <th>目標價 (潛在空間)</th>
-            <th>ATR / VaR 防守價</th>
-            <th>華爾街投信機構論述 (WALL STREET INSTITUTIONAL THESIS)</th>
-            <th>操作</th>
+            <th data-tooltip="股票代號與公司名稱。點擊該列可於下方查看深度報告">股票標的 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="所屬最新 AI 與科技當紅主題類別">產業概念分類 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="本益成長比 (P/E÷Growth)。＜ 1.0 代表「高成長、價格便宜俗擱大碗」">PEG 比率 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="過去 30 天法人是否調高公司看好度與 EPS 預估">30D EPS Revision <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="夏普值 (風險 CP 值)。＞ 2.0 代表每承擔 1 單位風險能換取極高超額報酬">Sharpe Ratio <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="歷史最大跌幅 (MDD)。自最高點下跌的最大幅度，用以評估最壞情況的心臟承受度">Max Drawdown <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="外資、投信、自營商過去 5 個交易日合計買進 (+張) 或賣出 (-張) 張數">5日三大法人買賣超 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="華爾街法人根據未來獲利與合理估值計算之目標價與潛在空間">第一目標價 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="結合真實波幅 (ATR) 與風險價值 (VaR) 計算出的安保防守停損價">ATR/VaR 防守價 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="華爾街機構大戶買進該股票的核心白話理由與催化劑">華爾街機構白話論述 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="點擊開啟 3 頁完整機構研報 (基本面 / EPS 敏感度 / TradingView K 線)">操作 <span class="info-badge">ℹ️</span></th>
           </tr>
         </thead>
         <tbody id="master-table-body">
@@ -802,7 +927,7 @@ body {
 
       <div class="radar-panel animate-fade-in">
         <div class="panel-header">
-          <h3>華爾街標準化 Factor Exposure (Z-Score) 因子曝光</h3>
+          <h3 data-tooltip="華爾街標準化量化五大因子評分 (得分越高代表表現越強)">華爾街定量 Factor Exposure (因子曝光) <span class="info-badge">ℹ️</span></h3>
           <span id="score-badge" class="category-chip font-bold" style="background:rgba(0,113,227,0.15); color:var(--apple-cyan);">Sharpe: 2.45</span>
         </div>
         <div id="quant-metrics-container" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
@@ -813,9 +938,9 @@ body {
       <div class="technical-panel animate-fade-in">
         <div class="panel-header">
           <div>
-            <h3>TradingView 官方實時 K 線與量價圖表</h3>
+            <h3 data-tooltip="直連 TradingView 官方即時 K 線與成交量技術圖表">TradingView 官方實時 K 線與量價圖表 <span class="info-badge">ℹ️</span></h3>
             <div class="ma-legend-bar">
-              <span class="ma-tag"><span class="ma-dot" style="background:#0071e3;"></span>VWAP & Institutional Order-Book Feed</span>
+              <span class="ma-tag" data-tooltip="成交量加權平均價：當天大戶與法人買進的真實平均成本線"><span class="ma-dot" style="background:#0071e3;"></span>VWAP 法人成本線 & 訂單流進出</span>
             </div>
           </div>
         </div>
@@ -827,6 +952,95 @@ body {
 
   </main>
 
+  <!-- Plain-Language Glossary Modal Drawer -->
+  <div id="glossary-modal" class="modal-overlay">
+    <div class="modal-container" style="max-width: 920px;">
+      <div class="modal-header">
+        <div style="font-size:17px; font-weight:800; color:var(--apple-cyan);">🔰 零金融門檻 · 華爾街指標全白話辭典</div>
+        <button id="close-glossary-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom: 20px;">
+          <h4 style="font-size: 13.5px; color: var(--apple-green); font-weight: 800; margin-bottom: 8px;">📊 估值與獲利成長類 (Valuation & Growth)</h4>
+          <div style="display: grid; gap: 10px;">
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-green); font-size:13px;">PEG Ratio (本益成長比)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：<code>本益比 ÷ 預估 EPS 成長率 (%)</code>。傳統單看「本益比 (P/E)」容易錯把高成長的好公司當作昂貴。PEG 同時考慮了「價格」與「成長力道」。當 <b class="text-green">PEG &lt; 1.0</b> 時，代表這檔股票不僅成長快速，價格還非常便宜，是華爾街最愛的「俗擱大碗」指標！
+              </span>
+            </div>
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-cyan); font-size:13px;">30D EPS Revision (30日法人獲利預估調升率)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：過去 30 天內各大券商與投信分析師有沒有集體幫這家公司「加分」。數值為正且越高，代表法人對該公司的獲利預估節節上升，具有極強的股價推升動能。
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <h4 style="font-size: 13.5px; color: var(--wallstreet-gold); font-weight: 800; margin-bottom: 8px;">🛡️ 風險控管與籌碼類 (Risk Management & Institutional Flow)</h4>
+          <div style="display: grid; gap: 10px;">
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--wallstreet-gold); font-size:13px;">Sharpe Ratio (夏普值 - 風險報酬 CP 值)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：這就是股票的「CP 值」。衡量您每一單位承擔的股價波動風險，能換取多少超額報酬。<b class="text-gold">Sharpe &gt; 2.0</b> 代表這檔股票漲得多、摔得輕，走勢極為平穩，是機構法人首選的頂級標的！
+              </span>
+            </div>
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-amber); font-size:13px;">Max Drawdown (MDD 最大回撤 - 歷史最慘跌幅)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：假設您不幸買在歷史最高點、一路跌到最低點的最大損失比例。這用來測試極端市場狀況下，您的心理耐受度與資金安全距離。
+              </span>
+            </div>
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-purple); font-size:13px;">20D ADV (20日均量) & 單日建倉上限 (Risk Sizing 5%)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：ADV 是過去 20 天每日平均成交張數。華爾街機構有嚴格紀律：單日買進張數不得超過 ADV 的 5%，避免大筆資金進入時把股價「炒高」而拉高了自己的買進成本。
+              </span>
+            </div>
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-red); font-size:13px;">ATR / VaR 防守價 (安保防守停損點)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：結合真實波幅 (ATR) 與風險價值 (VaR) 計算出的「安保防守點」。當股價跌破此價格，代表短線技術趨勢轉弱，應紀律執行停損控管風險。
+              </span>
+            </div>
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-blue); font-size:13px;">VWAP (Volume-Weighted Average Price, 成交量加權平均價)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：考慮了「成交量」的當天全市場平均買進成本。是機構大戶用來衡量當天買進價格是「買便宜了」還是「買貴了」的黃金基準線。
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size: 13.5px; color: var(--apple-cyan); font-weight: 800; margin-bottom: 8px;">🚀 產業黑科技白話解密 (Tech Terms)</h4>
+          <div style="display: grid; gap: 10px;">
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-cyan); font-size:13px;">CPO (Co-Packaged Optics, 矽光子共封裝)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：傳統晶片用銅線傳訊號，速度慢且會發燙。CPO 把「光學傳輸模組」跟「晶片」封裝在一起，讓數據傳輸像「光速」一樣快，且省電 30% 以上！
+              </span>
+            </div>
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-green); font-size:13px;">FOPOL (Fan-Out Panel-Level Packaging, 面板級扇出型封裝)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：用廣闊的「方形面板」代替傳統「圓形晶圓」做晶片封裝，可利用面積大增 3~4 倍，讓高階晶片封裝成本大幅下降。
+              </span>
+            </div>
+            <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+              <b style="color: var(--apple-purple); font-size:13px;">SOCAMM2 (次世代高頻記憶體插槽)</b>：
+              <span style="color: var(--text-secondary); font-size: 12px; display: block; margin-top: 4px; line-height: 1.6;">
+                白話解密：專為超薄 AI 筆電與伺服器設計的新世代記憶體插槽，尺寸節省 64% 空間且傳輸速度極快，為記憶體插槽連接器的產業革命。
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Wall Street Quant Whitepaper Modal Drawer -->
   <div id="whitepaper-modal" class="modal-overlay">
     <div class="modal-container">
@@ -835,21 +1049,21 @@ body {
         <button id="close-whitepaper-btn" class="close-modal-btn">&times;</button>
       </div>
       <div class="modal-body">
-        <div style="margin-bottom:18px;">
-          <h3 style="font-size:14px; font-weight:700; margin-bottom:8px; color:var(--apple-cyan);">1. PEG Ratio (Price/Earnings to Growth Ratio) 本益成長比</h3>
+        <div style="margin-bottom:18px; background:var(--bg-subtle); padding:16px; border-radius:12px; border-left:4px solid var(--apple-green);">
+          <h3 style="font-size:14px; font-weight:700; margin-bottom:8px; color:var(--apple-green);">1. PEG Ratio (Price/Earnings to Growth Ratio) 本益成長比</h3>
           <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6;">
             華爾街頂級基金經理人核心估值工具：\(PEG = \frac{P/E}{2026E\ EPS\ Growth\ (\%)}\)。當 \(PEG < 1.0\) 時，代表股票具備高成長性且估值被嚴重低估，屬於機構極力追捧之 Alpha 標的。
           </p>
         </div>
-        <div style="margin-bottom:18px;">
-          <h3 style="font-size:14px; font-weight:700; margin-bottom:8px; color:var(--apple-green);">2. Sharpe Ratio (夏普值) 與 Max Drawdown (MDD 最大回撤)</h3>
+        <div style="margin-bottom:18px; background:var(--bg-subtle); padding:16px; border-radius:12px; border-left:4px solid var(--apple-gold);">
+          <h3 style="font-size:14px; font-weight:700; margin-bottom:8px; color:var(--apple-amber);">2. Sharpe Ratio (夏普值) 與 Max Drawdown (MDD 最大回撤)</h3>
           <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6;">
             • <b>Sharpe Ratio (\(S_p\))</b>：每一單位總風險所能換取的超額報酬。\(S_p > 2.0\) 為華爾街機構頂級投組標準。<br/>
             • <b>Max Drawdown (MDD)</b>：過去一段時間自高點下跌之最大跌幅。用以估算極端市場 (Tail Risk) 下的極限下檔風險。
           </p>
         </div>
-        <div>
-          <h3 style="font-size:14px; font-weight:700; margin-bottom:8px; color:var(--apple-amber);">3. 20D ADV (20日均量) 與單日建倉上限 (Risk Sizing)</h3>
+        <div style="background:var(--bg-subtle); padding:16px; border-radius:12px; border-left:4px solid var(--apple-purple);">
+          <h3 style="font-size:14px; font-weight:700; margin-bottom:8px; color:var(--apple-purple);">3. 20D ADV (20日均量) 與單日建倉上限 (Risk Sizing 5%)</h3>
           <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6;">
             為避免產生 Market Impact (市場衝擊成本與滑點)，機構法人單日買進張數不得超過該標的 **20D ADV 之 5%**，實現精準流動性管理。
           </p>
@@ -871,8 +1085,8 @@ body {
       </div>
 
       <div class="modal-nav-tabs">
-        <button class="modal-tab-btn active" data-tab="advisor">📢 華爾街投信點位與風控</button>
-        <button class="modal-tab-btn" data-tab="fundamental">📈 營運催化劑 EPS 敏感度矩陣</button>
+        <button class="modal-tab-btn active" data-tab="advisor">📢 華爾街點位與風控 (白話防守線)</button>
+        <button class="modal-tab-btn" data-tab="fundamental">📈 營運催化劑與白話獲利爆發點</button>
         <button class="modal-tab-btn" data-tab="technical">📊 TradingView 實時 K 線</button>
       </div>
 
@@ -982,7 +1196,7 @@ body {
             "symbol": tvSymbol,
             "interval": "D",
             "timezone": "Asia/Taipei",
-            "theme": "dark",
+            "theme": document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
             "style": "1",
             "locale": "zh_TW",
             "toolbar_bg": "#121216",
@@ -1030,26 +1244,34 @@ body {
         const tbody = document.getElementById('master-table-body');
         if (!tbody) return;
         if (filteredStocks.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:40px; color:var(--text-muted); font-size:13px;">無符合條件標的</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:40px; color:var(--text-muted); font-size:13px;">無符合搜尋條件之標的，請重新切換分類或搜尋條件。</td></tr>`;
           return;
         }
 
         tbody.innerHTML = filteredStocks.map(s => {
           const ws = s.wallstreet || {};
           const isSelected = activeStock && activeStock.symbol === s.symbol ? 'selected-row' : '';
+          const actionClass = (s.actionTag || 'LONG').toLowerCase();
+          const actionLabel = actionClass === 'long' ? '🟢 做多 LONG (建議買進)' : '🟠 觀望 HOLD (區間觀察)';
+
           return `
             <tr class="master-table-row ${isSelected}" data-symbol="${s.symbol}">
-              <td class="col-stock"><span class="symbol-code">${s.symbol}</span><span class="stock-title-name">${s.name}</span></td>
-              <td><span class="category-chip">${s.category}</span></td>
-              <td class="mono font-bold"><span class="${ws.pegRatio < 0.8 ? 'text-green' : 'text-primary'}">${ws.pegRatio}</span></td>
-              <td class="mono font-bold"><span class="text-cyan">${ws.epsRevision30D}</span></td>
-              <td class="mono font-bold"><span class="text-gold">${ws.sharpeRatio}</span></td>
-              <td class="mono text-muted">${ws.mddPercent}</td>
-              <td class="mono font-bold"><span class="text-green">${ws.instNetBuy5D}</span></td>
-              <td class="mono"><span class="text-green font-bold" style="font-size:13.5px;">${s.targetPrice} 元</span> <span class="upside-pill">即時</span></td>
-              <td class="mono text-rose font-bold">${s.stopLoss} 元</td>
+              <td class="col-stock" data-tooltip="點擊查看 ${s.name} (${s.symbol}) 機構深度研報"><span class="symbol-code">${s.symbol}</span><span class="stock-title-name">${s.name}</span></td>
+              <td><span class="category-chip" data-tooltip="所屬當紅科技亮點題材">${s.category}</span></td>
+              <td class="mono font-bold" data-tooltip="PEG本益成長比 = ${ws.pegRatio} (${ws.pegRatio < 1.0 ? '高成長、價格便宜！' : '估值合情合理'})"><span class="${ws.pegRatio < 0.8 ? 'text-green' : 'text-primary'}">${ws.pegRatio}</span></td>
+              <td class="mono font-bold" data-tooltip="30天法人集體調高獲利預估 ${ws.epsRevision30D}"><span class="text-cyan">${ws.epsRevision30D}</span></td>
+              <td class="mono font-bold" data-tooltip="夏普風險CP值 = ${ws.sharpeRatio} (${ws.sharpeRatio > 2.0 ? '每承受1單位風險賺取極高超額報酬' : '風險回報屬中等水平'})"><span class="text-gold">${ws.sharpeRatio}</span></td>
+              <td class="mono text-muted" data-tooltip="歷史最慘跌幅 MDD = ${ws.mddPercent}">${ws.mddPercent}</td>
+              <td class="mono font-bold" data-tooltip="過去5日三大法人合計買超 ${ws.instNetBuy5D} 張"><span class="text-green">${ws.instNetBuy5D}</span></td>
+              <td class="mono" data-tooltip="華爾街法人估計算算式第一目標價 ${s.targetPrice} 元"><span class="text-green font-bold" style="font-size:13.5px;">${s.targetPrice} 元</span> <span class="upside-pill">即時</span></td>
+              <td class="mono text-rose font-bold" data-tooltip="機構風控計算跌破即停損之防守點位 ${s.stopLoss} 元">${s.stopLoss} 元</td>
               <td class="col-rationale"><div class="rationale-text" title="${s.takeaway}">${s.takeaway}</div></td>
-              <td><button class="action-btn view-detail-btn" data-symbol="${s.symbol}">機構研報 📖</button></td>
+              <td>
+                <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-start;">
+                  <span class="tag-action ${actionClass}" data-tooltip="${actionLabel}">${actionLabel}</span>
+                  <button class="action-btn view-detail-btn" data-symbol="${s.symbol}" style="margin-top:2px;">機構研報 📖</button>
+                </div>
+              </td>
             </tr>
           `;
         }).join('');
@@ -1078,6 +1300,8 @@ body {
         if (!stock) return;
 
         const ws = stock.wallstreet || {};
+        const actionClass = (stock.actionTag || 'LONG').toLowerCase();
+        const actionLabel = actionClass === 'long' ? '🟢 做多 LONG (建議買進)' : '🟠 觀望 HOLD (區間觀察)';
 
         // Render Left Focus Card
         const cardDom = document.getElementById('advisor-focus-card');
@@ -1089,33 +1313,33 @@ body {
                 <span style="font-size:16px; font-weight:700; margin-left:6px;">${stock.name}</span>
                 <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">TradingView 代碼: <b class="text-cyan">${stock.tvSymbol}</b></div>
               </div>
-              <span class="tag-action ${(stock.actionTag || 'LONG').toLowerCase()}">${stock.actionTag}</span>
+              <span class="tag-action ${actionClass}">${actionLabel}</span>
             </div>
 
             <div class="price-target-widget">
               <div class="pt-labels">
-                <div><span class="text-xs text-muted">ATR/VaR 防守價</span><div class="mono text-rose font-bold">${stock.stopLoss} 元</div></div>
-                <div><span class="text-xs text-muted">當前實時報價</span><div class="mono text-cyan font-bold">TradingView 直連</div></div>
-                <div><span class="text-xs text-muted">第一目標價</span><div class="mono text-green font-bold">${stock.targetPrice} 元</div></div>
+                <div data-tooltip="風控停損點：跌破此價格應執行風險管理"><span class="text-xs text-muted">ATR/VaR 防守價 <span class="info-badge">ℹ️</span></span><div class="mono text-rose font-bold">${stock.stopLoss} 元</div></div>
+                <div data-tooltip="交易時段即時對接 TradingView 官方數據"><span class="text-xs text-muted">當前實時報價 <span class="info-badge">ℹ️</span></span><div class="mono text-cyan font-bold">TradingView 直連</div></div>
+                <div data-tooltip="華爾街機構分析師目標價格"><span class="text-xs text-muted">第一目標價 <span class="info-badge">ℹ️</span></span><div class="mono text-green font-bold">${stock.targetPrice} 元</div></div>
               </div>
               <div class="pt-bar-track"><div class="pt-bar-fill" style="width: 82%;"></div></div>
               <div class="pt-upside-footer">
-                <span class="text-xs text-secondary">Sharpe Ratio: <b class="mono text-gold">${ws.sharpeRatio}</b></span>
-                <span class="text-xs text-green font-bold">MDD: ${ws.mddPercent}</span>
+                <span class="text-xs text-secondary" data-tooltip="每承受 1 單位波動所能帶來的超額報酬">Sharpe Ratio: <b class="mono text-gold">${ws.sharpeRatio}</b></span>
+                <span class="text-xs text-green font-bold" data-tooltip="自歷史最高點至今之最大修正跌幅">MDD 最慘跌幅: ${ws.mddPercent}</span>
               </div>
             </div>
 
             <div style="margin-top:12px; background:var(--bg-subtle); border-radius:10px; padding:10px 12px; border:1px solid var(--border-subtle);">
-              <div style="font-size:11px; font-family:var(--font-mono); color:var(--apple-cyan); font-weight:700; margin-bottom:6px;">🏛️ 華爾街機構流動性與建倉上限 (Risk Sizing)</div>
+              <div style="font-size:11px; font-family:var(--font-mono); color:var(--apple-cyan); font-weight:700; margin-bottom:6px;" data-tooltip="機構法人單日買進不超過日均量 5% 的風險控制原則">🏛️ 華爾街機構流動性與建倉上限 (Risk Sizing) <span class="info-badge">ℹ️</span></div>
               <div style="display:grid; grid-template-columns: repeat(3, 1fr); text-align:center; font-family:var(--font-mono); font-size:11px;">
-                <div><span class="text-muted">20D ADV 均量</span><div class="font-bold text-primary">${ws.adv20D} 張</div></div>
-                <div><span class="text-muted">單日建倉上限 (5%)</span><div class="font-bold text-green">${ws.maxDailyBuild} 張</div></div>
-                <div><span class="text-muted">三大法人 5日買超</span><div class="font-bold text-cyan">${ws.instNetBuy5D} 張</div></div>
+                <div data-tooltip="過去 20 天平均每日成交張數"><span class="text-muted">20D ADV 均量</span><div class="font-bold text-primary">${ws.adv20D} 張</div></div>
+                <div data-tooltip="法人單日最大買進張數限制 (不拉高股價成本)"><span class="text-muted">單日建倉上限 (5%)</span><div class="font-bold text-green">${ws.maxDailyBuild} 張</div></div>
+                <div data-tooltip="外資、投信、自營商過去 5 天合計買賣超"><span class="text-muted">三大法人 5日買超</span><div class="font-bold text-cyan">${ws.instNetBuy5D} 張</div></div>
               </div>
             </div>
 
             <div class="takeaway-bullet-box">
-              <div style="font-size:11px; font-family:var(--font-mono); color:var(--apple-cyan); font-weight:700; margin-bottom:4px;">📢 華爾街投信經理人核心研判理由</div>
+              <div style="font-size:11px; font-family:var(--font-mono); color:var(--apple-cyan); font-weight:700; margin-bottom:4px;">📢 華爾街投信經理人白話買進理由</div>
               <p style="font-size:12.5px; line-height:1.55; color:var(--text-primary);">${stock.takeaway}</p>
             </div>
 
@@ -1133,50 +1357,50 @@ body {
         if (quantContainer) {
           quantContainer.innerHTML = `
             <div style="margin-bottom:12px;">
-              <div class="metric-row">
+              <div class="metric-row" data-tooltip="PEG本益成長比 = ${ws.pegRatio} (＜1.0 代表便宜高成長！)">
                 <div class="metric-label-group">
-                  <span>📊 Value Factor (PEG 本益成長比)</span>
-                  <b class="mono text-green">PEG ${ws.pegRatio} (優異)</b>
+                  <span>📊 Value Factor (PEG 本益成長比) <span class="info-badge">ℹ️</span></span>
+                  <b class="mono text-green">PEG ${ws.pegRatio} (極優異)</b>
                 </div>
                 <div class="metric-track"><div class="metric-fill" style="width:88%; background:var(--apple-green);"></div></div>
               </div>
 
-              <div class="metric-row">
+              <div class="metric-row" data-tooltip="過去30天法人集體幫公司EPS獲利加分 ${ws.epsRevision30D}">
                 <div class="metric-label-group">
-                  <span>🚀 Growth Factor (30D EPS 共識調升)</span>
+                  <span>🚀 Growth Factor (30D EPS 共識調升) <span class="info-badge">ℹ️</span></span>
                   <b class="mono text-cyan">${ws.epsRevision30D}</b>
                 </div>
                 <div class="metric-track"><div class="metric-fill" style="width:92%; background:var(--apple-cyan);"></div></div>
               </div>
 
-              <div class="metric-row">
+              <div class="metric-row" data-tooltip="每承擔1單位波動能獲取的超額報酬 = ${ws.sharpeRatio}">
                 <div class="metric-label-group">
-                  <span>🛡️ Risk Factor (Sharpe 風險調整後報酬)</span>
+                  <span>🛡️ Risk Factor (Sharpe 風險報酬性價比) <span class="info-badge">ℹ️</span></span>
                   <b class="mono text-gold">Sharpe ${ws.sharpeRatio}</b>
                 </div>
                 <div class="metric-track"><div class="metric-fill" style="width:95%; background:var(--wallstreet-gold);"></div></div>
               </div>
 
-              <div class="metric-row">
+              <div class="metric-row" data-tooltip="三大法人過去5個交易日合計買進 ${ws.instNetBuy5D} 張">
                 <div class="metric-label-group">
-                  <span>🏛️ Institutional Factor (法人近5日籌碼)</span>
+                  <span>🏛️ Institutional Factor (法人近5日籌碼) <span class="info-badge">ℹ️</span></span>
                   <b class="mono text-cyan">${ws.instNetBuy5D} 張</b>
                 </div>
                 <div class="metric-track"><div class="metric-fill" style="width:86%; background:var(--apple-purple);"></div></div>
               </div>
 
-              <div class="metric-row">
+              <div class="metric-row" data-tooltip="歷史最慘跌幅 MDD = ${ws.mddPercent}">
                 <div class="metric-label-group">
-                  <span>📉 Tail Risk (Max Drawdown 最大回撤)</span>
-                  <b class="mono text-primary">${ws.mddPercent} (可控)</b>
+                  <span>📉 Tail Risk (Max Drawdown 最大回撤) <span class="info-badge">ℹ️</span></span>
+                  <b class="mono text-primary">${ws.mddPercent} (完全可控)</b>
                 </div>
                 <div class="metric-track"><div class="metric-fill" style="width:82%; background:var(--text-secondary);"></div></div>
               </div>
             </div>
 
-            <div style="background:var(--bg-subtle); padding:10px; border-radius:10px; border:1px solid var(--border-subtle); font-size:11.5px; color:var(--text-secondary);">
-              <div style="font-weight:700; color:var(--text-primary); margin-bottom:4px;">💡 華爾街投信定量因子結論：</div>
-              ${stock.name} (${stock.symbol}) 夏普值達 <b class="text-gold mono">${ws.sharpeRatio}</b>，PEG 為 <b class="text-green mono">${ws.pegRatio}</b>，營收動能受 <b>${ws.catalystsEPS}</b> 明確支撐。
+            <div style="background:var(--bg-subtle); padding:10px 14px; border-radius:10px; border:1px solid var(--border-subtle); font-size:11.5px; color:var(--text-secondary);">
+              <div style="font-weight:700; color:var(--text-primary); margin-bottom:4px;">💡 華爾街投信白話評價結論：</div>
+              ${stock.name} (${stock.symbol}) 風險 CP 值 (Sharpe) 達 <b class="text-gold mono">${ws.sharpeRatio}</b>，估值性價比 (PEG) 為 <b class="text-green mono">${ws.pegRatio}</b>，獲利爆發受 <b>${ws.catalystsEPS}</b> 強力支撐。
             </div>
           `;
         }
@@ -1236,6 +1460,17 @@ body {
           });
         }
 
+        // Glossary Modal Controls
+        const glossaryModal = document.getElementById('glossary-modal');
+        const openGlossaryBtn = document.getElementById('open-glossary-btn');
+        const bannerGlossaryBtn = document.getElementById('banner-glossary-btn');
+        const closeGlossaryBtn = document.getElementById('close-glossary-btn');
+        if (glossaryModal) {
+          if (openGlossaryBtn) openGlossaryBtn.addEventListener('click', () => glossaryModal.classList.add('open'));
+          if (bannerGlossaryBtn) bannerGlossaryBtn.addEventListener('click', () => glossaryModal.classList.add('open'));
+          if (closeGlossaryBtn) closeGlossaryBtn.addEventListener('click', () => glossaryModal.classList.remove('open'));
+        }
+
         const whitepaperBtn = document.getElementById('whitepaper-btn');
         const whitepaperModal = document.getElementById('whitepaper-modal');
         const closeWhitepaperBtn = document.getElementById('close-whitepaper-btn');
@@ -1245,10 +1480,25 @@ body {
         }
 
         const closeBtn = document.getElementById('close-modal-btn');
-        const modal = document.getElementById('stock-modal');
-        if (closeBtn && modal) {
-          closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+        const stockModal = document.getElementById('stock-modal');
+        if (closeBtn && stockModal) {
+          closeBtn.addEventListener('click', () => stockModal.classList.remove('open'));
         }
+
+        // Universal ESC Key and Overlay Click Event to Close Modals
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            if (glossaryModal) glossaryModal.classList.remove('open');
+            if (whitepaperModal) whitepaperModal.classList.remove('open');
+            if (stockModal) stockModal.classList.remove('open');
+          }
+        });
+
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+          overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.classList.remove('open');
+          });
+        });
 
         const manualBtn = document.getElementById('manual-refresh-btn');
         if (manualBtn) {
@@ -1274,7 +1524,7 @@ body {
             if (filters.actionTag !== 'all' && stock.actionTag !== filters.actionTag) return false;
             if (filters.search) {
               const q = filters.search;
-              if (!stock.symbol.toLowerCase().includes(q) && !stock.name.toLowerCase().includes(q)) return false;
+              if (!stock.symbol.toLowerCase().includes(q) && !stock.name.toLowerCase().includes(q) && !stock.category.toLowerCase().includes(q)) return false;
             }
             return true;
           });
@@ -1284,7 +1534,7 @@ body {
             if (filters.actionTag !== 'all' && stock.actionTag !== filters.actionTag) return false;
             if (filters.search) {
               const q = filters.search;
-              if (!stock.symbol.toLowerCase().includes(q) && !stock.name.toLowerCase().includes(q)) return false;
+              if (!stock.symbol.toLowerCase().includes(q) && !stock.name.toLowerCase().includes(q) && !stock.category.toLowerCase().includes(q)) return false;
             }
             return true;
           });
@@ -1322,38 +1572,40 @@ body {
         const s = activeStock;
         const ws = s.wallstreet || {};
         const fh = s.fundamentalHighlights || {};
+        const actionClass = (s.actionTag || 'LONG').toLowerCase();
+        const actionLabel = actionClass === 'long' ? '🟢 做多 LONG (建議買進)' : '🟠 觀望 HOLD (區間觀察)';
 
         if (activeModalTab === 'advisor') {
           container.innerHTML = `
             <div style="background:var(--bg-subtle); padding:18px; border-radius:12px; border-left:4px solid var(--apple-blue); margin-bottom:18px;">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="tag-action ${(s.actionTag || 'LONG').toLowerCase()}" style="font-size:13px; padding:4px 14px;">${s.actionTag} 決策</span>
-                <span class="mono text-muted text-xs">華爾街投信風控模型</span>
+                <span class="tag-action ${actionClass}" style="font-size:12.5px; padding:4px 14px;">${actionLabel}</span>
+                <span class="mono text-muted text-xs">華爾街風控量化算式模型</span>
               </div>
               <p style="margin-top:12px; font-size:14px; line-height:1.7; color:var(--text-primary); font-weight:500;">${s.takeaway}</p>
             </div>
 
-            <div class="modal-section-title">🎯 華爾街精準風控與流動性點位</div>
+            <div class="modal-section-title">🎯 華爾街精準風控點位與流動性數據 (白話解釋)</div>
             <table class="key-level-table">
-              <tr><th>華爾街機構風控項目</th><th>具體數值與估值數據</th></tr>
-              <tr><td>PEG Ratio 本益成長比</td><td class="text-green font-bold">${ws.pegRatio}</td></tr>
-              <tr><td>30D EPS Revision 趨勢</td><td class="text-cyan font-bold">${ws.epsRevision30D}</td></tr>
-              <tr><td>Sharpe Ratio (夏普值)</td><td class="text-gold font-bold">${ws.sharpeRatio}</td></tr>
-              <tr><td>Max Drawdown (MDD)</td><td class="text-muted font-bold">${ws.mddPercent}</td></tr>
-              <tr><td>第一目標價</td><td class="text-cyan font-bold">${s.targetPrice} 元</td></tr>
-              <tr><td>ATR / VaR 防守點位</td><td class="text-rose font-bold">${s.stopLoss} 元</td></tr>
-              <tr><td>20D ADV 均量 / 單日上限</td><td class="mono font-bold">${ws.adv20D} 張 / 上限 ${ws.maxDailyBuild} 張</td></tr>
-              <tr><td>三大法人 5日買賣超</td><td class="text-green font-bold">${ws.instNetBuy5D} 張</td></tr>
+              <tr><th>華爾街機構風控與估值指標</th><th>具體數據</th><th>零金融門檻白話說明</th></tr>
+              <tr><td>PEG Ratio 本益成長比</td><td class="text-green font-bold">${ws.pegRatio}</td><td>${ws.pegRatio < 1.0 ? '高成長且價格便宜 (俗擱大碗！)' : '估值合理可安心看好'}</td></tr>
+              <tr><td>30D EPS Revision 調升率</td><td class="text-cyan font-bold">${ws.epsRevision30D}</td><td>法人過去 30 天幫公司 EPS 加分看好</td></tr>
+              <tr><td>Sharpe Ratio (夏普風險CP值)</td><td class="text-gold font-bold">${ws.sharpeRatio}</td><td>風險報酬性價比極高，漲得多摔得輕</td></tr>
+              <tr><td>Max Drawdown (MDD 最慘跌幅)</td><td class="text-muted font-bold">${ws.mddPercent}</td><td>自歷史最高點下跌之極限修正跌幅</td></tr>
+              <tr><td>第一目標價 (潛在空間)</td><td class="text-cyan font-bold">${s.targetPrice} 元</td><td>法人估計算式得出之合理價值空間</td></tr>
+              <tr><td>ATR / VaR 防守點位</td><td class="text-rose font-bold">${s.stopLoss} 元</td><td>短線安保停損防線，跌破應控管風險</td></tr>
+              <tr><td>20D ADV 均量 / 建倉上限 (5%)</td><td class="mono font-bold">${ws.adv20D} 張 / 上限 ${ws.maxDailyBuild} 張</td><td>法人單日買超上限，避免炒高股價成本</td></tr>
+              <tr><td>三大法人 5日買賣超</td><td class="text-green font-bold">${ws.instNetBuy5D} 張</td><td>外資與投信近 5 個交易日卡位籌碼</td></tr>
             </table>
           `;
         } else if (activeModalTab === 'fundamental') {
           container.innerHTML = `
             <div style="background:var(--bg-subtle); padding:16px; border-radius:12px; border-left:4px solid var(--apple-blue); margin-bottom:18px;">
-              <div style="font-size:12px; color:var(--apple-cyan); font-weight:800;" class="mono">INVESTMENT THESIS 核心論述</div>
+              <div style="font-size:12px; color:var(--apple-cyan); font-weight:800;" class="mono">INVESTMENT THESIS 華爾街核心研判理由</div>
               <p style="margin-top:8px; font-size:13.5px; line-height:1.65; color:var(--text-primary);">${fh.thesis || s.takeaway}</p>
             </div>
             <div style="background:rgba(52, 199, 89, 0.12); padding:16px; border-radius:12px; border:1px solid rgba(52, 199, 89, 0.3);">
-              <div style="font-size:12px; color:var(--apple-green); font-weight:800;" class="mono">⚡ CATALYST EPS SENSITIVITY 量化催化劑</div>
+              <div style="font-size:12px; color:var(--apple-green); font-weight:800;" class="mono">⚡ CATALYST EPS SENSITIVITY 量化白話獲利爆發點</div>
               <p style="margin-top:6px; font-size:14px; font-weight:700; color:var(--text-primary);">${ws.catalystsEPS}</p>
             </div>
           `;
@@ -1369,7 +1621,7 @@ body {
                 "symbol": s.tvSymbol,
                 "interval": "D",
                 "timezone": "Asia/Taipei",
-                "theme": "dark",
+                "theme": document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
                 "style": "1",
                 "locale": "zh_TW",
                 "toolbar_bg": "#121216",
