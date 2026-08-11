@@ -500,6 +500,24 @@ body {
   color: var(--apple-amber);
   border: 1px solid rgba(255, 149, 0, 0.35);
 }
+.tag-action.short {
+  background: rgba(255, 59, 48, 0.16);
+  color: var(--apple-red);
+  border: 1px solid rgba(255, 59, 48, 0.35);
+}
+
+.star-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.star-btn:hover, .star-btn.starred {
+  color: var(--wallstreet-gold);
+  transform: scale(1.2);
+}
 
 .upside-pill {
   font-family: var(--font-mono);
@@ -900,13 +918,12 @@ body {
       <table class="master-table">
         <thead>
           <tr>
-            <th data-tooltip="股票代號與公司名稱。點擊該列可於下方查看深度報告">股票標的 <span class="info-badge">ℹ️</span></th>
-            <th data-tooltip="所屬最新 AI 與科技當紅主題類別">產業概念分類 <span class="info-badge">ℹ️</span></th>
+            <th style="width: 40px; text-align: center;" data-tooltip="點擊將股票加入/移出個人追蹤清單">★</th>
+            <th data-tooltip="股票代號與公司名稱。點擊該列可於下方查看詳細分析">股票標的 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="所屬最新 AI 與科技當紅主題類別">產業概念 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="當前最新盤後價格與單日漲跌幅%">當前報價 <span class="info-badge">ℹ️</span></th>
+            <th data-tooltip="華爾街量化模型綜合評級：做多 LONG / 觀望 HOLD / 做空 SHORT">機構決策 <span class="info-badge">ℹ️</span></th>
             <th data-tooltip="本益成長比 (P/E÷Growth)。＜ 1.0 代表「高成長、價格便宜俗擱大碗」">PEG 比率 <span class="info-badge">ℹ️</span></th>
-            <th data-tooltip="過去 30 天法人是否調高公司看好度與 EPS 預估">30D EPS Revision <span class="info-badge">ℹ️</span></th>
-            <th data-tooltip="夏普值 (風險 CP 值)。＞ 2.0 代表每承擔 1 單位風險能換取極高超額報酬">Sharpe Ratio <span class="info-badge">ℹ️</span></th>
-            <th data-tooltip="歷史最大跌幅 (MDD)。自最高點下跌的最大幅度，用以評估最壞情況的心臟承受度">Max Drawdown <span class="info-badge">ℹ️</span></th>
-            <th data-tooltip="外資、投信、自營商過去 5 個交易日合計買進 (+張) 或賣出 (-張) 張數">5日三大法人買賣超 <span class="info-badge">ℹ️</span></th>
             <th data-tooltip="華爾街法人根據未來獲利與合理估值計算之目標價與潛在空間">第一目標價 <span class="info-badge">ℹ️</span></th>
             <th data-tooltip="結合真實波幅 (ATR) 與風險價值 (VaR) 計算出的安保防守停損價">ATR/VaR 防守價 <span class="info-badge">ℹ️</span></th>
             <th data-tooltip="華爾街機構大戶買進該股票的核心白話理由與催化劑">華爾街機構白話論述 <span class="info-badge">ℹ️</span></th>
