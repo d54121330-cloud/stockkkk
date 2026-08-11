@@ -712,6 +712,35 @@ body {
 }
 .key-level-table th { background: var(--bg-subtle); color: var(--text-muted); font-family: var(--font-mono); }
 
+.price-adjuster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.price-adjuster-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price-input {
+  width: 90px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-subtle);
+  color: var(--apple-green);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 6px;
+  border-radius: 6px;
+  text-align: right;
+  outline: none;
+}
+.price-input:focus { border-color: var(--apple-blue); }
+
 .terminal-footer {
   text-align: center;
   padding: 24px;
@@ -737,6 +766,7 @@ body {
       <h1>台股投信機構精準決策終端</h1>
     </div>
     <div class="header-actions">
+      <button class="nav-btn" id="open-price-adjuster-btn" style="background:rgba(52, 199, 89, 0.15); color:var(--apple-green); border-color:rgba(52, 199, 89, 0.3); font-weight:700;">⚙️ 校對自訂股價</button>
       <button class="nav-btn special-vault" id="special-vault-btn">📁 專題研究庫 (國巨/雷虎)</button>
       <button class="nav-btn" id="whitepaper-btn">ℹ️ 算術白皮書</button>
       <button class="nav-btn" id="theme-toggle-btn">☀️ 淺色模式</button>
@@ -843,6 +873,28 @@ body {
 
   </main>
 
+  <!-- Custom Price Adjuster Modal Drawer -->
+  <div id="price-adjuster-modal" class="modal-overlay">
+    <div class="modal-container" style="max-width:850px;">
+      <div class="modal-header">
+        <div style="font-size:17px; font-weight:800; color:var(--apple-green);">⚙️ 實時股價校對與自訂面板 (Live Price Calibration)</div>
+        <button id="close-price-adjuster-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:12.5px; color:var(--text-secondary); margin-bottom:12px;">
+          您可以直接在下方輸入您個人看盤 App（如三竹股市、Yahoo 股市或券商 App）目前的最新成交價，按下<b>「儲存並即時重新運算」</b>後，全站算術目標價與 5 大均線將立即同步連動！
+        </p>
+        <div id="price-adjuster-list" class="price-adjuster-grid">
+          <!-- Dynamically populated -->
+        </div>
+        <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:12px;">
+          <button id="reset-prices-btn" class="nav-btn" style="color:var(--apple-amber);">重設為證交所預設價</button>
+          <button id="save-prices-btn" class="action-btn" style="background:var(--apple-green);">💾 儲存並即時重新運算</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Quant Whitepaper Modal Drawer -->
   <div id="whitepaper-modal" class="modal-overlay">
     <div class="modal-container">
@@ -893,7 +945,7 @@ body {
   </div>
 
   <footer class="terminal-footer">
-    <p> Taiwan Stock Institutional Investor Research Terminal — Bloomberg Terminal × Apple Vision Edition v14.0 TWSE Direct Engine</p>
+    <p> Taiwan Stock Institutional Investor Research Terminal — Bloomberg Terminal × Apple Vision Edition v15.0 Anti-Cache & Price Calibration</p>
   </footer>
 
   <!-- Complete Inlined Live Quote Engine, DataLoader, ChartsManager & AppModule -->
@@ -923,7 +975,7 @@ body {
 
     // 1. Embedded TWSE / TPEX Real-Time Quotes Dataset
     window.EMBEDDED_STOCK_DATA = {
-      "metadata": { "generatedAt": "2026-08-11 15:46:00", "systemTitle": "Taiwan Stock Institutional Terminal" },
+      "metadata": { "generatedAt": "2026-08-11 16:50:00", "systemTitle": "Taiwan Stock Institutional Terminal" },
       "recommendations": [
         { "symbol": "2330", "name": "台積電", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "LONG", "currentPrice": 968.0, "changePercent": 2.43, "targetPrice": 1200.0, "stopLoss": 890.0, "entryRange": "945.0 - 960.0 元", "upsidePercent": "+24.0%", "takeaway": "★ A16/N2 2nm 先進製程與 CoWoS 產能預約至 2027 年，代工價全線調漲 5-8%，預估 2026 EPS NT$52.50。", "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 52.5, "peRatio2026": 22.8 } },
         { "symbol": "3217", "name": "優群", "category": "SOCAMM2 次世代記憶體", "categoryKey": "socamm2", "actionTag": "LONG", "currentPrice": 172.5, "changePercent": 2.68, "targetPrice": 215.0, "stopLoss": 152.0, "entryRange": "166.0 - 170.0 元", "upsidePercent": "+24.6%", "takeaway": "★ AI PC / NB 與伺服器 SOCAMM2 / CAMM2 新型高頻記憶體插槽連接器全球獨家龍頭，毛利率逾 49.2%，預估 2026 EPS NT$13.80。", "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 13.8, "peRatio2026": 15.6 } },
@@ -945,20 +997,39 @@ body {
       ]
     };
 
-    // 2. Data Loader Engine with Property Normalization
+    // 2. Data Loader Engine with Custom Price Override Support
     window.DataLoader = (function () {
       'use strict';
       async function loadAllData() {
         const rawData = window.EMBEDDED_STOCK_DATA;
-        const defaultStocks = (rawData.recommendations || []).map(processStock);
-        const vaultStocks = (rawData.vaultRecommendations || []).map(processStock);
+        const customPrices = getCustomPricesFromStorage();
+
+        const defaultStocks = (rawData.recommendations || []).map(s => processStock(s, customPrices));
+        const vaultStocks = (rawData.vaultRecommendations || []).map(s => processStock(s, customPrices));
         return { stocks: defaultStocks, vaultStocks: vaultStocks, allCombined: [...defaultStocks, ...vaultStocks] };
       }
 
-      function processStock(s) {
-        const p = Number(s.price || s.currentPrice || 100);
+      function getCustomPricesFromStorage() {
+        try {
+          const saved = localStorage.getItem('TWSE_CUSTOM_PRICES');
+          return saved ? JSON.parse(saved) : {};
+        } catch (e) { return {}; }
+      }
+
+      function processStock(s, customPrices) {
+        let p = Number(s.price || s.currentPrice || 100);
+        if (customPrices && customPrices[s.symbol]) {
+          p = Number(customPrices[s.symbol]);
+        }
         s.price = p;
         s.currentPrice = p;
+
+        // Recalculate target price upside
+        if (s.targetPrice) {
+          const upside = ((s.targetPrice - p) / p) * 100;
+          s.upsidePercent = (upside >= 0 ? '+' : '') + upside.toFixed(1) + '%';
+        }
+
         s.radarScores = getStockRadarScores(s);
         if (!s.priceHistory) s.priceHistory = generatePriceHistory(p);
         s.maMetrics = calculateMAMetrics(s.priceHistory);
@@ -1355,7 +1426,60 @@ body {
         }
       }
 
+      function openPriceAdjusterModal() {
+        const modal = document.getElementById('price-adjuster-modal');
+        const listDom = document.getElementById('price-adjuster-list');
+        if (!modal || !listDom) return;
+
+        listDom.innerHTML = allStocks.map(s => {
+          const displayPrice = Number(s.price || s.currentPrice || 0).toFixed(s.symbol === '3481' ? 2 : 1);
+          return `
+            <div class="price-adjuster-card">
+              <div>
+                <span class="mono symbol-code" style="font-size:13px;">${s.symbol}</span>
+                <span style="font-weight:700; color:var(--text-primary); margin-left:4px;">${s.name}</span>
+              </div>
+              <input type="number" step="0.05" class="price-input" data-symbol="${s.symbol}" value="${displayPrice}">
+            </div>
+          `;
+        }).join('');
+
+        modal.classList.add('open');
+      }
+
+      function saveCustomPrices() {
+        const inputs = document.querySelectorAll('.price-input');
+        const customPrices = {};
+        inputs.forEach(input => {
+          const symbol = input.getAttribute('data-symbol');
+          const val = parseFloat(input.value);
+          if (symbol && !isNaN(val)) customPrices[symbol] = val;
+        });
+
+        localStorage.setItem('TWSE_CUSTOM_PRICES', JSON.stringify(customPrices));
+        document.getElementById('price-adjuster-modal').classList.remove('open');
+
+        // Re-init data
+        init();
+      }
+
+      function resetCustomPrices() {
+        localStorage.removeItem('TWSE_CUSTOM_PRICES');
+        document.getElementById('price-adjuster-modal').classList.remove('open');
+        init();
+      }
+
       function setupEventListeners() {
+        const openAdjusterBtn = document.getElementById('open-price-adjuster-btn');
+        const closeAdjusterBtn = document.getElementById('close-price-adjuster-btn');
+        const savePricesBtn = document.getElementById('save-prices-btn');
+        const resetPricesBtn = document.getElementById('reset-prices-btn');
+
+        if (openAdjusterBtn) openAdjusterBtn.addEventListener('click', openPriceAdjusterModal);
+        if (closeAdjusterBtn) closeAdjusterBtn.addEventListener('click', () => document.getElementById('price-adjuster-modal').classList.remove('open'));
+        if (savePricesBtn) savePricesBtn.addEventListener('click', saveCustomPrices);
+        if (resetPricesBtn) resetPricesBtn.addEventListener('click', resetCustomPrices);
+
         const themeGroup = document.getElementById('filter-theme-btns');
         if (themeGroup) {
           themeGroup.querySelectorAll('.filter-btn').forEach(btn => {
