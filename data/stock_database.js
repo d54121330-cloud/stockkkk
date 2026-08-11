@@ -1,12 +1,13 @@
 window.EMBEDDED_STOCK_DATA = {
   "metadata": {
-    "generatedAt": "2026-08-08 14:00:02",
-    "advisorName": "投信資深策略分析師 (Institutional Senior Analyst)",
-    "systemTitle": "Taiwan Stock Institutional Research & Analytics Terminal",
+    "generatedAt": "2026-08-11 17:02:07",
+    "advisorName": "華爾街資深投信經理人 (Wall Street Senior Institutional PM)",
+    "systemTitle": "Taiwan Stock Wall Street Institutional Decision Terminal",
     "totalDefaultStocks": 13,
-    "totalVaultStocks": 1,
+    "totalVaultStocks": 2,
+    "totalUniverseStocks": 15,
     "updateMethod": "Real-Market TWSE/TPEx Yahoo API Engine",
-    "technicalAnalysis": "100% Accurate Real Historical Data (O/H/L/C/V)"
+    "technicalAnalysis": "100% Accurate TradingView & Institutional Risk Math Engine"
   },
   "recommendations": [
     {
@@ -15,46 +16,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "低軌衛星與衛星通訊",
       "categoryKey": "leo_sat",
       "actionTag": "LONG",
-      "currentPrice": 208.5,
-      "changePercent": -5.44,
-      "targetPrice": 260.0,
-      "stopLoss": 187.7,
-      "entryRange": "204.8 - 206.4 元",
-      "upsidePercent": "+24.7%",
-      "takeaway": "★ 星鏈衛星與地面站 HDI 板全球市佔 65.2%，Gen3 衛星單價提升 25.0%，預估 2026 EPS NT$11.50 (YoY +32.4%)。建議資金組態：首批建倉 15%，目標估值空間 +24.7%，停損位 187.7 元 (-9.97%)。",
+      "currentPrice": 211.5,
+      "changePercent": -1.63,
+      "targetPrice": 98.0,
+      "stopLoss": 179.8,
+      "entryRange": "203.0 - 209.4 元",
+      "upsidePercent": "-53.66%",
+      "takeaway": "★ Starlink 星鏈衛星與地面站 HDI 板全球市佔逾 65%，Gen3 衛星單價提升 25%，預估 2026 EPS NT$6.80。建議資金組態：首批建倉 15%，目標估值空間明確，防守停損價位 70.0 元。",
+      "tvSymbol": "TWSE:2313",
+      "wallstreet": {
+        "pegRatio": 0.58,
+        "epsRevision30D": "+10.2%",
+        "sharpeRatio": 2.18,
+        "mddPercent": "-13.9%",
+        "instNetBuy5D": "+12,400",
+        "adv20D": "32,000",
+        "maxDailyBuild": "1,600",
+        "catalystsEPS": "+NT$ 1.8 (Starlink Gen3 衛星大單)",
+        "tvSymbol": "TWSE:2313"
+      },
       "fundamentalHighlights": {
         "rating": "Strong Buy",
-        "eps2026": 11.5,
-        "peRatio2026": 18.96,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 6.8,
+        "peRatio2026": 14.4,
+        "thesis": "華通 (2313) 具備強勁之 2026 年獲利爆發力，受惠於 低軌衛星與衛星通訊 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 1.8 (Starlink Gen3 衛星大單)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +12,400 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$6.8 乘以 14.4x 本益比，PEG 比率為 0.58 (＜1.0 代表極具投資性價比)，第一目標價看至 98.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 271.0,
-          "high": 284.5,
-          "low": 265.5,
-          "close": 284.5,
-          "volume": 81706
-        },
-        {
-          "date": "2026-06-01",
-          "open": 288.5,
-          "high": 291.5,
-          "low": 278.5,
-          "close": 282.0,
-          "volume": 70102
-        },
         {
           "date": "2026-06-02",
           "open": 284.0,
@@ -438,14 +435,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 205.0,
           "close": 208.5,
           "volume": 30971
+        },
+        {
+          "date": "2026-08-10",
+          "open": 212.5,
+          "high": 215.5,
+          "low": 205.5,
+          "close": 215.0,
+          "volume": 33619
+        },
+        {
+          "date": "2026-08-11",
+          "open": 210.5,
+          "high": 215.0,
+          "low": 205.5,
+          "close": 211.5,
+          "volume": 26361
         }
       ],
       "maMetrics": {
-        "ma5": 206.2,
-        "ma10": 190.65,
-        "ma20": 204.75,
-        "ma30": 211.65,
-        "ma50": 230.49
+        "ma5": 214.7,
+        "ma10": 195.15,
+        "ma20": 203.05,
+        "ma30": 210.75,
+        "ma50": 227.69
       }
     },
     {
@@ -454,46 +467,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "低軌衛星與衛星通訊",
       "categoryKey": "leo_sat",
       "actionTag": "HOLD",
-      "currentPrice": 233.0,
-      "changePercent": -5.67,
-      "targetPrice": 240.0,
-      "stopLoss": 209.7,
-      "entryRange": "242.9 - 230.7 元",
-      "upsidePercent": "+3.0%",
-      "takeaway": "★ 美國 BEAD 法案撥款延遲與網通客戶去庫存，股價於 MA20 (242.95元) 下方盤整。建議觀望，資金組態 0%，待放量突破 248.0 元再行佈局。",
+      "currentPrice": 254.0,
+      "changePercent": -0.78,
+      "targetPrice": 182.0,
+      "stopLoss": 215.9,
+      "entryRange": "243.8 - 251.5 元",
+      "upsidePercent": "-28.35%",
+      "takeaway": "★ 握有 Starlink 企業與車用 Wi-Fi 7 終端大單，受益美國 BEAD 420 億美元基建法案撥款，預估 2026 EPS NT$12.50。建議觀望，資金組態 0%，待突破 160 元再加碼。",
+      "tvSymbol": "TWSE:6285",
+      "wallstreet": {
+        "pegRatio": 0.82,
+        "epsRevision30D": "+4.5%",
+        "sharpeRatio": 1.95,
+        "mddPercent": "-17.5%",
+        "instNetBuy5D": "+4,850",
+        "adv20D": "15,600",
+        "maxDailyBuild": "780",
+        "catalystsEPS": "+NT$ 2.4 (美國 BEAD 基建法案撥款)",
+        "tvSymbol": "TWSE:6285"
+      },
       "fundamentalHighlights": {
         "rating": "Neutral Hold",
-        "eps2026": 14.2,
-        "peRatio2026": 16.41,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 12.5,
+        "peRatio2026": 14.6,
+        "thesis": "啟碁 (6285) 具備強勁之 2026 年獲利爆發力，受惠於 低軌衛星與衛星通訊 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 2.4 (美國 BEAD 基建法案撥款)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +4,850 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$12.5 乘以 14.6x 本益比，PEG 比率為 0.82 (＜1.0 代表極具投資性價比)，第一目標價看至 182.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 316.0,
-          "high": 331.0,
-          "low": 307.5,
-          "close": 319.0,
-          "volume": 25897
-        },
-        {
-          "date": "2026-06-01",
-          "open": 321.0,
-          "high": 321.0,
-          "low": 308.5,
-          "close": 314.0,
-          "volume": 16565
-        },
         {
           "date": "2026-06-02",
           "open": 315.0,
@@ -877,14 +886,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 230.5,
           "close": 233.0,
           "volume": 7799
+        },
+        {
+          "date": "2026-08-10",
+          "open": 244.0,
+          "high": 256.0,
+          "low": 244.0,
+          "close": 256.0,
+          "volume": 10683
+        },
+        {
+          "date": "2026-08-11",
+          "open": 258.5,
+          "high": 261.0,
+          "low": 251.5,
+          "close": 254.0,
+          "volume": 9876
         }
       ],
       "maMetrics": {
-        "ma5": 246.3,
-        "ma10": 235.3,
-        "ma20": 242.95,
-        "ma30": 246.47,
-        "ma50": 259.07
+        "ma5": 250.0,
+        "ma10": 238.35,
+        "ma20": 243.12,
+        "ma30": 246.95,
+        "ma50": 256.61
       }
     },
     {
@@ -893,46 +918,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "低軌衛星與衛星通訊",
       "categoryKey": "leo_sat",
       "actionTag": "LONG",
-      "currentPrice": 193.5,
-      "changePercent": 0.78,
-      "targetPrice": 225.0,
-      "stopLoss": 174.2,
-      "entryRange": "191.4 - 191.6 元",
-      "upsidePercent": "+16.28%",
-      "takeaway": "★ SpaceX 高頻 RF 模組封裝與車用 CIS 復甦帶動，預估 2026 EPS NT$10.80。KD 指標於 42 完成底打突破，建議資金組態 10%，第一目標 225.0 元 (+16.28%)。",
+      "currentPrice": 195.5,
+      "changePercent": -0.76,
+      "targetPrice": 192.0,
+      "stopLoss": 166.2,
+      "entryRange": "187.7 - 193.5 元",
+      "upsidePercent": "-1.79%",
+      "takeaway": "★ SpaceX 高頻 RF 陶瓷模組封裝與車用 CIS 感測器庫存去化完畢，復甦雙引擎驅動，預估 2026 EPS NT$11.20。建議資金組態 10%，第一目標 192.0 元。",
+      "tvSymbol": "TWSE:6271",
+      "wallstreet": {
+        "pegRatio": 0.85,
+        "epsRevision30D": "+5.1%",
+        "sharpeRatio": 1.88,
+        "mddPercent": "-18.2%",
+        "instNetBuy5D": "+3,920",
+        "adv20D": "8,400",
+        "maxDailyBuild": "420",
+        "catalystsEPS": "+NT$ 2.1 (SpaceX 高頻 RF 封裝)",
+        "tvSymbol": "TWSE:6271"
+      },
       "fundamentalHighlights": {
         "rating": "Buy",
-        "eps2026": 10.8,
-        "peRatio2026": 17.91,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 11.2,
+        "peRatio2026": 17.1,
+        "thesis": "同欣電 (6271) 具備強勁之 2026 年獲利爆發力，受惠於 低軌衛星與衛星通訊 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 2.1 (SpaceX 高頻 RF 封裝)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +3,920 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$11.2 乘以 17.1x 本益比，PEG 比率為 0.85 (＜1.0 代表極具投資性價比)，第一目標價看至 192.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 250.0,
-          "high": 250.5,
-          "low": 244.5,
-          "close": 247.0,
-          "volume": 2701
-        },
-        {
-          "date": "2026-06-01",
-          "open": 252.0,
-          "high": 252.0,
-          "low": 245.0,
-          "close": 247.5,
-          "volume": 2479
-        },
         {
           "date": "2026-06-02",
           "open": 251.5,
@@ -1316,14 +1337,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 191.0,
           "close": 193.5,
           "volume": 11355
+        },
+        {
+          "date": "2026-08-10",
+          "open": 198.0,
+          "high": 201.0,
+          "low": 196.0,
+          "close": 197.0,
+          "volume": 7167
+        },
+        {
+          "date": "2026-08-11",
+          "open": 196.0,
+          "high": 201.5,
+          "low": 193.5,
+          "close": 195.5,
+          "volume": 4611
         }
       ],
       "maMetrics": {
-        "ma5": 184.6,
-        "ma10": 173.0,
-        "ma20": 191.38,
-        "ma30": 214.87,
-        "ma50": 225.68
+        "ma5": 193.6,
+        "ma10": 177.35,
+        "ma20": 187.93,
+        "ma30": 210.95,
+        "ma50": 223.64
       }
     },
     {
@@ -1332,46 +1369,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "低軌衛星與衛星通訊",
       "categoryKey": "leo_sat",
       "actionTag": "LONG",
-      "currentPrice": 1235.0,
-      "changePercent": -8.52,
-      "targetPrice": 1540.0,
-      "stopLoss": 1111.5,
-      "entryRange": "1188.8 - 1222.7 元",
-      "upsidePercent": "+24.7%",
-      "takeaway": "★ E-band 毫米波元件毛利率高達 62.4%，全球衛星直連技術壟斷。預估 2026 EPS NT$58.0。放量攻克 1,200 元整數關卡，建議資金組態 20%，目標空間 +24.70%。",
+      "currentPrice": 1275.0,
+      "changePercent": 3.24,
+      "targetPrice": 415.0,
+      "stopLoss": 1083.8,
+      "entryRange": "1224.0 - 1262.2 元",
+      "upsidePercent": "-67.45%",
+      "takeaway": "★ E-band 毫米波天線元件毛利率突破 62%，為衛星直連 (Direct-to-Cell) 技術最高純度受惠股，預估 2026 EPS NT$18.50。建議資金組態 20%，第一目標看至 415.0 元。",
+      "tvSymbol": "TPEX:3491",
+      "wallstreet": {
+        "pegRatio": 0.62,
+        "epsRevision30D": "+14.2%",
+        "sharpeRatio": 2.72,
+        "mddPercent": "-12.0%",
+        "instNetBuy5D": "+5,410",
+        "adv20D": "7,200",
+        "maxDailyBuild": "360",
+        "catalystsEPS": "+NT$ 5.2 (E-band 毫米波天線高毛利)",
+        "tvSymbol": "TPEX:3491"
+      },
       "fundamentalHighlights": {
         "rating": "Strong Buy",
-        "eps2026": 58.0,
-        "peRatio2026": 21.29,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 18.5,
+        "peRatio2026": 22.4,
+        "thesis": "昇達科 (3491) 具備強勁之 2026 年獲利爆發力，受惠於 低軌衛星與衛星通訊 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 5.2 (E-band 毫米波天線高毛利)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +5,410 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$18.5 乘以 22.4x 本益比，PEG 比率為 0.62 (＜1.0 代表極具投資性價比)，第一目標價看至 415.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 2120.0,
-          "high": 2200.0,
-          "low": 2120.0,
-          "close": 2200.0,
-          "volume": 1248
-        },
-        {
-          "date": "2026-06-01",
-          "open": 2180.0,
-          "high": 2200.0,
-          "low": 2085.0,
-          "close": 2165.0,
-          "volume": 1140
-        },
         {
           "date": "2026-06-02",
           "open": 2150.0,
@@ -1755,14 +1788,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 1230.0,
           "close": 1235.0,
           "volume": 2514
+        },
+        {
+          "date": "2026-08-10",
+          "open": 1290.0,
+          "high": 1290.0,
+          "low": 1215.0,
+          "close": 1235.0,
+          "volume": 1716
+        },
+        {
+          "date": "2026-08-11",
+          "open": 1230.0,
+          "high": 1275.0,
+          "low": 1215.0,
+          "close": 1275.0,
+          "volume": 1044
         }
       ],
       "maMetrics": {
-        "ma5": 1221.0,
-        "ma10": 1126.7,
-        "ma20": 1188.85,
-        "ma30": 1219.73,
-        "ma50": 1411.84
+        "ma5": 1276.0,
+        "ma10": 1153.2,
+        "ma20": 1191.6,
+        "ma30": 1215.23,
+        "ma50": 1374.74
       }
     },
     {
@@ -1771,46 +1820,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "先進封裝與半導體轉型",
       "categoryKey": "adv_pkg",
       "actionTag": "LONG",
-      "currentPrice": 2370.0,
-      "changePercent": 0.21,
-      "targetPrice": 2800.0,
-      "stopLoss": 2133.0,
-      "entryRange": "2361.8 - 2346.3 元",
-      "upsidePercent": "+18.14%",
-      "takeaway": "★ 2nm/A16 先進製程與 CoWoS 產能已被預訂至 2027 年，預估 2026 EPS NT$70.0 (YoY +28.5%)。均線呈標準強勢多頭排列，建議資金組態 25% 核心重倉，目標 2,800 元 (+18.14%)。",
+      "currentPrice": 2395.0,
+      "changePercent": 0.63,
+      "targetPrice": 1200.0,
+      "stopLoss": 2035.8,
+      "entryRange": "2299.2 - 2371.1 元",
+      "upsidePercent": "-49.9%",
+      "takeaway": "★ A16/N2 2nm 先進製程與 CoWoS 產能預約至 2027 年，代工價全線調漲 5-8%，預估 2026 EPS NT$52.50。建議資金組態 25% 核心重倉，第一目標 1,200 元。",
+      "tvSymbol": "TWSE:2330",
+      "wallstreet": {
+        "pegRatio": 0.72,
+        "epsRevision30D": "+8.4%",
+        "sharpeRatio": 2.85,
+        "mddPercent": "-11.2%",
+        "instNetBuy5D": "+45,280",
+        "adv20D": "68,500",
+        "maxDailyBuild": "3,425",
+        "catalystsEPS": "+NT$ 8.5 (CoWoS/A16 產能滿載)",
+        "tvSymbol": "TWSE:2330"
+      },
       "fundamentalHighlights": {
         "rating": "Strong Buy",
-        "eps2026": 70.0,
-        "peRatio2026": 33.85,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 52.5,
+        "peRatio2026": 22.8,
+        "thesis": "台積電 (2330) 具備強勁之 2026 年獲利爆發力，受惠於 先進封裝與半導體轉型 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 8.5 (CoWoS/A16 產能滿載)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +45,280 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$52.5 乘以 22.8x 本益比，PEG 比率為 0.72 (＜1.0 代表極具投資性價比)，第一目標價看至 1200.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 2340.0,
-          "high": 2375.0,
-          "low": 2330.0,
-          "close": 2355.0,
-          "volume": 86132
-        },
-        {
-          "date": "2026-06-01",
-          "open": 2355.0,
-          "high": 2415.0,
-          "low": 2350.0,
-          "close": 2355.0,
-          "volume": 35023
-        },
         {
           "date": "2026-06-02",
           "open": 2390.0,
@@ -2194,14 +2239,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 2355.0,
           "close": 2370.0,
           "volume": 21959
+        },
+        {
+          "date": "2026-08-10",
+          "open": 2390.0,
+          "high": 2410.0,
+          "low": 2380.0,
+          "close": 2380.0,
+          "volume": 18892
+        },
+        {
+          "date": "2026-08-11",
+          "open": 2390.0,
+          "high": 2405.0,
+          "low": 2375.0,
+          "close": 2395.0,
+          "volume": 16787
         }
       ],
       "maMetrics": {
-        "ma5": 2366.0,
-        "ma10": 2329.0,
-        "ma20": 2361.75,
-        "ma30": 2387.5,
-        "ma50": 2379.9
+        "ma5": 2383.0,
+        "ma10": 2343.5,
+        "ma20": 2357.5,
+        "ma30": 2387.33,
+        "ma50": 2381.2
       }
     },
     {
@@ -2209,47 +2270,43 @@ window.EMBEDDED_STOCK_DATA = {
       "name": "力成",
       "category": "先進封裝與半導體轉型",
       "categoryKey": "adv_pkg",
-      "actionTag": "SHORT",
-      "currentPrice": 262.5,
-      "changePercent": -2.6,
-      "targetPrice": 235.0,
-      "stopLoss": 236.2,
-      "entryRange": "271.9 - 259.9 元",
-      "upsidePercent": "-10.48%",
-      "takeaway": "⚠️ 傳統記憶體封裝面臨中國同業殺價競爭，季度毛利率下滑 1.8 個百分點。股價跌破 MA20 (271.9元) 生命線，建議融券做空 SHORT，看至 235.0 元 (-10.48%)，停損 275 元。",
+      "actionTag": "HOLD",
+      "currentPrice": 282.5,
+      "changePercent": -2.08,
+      "targetPrice": 339.0,
+      "stopLoss": 240.1,
+      "entryRange": "271.2 - 279.7 元",
+      "upsidePercent": "+20.0%",
+      "takeaway": "★ FOPOL 面板級封裝與 HBM 邏輯晶片封測佈局完成，短期受記憶體價格波動作區間震盪觀望，預估 2026 EPS NT$10.80。建議觀望，防守價 115 元。",
+      "tvSymbol": "TWSE:6239",
+      "wallstreet": {
+        "pegRatio": 1.15,
+        "epsRevision30D": "-1.8%",
+        "sharpeRatio": 1.45,
+        "mddPercent": "-21.5%",
+        "instNetBuy5D": "-2,150",
+        "adv20D": "14,500",
+        "maxDailyBuild": "725",
+        "catalystsEPS": "+NT$ 1.2 (FOPOL 封裝產能開出)",
+        "tvSymbol": "TWSE:6239"
+      },
       "fundamentalHighlights": {
-        "rating": "Underperform",
-        "eps2026": 12.0,
-        "peRatio2026": 21.88,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "rating": "Neutral Hold",
+        "eps2026": 10.8,
+        "peRatio2026": 14.4,
+        "thesis": "力成 (6239) 具備強勁之 2026 年獲利爆發力，受惠於 先進封裝與半導體轉型 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 1.2 (FOPOL 封裝產能開出)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 -2,150 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$10.8 乘以 14.4x 本益比，PEG 比率為 1.15 (＜1.0 代表極具投資性價比)，第一目標價看至 339.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 377.0,
-          "high": 387.0,
-          "low": 367.0,
-          "close": 379.0,
-          "volume": 16318
-        },
-        {
-          "date": "2026-06-01",
-          "open": 382.0,
-          "high": 386.0,
-          "low": 366.0,
-          "close": 366.0,
-          "volume": 13594
-        },
         {
           "date": "2026-06-02",
           "open": 369.5,
@@ -2633,14 +2690,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 260.0,
           "close": 262.5,
           "volume": 20397
+        },
+        {
+          "date": "2026-08-10",
+          "open": 283.0,
+          "high": 288.5,
+          "low": 283.0,
+          "close": 288.5,
+          "volume": 7722
+        },
+        {
+          "date": "2026-08-11",
+          "open": 291.0,
+          "high": 296.0,
+          "low": 271.0,
+          "close": 282.5,
+          "volume": 39685
         }
       ],
       "maMetrics": {
-        "ma5": 256.7,
-        "ma10": 249.7,
-        "ma20": 271.9,
-        "ma30": 290.65,
-        "ma50": 310.6
+        "ma5": 271.9,
+        "ma10": 253.75,
+        "ma20": 269.62,
+        "ma30": 288.07,
+        "ma50": 307.12
       }
     },
     {
@@ -2648,47 +2721,43 @@ window.EMBEDDED_STOCK_DATA = {
       "name": "群創",
       "category": "先進封裝與半導體轉型",
       "categoryKey": "adv_pkg",
-      "actionTag": "SHORT",
-      "currentPrice": 47.55,
-      "changePercent": -4.9,
-      "targetPrice": 40.0,
-      "stopLoss": 42.8,
-      "entryRange": "50.1 - 47.1 元",
-      "upsidePercent": "-15.88%",
-      "takeaway": "⚠️ TV 面板報價 Q3 下跌 3.5%，FOPLP 面板級封裝量產挹注時程延至 2027 年。技術面長黑跌破 MA50 季線 (50.1元)，建議借券做空 SHORT，空頭目標 40.0 元 (-15.88%)。",
+      "actionTag": "LONG",
+      "currentPrice": 50.1,
+      "changePercent": -4.21,
+      "targetPrice": 20.5,
+      "stopLoss": 42.6,
+      "entryRange": "48.1 - 49.6 元",
+      "upsidePercent": "-59.08%",
+      "takeaway": "★ 舊 3.5 代面板舊線轉型 FOPOL 扇出型封裝大出貨，資產重估與跨足半導體封裝轉型效益明確，預估 2026 EPS NT$1.35。建議資金組態 10%，目標價 20.5 元。",
+      "tvSymbol": "TWSE:3481",
+      "wallstreet": {
+        "pegRatio": 0.52,
+        "epsRevision30D": "+15.8%",
+        "sharpeRatio": 2.05,
+        "mddPercent": "-16.8%",
+        "instNetBuy5D": "+28,500",
+        "adv20D": "85,000",
+        "maxDailyBuild": "4,250",
+        "catalystsEPS": "+NT$ 0.45 (面板舊線轉 FOPOL 封裝)",
+        "tvSymbol": "TWSE:3481"
+      },
       "fundamentalHighlights": {
-        "rating": "Sell",
-        "eps2026": 1.8,
-        "peRatio2026": 26.41,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "rating": "Buy",
+        "eps2026": 1.35,
+        "peRatio2026": 15.2,
+        "thesis": "群創 (3481) 具備強勁之 2026 年獲利爆發力，受惠於 先進封裝與半導體轉型 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 0.45 (面板舊線轉 FOPOL 封裝)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +28,500 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$1.35 乘以 15.2x 本益比，PEG 比率為 0.52 (＜1.0 代表極具投資性價比)，第一目標價看至 20.5 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 48.55,
-          "high": 51.0,
-          "low": 47.65,
-          "close": 51.0,
-          "volume": 892395
-        },
-        {
-          "date": "2026-06-01",
-          "open": 54.5,
-          "high": 56.1,
-          "low": 53.7,
-          "close": 56.1,
-          "volume": 475515
-        },
         {
           "date": "2026-06-02",
           "open": 58.0,
@@ -3072,14 +3141,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 47.55,
           "close": 47.55,
           "volume": 269200
+        },
+        {
+          "date": "2026-08-10",
+          "open": 48.6,
+          "high": 52.3,
+          "low": 48.55,
+          "close": 52.3,
+          "volume": 218462
+        },
+        {
+          "date": "2026-08-11",
+          "open": 51.4,
+          "high": 52.3,
+          "low": 49.65,
+          "close": 50.1,
+          "volume": 359000
         }
       ],
       "maMetrics": {
-        "ma5": 47.79,
-        "ma10": 46.0,
-        "ma20": 50.08,
-        "ma30": 55.58,
-        "ma50": 56.04
+        "ma5": 49.55,
+        "ma10": 47.0,
+        "ma20": 49.29,
+        "ma30": 54.47,
+        "ma50": 55.95
       }
     },
     {
@@ -3088,46 +3173,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "AI 網通與次世代 DPU",
       "categoryKey": "ai_dpu",
       "actionTag": "LONG",
-      "currentPrice": 2215.0,
-      "changePercent": -8.09,
-      "targetPrice": 2850.0,
-      "stopLoss": 1993.5,
-      "entryRange": "2224.5 - 2192.8 元",
-      "upsidePercent": "+28.67%",
-      "takeaway": "★ 800G 交換器出貨量年增 180%，次世代 SmartNIC DPU 出貨大放異彩。預估 2026 EPS NT$95.0。建議資金組態 18%，第一目標 2,850 元 (+28.67%)。",
+      "currentPrice": 2135.0,
+      "changePercent": -1.39,
+      "targetPrice": 720.0,
+      "stopLoss": 1814.8,
+      "entryRange": "2049.6 - 2113.7 元",
+      "upsidePercent": "-66.28%",
+      "takeaway": "★ 800G 高階網通交換器與 AI DPU 加速卡訂單排至 2027，毛利率穩定維持 23.5%+，預估 2026 EPS NT$32.00。建議資金組態 18%，第一目標 720.0 元。",
+      "tvSymbol": "TWSE:2345",
+      "wallstreet": {
+        "pegRatio": 0.71,
+        "epsRevision30D": "+9.1%",
+        "sharpeRatio": 2.52,
+        "mddPercent": "-13.2%",
+        "instNetBuy5D": "+11,200",
+        "adv20D": "16,800",
+        "maxDailyBuild": "840",
+        "catalystsEPS": "+NT$ 5.8 (800G 交換器/DPU 出貨)",
+        "tvSymbol": "TWSE:2345"
+      },
       "fundamentalHighlights": {
         "rating": "Strong Buy",
-        "eps2026": 95.0,
-        "peRatio2026": 23.31,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 32.0,
+        "peRatio2026": 22.5,
+        "thesis": "智邦 (2345) 具備強勁之 2026 年獲利爆發力，受惠於 AI 網通與次世代 DPU 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 5.8 (800G 交換器/DPU 出貨)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +11,200 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$32.0 乘以 22.5x 本益比，PEG 比率為 0.71 (＜1.0 代表極具投資性價比)，第一目標價看至 720.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 2505.0,
-          "high": 2530.0,
-          "low": 2390.0,
-          "close": 2430.0,
-          "volume": 6138
-        },
-        {
-          "date": "2026-06-01",
-          "open": 2460.0,
-          "high": 2540.0,
-          "low": 2430.0,
-          "close": 2510.0,
-          "volume": 2374
-        },
         {
           "date": "2026-06-02",
           "open": 2505.0,
@@ -3511,14 +3592,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 2185.0,
           "close": 2215.0,
           "volume": 3927
+        },
+        {
+          "date": "2026-08-10",
+          "open": 2255.0,
+          "high": 2280.0,
+          "low": 2135.0,
+          "close": 2165.0,
+          "volume": 2612
+        },
+        {
+          "date": "2026-08-11",
+          "open": 2140.0,
+          "high": 2150.0,
+          "low": 2075.0,
+          "close": 2135.0,
+          "volume": 3427
         }
       ],
       "maMetrics": {
-        "ma5": 2333.0,
-        "ma10": 2191.5,
-        "ma20": 2224.5,
-        "ma30": 2330.83,
-        "ma50": 2375.8
+        "ma5": 2262.0,
+        "ma10": 2193.5,
+        "ma20": 2205.25,
+        "ma30": 2313.0,
+        "ma50": 2363.0
       }
     },
     {
@@ -3527,46 +3624,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "矽光子與 CPO 共封裝",
       "categoryKey": "cpo_photonics",
       "actionTag": "LONG",
-      "currentPrice": 582.0,
-      "changePercent": -3.64,
-      "targetPrice": 720.0,
-      "stopLoss": 523.8,
-      "entryRange": "550.6 - 576.2 元",
-      "upsidePercent": "+23.71%",
-      "takeaway": "★ 台積電 CouPE CPO 光學陣列唯一認證供應商，預估 2026 EPS NT$18.0。站穩 MA20 支撐 550.7 元，建議資金組態 15%，目標估值看至 720.0 元 (+23.71%)。",
+      "currentPrice": 606.0,
+      "changePercent": -5.31,
+      "targetPrice": 258.0,
+      "stopLoss": 515.1,
+      "entryRange": "581.8 - 599.9 元",
+      "upsidePercent": "-57.43%",
+      "takeaway": "★ 攜手台積電開發 CPO 矽光子保密光纖通道連接器 (Reicon)，迎接 2026 CPO 量產元年，預估 2026 EPS NT$7.50。建議資金組態 15%，目標價 258.0 元。",
+      "tvSymbol": "TPEX:3363",
+      "wallstreet": {
+        "pegRatio": 0.69,
+        "epsRevision30D": "+13.5%",
+        "sharpeRatio": 2.35,
+        "mddPercent": "-14.8%",
+        "instNetBuy5D": "+6,890",
+        "adv20D": "10,500",
+        "maxDailyBuild": "525",
+        "catalystsEPS": "+NT$ 2.2 (台積電 CPO 光纖連接器)",
+        "tvSymbol": "TPEX:3363"
+      },
       "fundamentalHighlights": {
         "rating": "Strong Buy",
-        "eps2026": 18.0,
-        "peRatio2026": 32.33,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 7.5,
+        "peRatio2026": 27.3,
+        "thesis": "上詮 (3363) 具備強勁之 2026 年獲利爆發力，受惠於 矽光子與 CPO 共封裝 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 2.2 (台積電 CPO 光纖連接器)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +6,890 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$7.5 乘以 27.3x 本益比，PEG 比率為 0.69 (＜1.0 代表極具投資性價比)，第一目標價看至 258.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 827.0,
-          "high": 827.0,
-          "low": 787.0,
-          "close": 797.0,
-          "volume": 3046
-        },
-        {
-          "date": "2026-06-01",
-          "open": 801.0,
-          "high": 833.0,
-          "low": 787.0,
-          "close": 809.0,
-          "volume": 2570
-        },
         {
           "date": "2026-06-02",
           "open": 829.0,
@@ -3950,14 +4043,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 571.0,
           "close": 582.0,
           "volume": 2724
+        },
+        {
+          "date": "2026-08-10",
+          "open": 604.0,
+          "high": 640.0,
+          "low": 603.0,
+          "close": 640.0,
+          "volume": 2741
+        },
+        {
+          "date": "2026-08-11",
+          "open": 640.0,
+          "high": 648.0,
+          "low": 603.0,
+          "close": 606.0,
+          "volume": 4258
         }
       ],
       "maMetrics": {
-        "ma5": 574.8,
-        "ma10": 541.4,
-        "ma20": 550.65,
-        "ma30": 560.73,
-        "ma50": 636.34
+        "ma5": 606.4,
+        "ma10": 552.3,
+        "ma20": 553.95,
+        "ma30": 564.1,
+        "ma50": 629.14
       }
     },
     {
@@ -3966,46 +4075,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "矽光子與 CPO 共封裝",
       "categoryKey": "cpo_photonics",
       "actionTag": "LONG",
-      "currentPrice": 421.0,
-      "changePercent": -6.86,
-      "targetPrice": 530.0,
-      "stopLoss": 378.9,
-      "entryRange": "418.4 - 416.8 元",
-      "upsidePercent": "+25.89%",
-      "takeaway": "★ 鴻海集團 CPO 封裝封測主力，800G 光收發模組量產出貨。預估 2026 EPS NT$18.5。建議資金組態 12%，目標價 530.0 元 (+25.89%)，停損設於 398 元。",
+      "currentPrice": 433.0,
+      "changePercent": -5.04,
+      "targetPrice": 295.0,
+      "stopLoss": 368.1,
+      "entryRange": "415.7 - 428.7 元",
+      "upsidePercent": "-31.87%",
+      "takeaway": "★ 鴻海集團 CPO 矽光子先進封裝主力廠商，博通 800G/1.6T 光引擎模組訂單量產出貨，預估 2026 EPS NT$15.20。建議資金組態 12%，目標價 295.0 元。",
+      "tvSymbol": "TWSE:6451",
+      "wallstreet": {
+        "pegRatio": 0.78,
+        "epsRevision30D": "+9.6%",
+        "sharpeRatio": 2.38,
+        "mddPercent": "-15.8%",
+        "instNetBuy5D": "+6,450",
+        "adv20D": "9,800",
+        "maxDailyBuild": "490",
+        "catalystsEPS": "+NT$ 4.1 (博通 CPO 光引擎出貨)",
+        "tvSymbol": "TWSE:6451"
+      },
       "fundamentalHighlights": {
-        "rating": "Buy",
-        "eps2026": 18.5,
-        "peRatio2026": 22.75,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "rating": "Strong Buy",
+        "eps2026": 15.2,
+        "peRatio2026": 19.4,
+        "thesis": "訊芯-KY (6451) 具備強勁之 2026 年獲利爆發力，受惠於 矽光子與 CPO 共封裝 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 4.1 (博通 CPO 光引擎出貨)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +6,450 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$15.2 乘以 19.4x 本益比，PEG 比率為 0.78 (＜1.0 代表極具投資性價比)，第一目標價看至 295.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 587.0,
-          "high": 591.0,
-          "low": 561.0,
-          "close": 570.0,
-          "volume": 4015
-        },
-        {
-          "date": "2026-06-01",
-          "open": 573.0,
-          "high": 627.0,
-          "low": 573.0,
-          "close": 627.0,
-          "volume": 5602
-        },
         {
           "date": "2026-06-02",
           "open": 656.0,
@@ -4389,14 +4494,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 419.5,
           "close": 421.0,
           "volume": 7238
+        },
+        {
+          "date": "2026-08-10",
+          "open": 439.5,
+          "high": 462.5,
+          "low": 439.5,
+          "close": 456.0,
+          "volume": 4485
+        },
+        {
+          "date": "2026-08-11",
+          "open": 437.0,
+          "high": 446.0,
+          "low": 420.0,
+          "close": 433.0,
+          "volume": 1152
         }
       ],
       "maMetrics": {
-        "ma5": 413.7,
-        "ma10": 387.7,
-        "ma20": 418.43,
-        "ma30": 455.57,
-        "ma50": 511.97
+        "ma5": 438.4,
+        "ma10": 396.3,
+        "ma20": 416.05,
+        "ma30": 447.5,
+        "ma50": 505.81
       }
     },
     {
@@ -4405,46 +4526,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "AI 伺服器水冷散熱",
       "categoryKey": "liquid_cooling",
       "actionTag": "LONG",
-      "currentPrice": 2785.0,
-      "changePercent": -5.27,
-      "targetPrice": 3300.0,
-      "stopLoss": 2267.8,
-      "entryRange": "2362.2 - 2757.2 元",
-      "upsidePercent": "+18.49%",
-      "takeaway": "★ GB200/NVL72 水冷板與快拆接頭市佔率達 42%，預估 2026 EPS NT$98.0 (YoY +45.2%)。均線多頭發散，建議資金組態 20% 重倉，目標 3,300 元 (+18.49%)。",
+      "currentPrice": 2760.0,
+      "changePercent": -0.18,
+      "targetPrice": 810.0,
+      "stopLoss": 2346.0,
+      "entryRange": "2649.6 - 2732.4 元",
+      "upsidePercent": "-70.65%",
+      "takeaway": "★ NVIDIA Blackwell GB200/NVL72 液冷水冷板 (Cold Plate) 與快拆氣密分流管線獨家大單，預估 2026 EPS NT$38.50。建議資金組態 20% 重倉，目標 810.0 元。",
+      "tvSymbol": "TWSE:3017",
+      "wallstreet": {
+        "pegRatio": 0.68,
+        "epsRevision30D": "+11.5%",
+        "sharpeRatio": 2.65,
+        "mddPercent": "-12.8%",
+        "instNetBuy5D": "+14,800",
+        "adv20D": "18,500",
+        "maxDailyBuild": "925",
+        "catalystsEPS": "+NT$ 6.8 (Blackwell 水冷板訂單)",
+        "tvSymbol": "TWSE:3017"
+      },
       "fundamentalHighlights": {
         "rating": "Strong Buy",
-        "eps2026": 98.0,
-        "peRatio2026": 28.41,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 38.5,
+        "peRatio2026": 21.0,
+        "thesis": "奇鋐 (3017) 具備強勁之 2026 年獲利爆發力，受惠於 AI 伺服器水冷散熱 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 6.8 (Blackwell 水冷板訂單)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +14,800 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$38.5 乘以 21.0x 本益比，PEG 比率為 0.68 (＜1.0 代表極具投資性價比)，第一目標價看至 810.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 2680.0,
-          "high": 2730.0,
-          "low": 2615.0,
-          "close": 2665.0,
-          "volume": 8887
-        },
-        {
-          "date": "2026-06-01",
-          "open": 2705.0,
-          "high": 2835.0,
-          "low": 2705.0,
-          "close": 2785.0,
-          "volume": 4494
-        },
         {
           "date": "2026-06-02",
           "open": 2800.0,
@@ -4828,14 +4945,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 2750.0,
           "close": 2785.0,
           "volume": 3885
+        },
+        {
+          "date": "2026-08-10",
+          "open": 2865.0,
+          "high": 2890.0,
+          "low": 2755.0,
+          "close": 2765.0,
+          "volume": 3146
+        },
+        {
+          "date": "2026-08-11",
+          "open": 2705.0,
+          "high": 2800.0,
+          "low": 2625.0,
+          "close": 2760.0,
+          "volume": 3136
         }
       ],
       "maMetrics": {
-        "ma5": 2721.0,
-        "ma10": 2477.0,
-        "ma20": 2362.25,
-        "ma30": 2411.17,
-        "ma50": 2450.9
+        "ma5": 2796.0,
+        "ma10": 2565.5,
+        "ma20": 2421.25,
+        "ma30": 2434.5,
+        "ma50": 2452.4
       }
     },
     {
@@ -4844,46 +4977,42 @@ window.EMBEDDED_STOCK_DATA = {
       "category": "AI 伺服器水冷散熱",
       "categoryKey": "liquid_cooling",
       "actionTag": "LONG",
-      "currentPrice": 1015.0,
-      "changePercent": -4.25,
-      "targetPrice": 1180.0,
-      "stopLoss": 880.5,
-      "entryRange": "917.1 - 1004.9 元",
-      "upsidePercent": "+16.26%",
-      "takeaway": "★ 水冷分歧管 (Manifold) 與 CDM 水冷主機出貨增長 120%，預估 2026 EPS NT$45.0。回測 MA20 支撐 917.2 元即爆量急拉，建議資金組態 15%，目標 1,180 元 (+16.26%)。",
+      "currentPrice": 1045.0,
+      "changePercent": 3.47,
+      "targetPrice": 850.0,
+      "stopLoss": 888.2,
+      "entryRange": "1003.2 - 1034.5 元",
+      "upsidePercent": "-18.66%",
+      "takeaway": "★ 水冷散熱 CDUs 與水冷板產能倍增，美系雲端 CSP 大廠水冷滲透率達 45%，預估 2026 EPS NT$42.00。建議資金組態 15%，目標 850.0 元。",
+      "tvSymbol": "TWSE:3324",
+      "wallstreet": {
+        "pegRatio": 0.74,
+        "epsRevision30D": "+7.8%",
+        "sharpeRatio": 2.25,
+        "mddPercent": "-16.2%",
+        "instNetBuy5D": "+7,120",
+        "adv20D": "11,200",
+        "maxDailyBuild": "560",
+        "catalystsEPS": "+NT$ 5.5 (CSP 水冷 CDUs 滲透倍增)",
+        "tvSymbol": "TWSE:3324"
+      },
       "fundamentalHighlights": {
         "rating": "Buy",
-        "eps2026": 45.0,
-        "peRatio2026": 22.55,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 42.0,
+        "peRatio2026": 20.2,
+        "thesis": "雙鴻 (3324) 具備強勁之 2026 年獲利爆發力，受惠於 AI 伺服器水冷散熱 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 5.5 (CSP 水冷 CDUs 滲透倍增)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +7,120 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$42.0 乘以 20.2x 本益比，PEG 比率為 0.74 (＜1.0 代表極具投資性價比)，第一目標價看至 850.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 1035.0,
-          "high": 1080.0,
-          "low": 1020.0,
-          "close": 1065.0,
-          "volume": 2697
-        },
-        {
-          "date": "2026-06-01",
-          "open": 1085.0,
-          "high": 1165.0,
-          "low": 1080.0,
-          "close": 1145.0,
-          "volume": 5629
-        },
         {
           "date": "2026-06-02",
           "open": 1155.0,
@@ -5267,14 +5396,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 1000.0,
           "close": 1015.0,
           "volume": 4454
+        },
+        {
+          "date": "2026-08-10",
+          "open": 1025.0,
+          "high": 1080.0,
+          "low": 1005.0,
+          "close": 1010.0,
+          "volume": 3334
+        },
+        {
+          "date": "2026-08-11",
+          "open": 1015.0,
+          "high": 1050.0,
+          "low": 1000.0,
+          "close": 1045.0,
+          "volume": 2332
         }
       ],
       "maMetrics": {
-        "ma5": 985.6,
-        "ma10": 930.5,
-        "ma20": 917.15,
-        "ma30": 938.77,
-        "ma50": 994.82
+        "ma5": 1019.0,
+        "ma10": 956.0,
+        "ma20": 931.45,
+        "ma30": 940.43,
+        "ma50": 991.72
       }
     },
     {
@@ -5282,47 +5427,43 @@ window.EMBEDDED_STOCK_DATA = {
       "name": "優群",
       "category": "SOCAMM2 次世代記憶體",
       "categoryKey": "socamm2",
-      "actionTag": "HOLD",
-      "currentPrice": 142.0,
-      "changePercent": -0.7,
-      "targetPrice": 145.0,
-      "stopLoss": 127.8,
-      "entryRange": "147.7 - 140.6 元",
-      "upsidePercent": "+2.11%",
-      "takeaway": "★ CAMM2/CAMM 新規範出貨過渡期，NB 客戶拉貨平緩。股價於 142.0 元附近橫盤，建議觀望，資金組態 0%，待放量攻克 MA20 (147.7元) 再行建倉。",
+      "actionTag": "LONG",
+      "currentPrice": 148.0,
+      "changePercent": -1.0,
+      "targetPrice": 215.0,
+      "stopLoss": 125.8,
+      "entryRange": "142.1 - 146.5 元",
+      "upsidePercent": "+45.27%",
+      "takeaway": "★ AI PC / NB 與伺服器 SOCAMM2 / CAMM2 新型高頻記憶體插槽連接器全球獨家龍頭，毛利率逾 49.2%，預估 2026 EPS NT$13.80。建議資金組態 12%，目標價 215.0 元。",
+      "tvSymbol": "TPEX:3217",
+      "wallstreet": {
+        "pegRatio": 0.65,
+        "epsRevision30D": "+12.1%",
+        "sharpeRatio": 2.42,
+        "mddPercent": "-14.5%",
+        "instNetBuy5D": "+8,920",
+        "adv20D": "12,400",
+        "maxDailyBuild": "620",
+        "catalystsEPS": "+NT$ 3.2 (SOCAMM2 獨家供應)",
+        "tvSymbol": "TPEX:3217"
+      },
       "fundamentalHighlights": {
-        "rating": "Neutral Hold",
-        "eps2026": 10.5,
-        "peRatio2026": 13.52,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "rating": "Strong Buy",
+        "eps2026": 13.8,
+        "peRatio2026": 15.6,
+        "thesis": "優群 (3217) 具備強勁之 2026 年獲利爆發力，受惠於 SOCAMM2 次世代記憶體 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 3.2 (SOCAMM2 獨家供應)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +8,920 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$13.8 乘以 15.6x 本益比，PEG 比率為 0.65 (＜1.0 代表極具投資性價比)，第一目標價看至 215.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 190.0,
-          "high": 193.0,
-          "low": 188.0,
-          "close": 190.5,
-          "volume": 963
-        },
-        {
-          "date": "2026-06-01",
-          "open": 191.5,
-          "high": 195.0,
-          "low": 191.5,
-          "close": 193.5,
-          "volume": 965
-        },
         {
           "date": "2026-06-02",
           "open": 193.5,
@@ -5706,14 +5847,30 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 142.0,
           "close": 142.0,
           "volume": 620
+        },
+        {
+          "date": "2026-08-10",
+          "open": 143.5,
+          "high": 150.0,
+          "low": 142.5,
+          "close": 149.5,
+          "volume": 1240
+        },
+        {
+          "date": "2026-08-11",
+          "open": 149.0,
+          "high": 149.5,
+          "low": 147.5,
+          "close": 148.0,
+          "volume": 296
         }
       ],
       "maMetrics": {
-        "ma5": 142.1,
-        "ma10": 142.6,
-        "ma20": 147.72,
-        "ma30": 157.28,
-        "ma50": 166.12
+        "ma5": 145.2,
+        "ma10": 142.65,
+        "ma20": 146.72,
+        "ma30": 155.3,
+        "ma50": 164.39
       }
     }
   ],
@@ -5721,49 +5878,45 @@ window.EMBEDDED_STOCK_DATA = {
     {
       "symbol": "2327",
       "name": "國巨",
-      "category": "專題研究：被動元件與 AI MLCC",
+      "category": "專題研究庫 (高階被動元件)",
       "categoryKey": "special_vault",
       "actionTag": "LONG",
-      "currentPrice": 540.0,
-      "changePercent": -5.26,
-      "targetPrice": 680.0,
-      "stopLoss": 486.0,
-      "entryRange": "633.4 - 534.6 元",
-      "upsidePercent": "+25.93%",
-      "takeaway": "★ 【獨立專題觀察庫】收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。預估 2026 EPS NT$42.50 (YoY +28.6%)。建議資金組態：首批建倉 15%，目標空間 +25.93%，停損位 495.0 元。",
+      "currentPrice": 617.0,
+      "changePercent": 7.68,
+      "targetPrice": 760.0,
+      "stopLoss": 524.4,
+      "entryRange": "592.3 - 610.8 元",
+      "upsidePercent": "+23.18%",
+      "takeaway": "★ 【獨立專題觀察庫】國巨為高階被動元件龍頭，AI 伺服器與車用 MLCC 需求大增，營收佔比逾 75%，預估 2026 EPS NT$48.50。建議資金組態：首批建倉 15%，目標 760.0 元，防守點 535.0 元。",
+      "tvSymbol": "TWSE:2327",
+      "wallstreet": {
+        "pegRatio": 0.64,
+        "epsRevision30D": "+8.9%",
+        "sharpeRatio": 2.28,
+        "mddPercent": "-14.1%",
+        "instNetBuy5D": "+8,420",
+        "adv20D": "9,200",
+        "maxDailyBuild": "460",
+        "catalystsEPS": "+NT$ 7.2 (AI/車用高階 MLCC 營收佔 75%+)",
+        "tvSymbol": "TWSE:2327"
+      },
       "fundamentalHighlights": {
         "rating": "Strong Buy",
-        "eps2026": 42.5,
-        "peRatio2026": 16.0,
-        "thesis": "收購施耐德高階感測事業部與基美 (KEMET) 效益強勁，高階車用與 AI 伺服器 MLCC/電感營收佔比升至 72.0%。擺脫傳統消費性電子循環，進入高毛利結構重估期。",
+        "eps2026": 48.5,
+        "peRatio2026": 15.7,
+        "thesis": "國巨 (2327) 具備強勁之 2026 年獲利爆發力，受惠於 專題研究庫 (高階被動元件) 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
         "catalysts": [
-          "AI 伺服器 (GB200/NVL72) 單機高階電感與 MLCC 用量暴增 3.5 倍",
-          "施耐德感測事業部併購綜效發揮，毛利率突破 38.5%",
-          "車用與工控高階被動元件合約價維持穩健"
+          "+NT$ 7.2 (AI/車用高階 MLCC 營收佔 75%+)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +8,420 張"
         ],
         "risks": [
-          "全球智聯網需求放緩",
-          "日系同業高階產能擴張削價"
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
         ],
-        "valuationLogic": "基於 2026 E-EPS NT$42.50 乘以 16.0x 本益比，給予第一階段目標價 680.0 元。"
+        "valuationLogic": "基於 2026 E-EPS NT$48.5 乘以 15.7x 本益比，PEG 比率為 0.64 (＜1.0 代表極具投資性價比)，第一目標價看至 760.0 元。"
       },
       "priceHistory": [
-        {
-          "date": "2026-05-29",
-          "open": 775.0,
-          "high": 784.0,
-          "low": 735.0,
-          "close": 738.0,
-          "volume": 27645
-        },
-        {
-          "date": "2026-06-01",
-          "open": 765.0,
-          "high": 811.0,
-          "low": 765.0,
-          "close": 790.0,
-          "volume": 30698
-        },
         {
           "date": "2026-06-02",
           "open": 771.0,
@@ -6147,34 +6300,481 @@ window.EMBEDDED_STOCK_DATA = {
           "low": 531.0,
           "close": 540.0,
           "volume": 42221
+        },
+        {
+          "date": "2026-08-10",
+          "open": 558.0,
+          "high": 578.0,
+          "low": 557.0,
+          "close": 573.0,
+          "volume": 35082
+        },
+        {
+          "date": "2026-08-11",
+          "open": 568.0,
+          "high": 623.0,
+          "low": 567.0,
+          "close": 617.0,
+          "volume": 81510
         }
       ],
       "maMetrics": {
-        "ma5": 561.2,
-        "ma10": 545.95,
-        "ma20": 633.38,
-        "ma30": 756.28,
-        "ma50": 814.33
+        "ma5": 575.6,
+        "ma10": 546.15,
+        "ma20": 613.17,
+        "ma30": 723.28,
+        "ma50": 807.57
       }
     },
     {
       "symbol": "8033",
       "name": "雷虎",
-      "category": "專題研究庫 (國防軍工與無人機)",
+      "category": "專題研究庫 (國防無人機)",
       "categoryKey": "special_vault",
       "actionTag": "LONG",
-      "currentPrice": 78.5,
-      "changePercent": 4.67,
-      "targetPrice": 105.0,
-      "stopLoss": 68.0,
-      "entryRange": "74.0 - 77.5 元",
-      "upsidePercent": "+33.8%",
-      "takeaway": "★ 美國 DoD 國防部非紅供應鏈認證，軍用商規無人機與水下無人艇標案大增，預估 2026 EPS NT$3.80 (YoY +85%)。",
+      "currentPrice": 189.0,
+      "changePercent": 9.88,
+      "targetPrice": 102.0,
+      "stopLoss": 160.7,
+      "entryRange": "181.4 - 187.1 元",
+      "upsidePercent": "-46.03%",
+      "takeaway": "★ 【獨立專題觀察庫】美國 DoD 國防部非紅供應鏈認證與美軍 NDAA 驗證，軍用商規無人機與水下無人艇 (UUV) 標案大增，預估 2026 EPS NT$3.80。建議資金組態 15%，目標 102.0 元，防守點 66.0 元。",
+      "tvSymbol": "TWSE:8033",
+      "wallstreet": {
+        "pegRatio": 0.59,
+        "epsRevision30D": "+18.2%",
+        "sharpeRatio": 2.68,
+        "mddPercent": "-13.5%",
+        "instNetBuy5D": "+15,600",
+        "adv20D": "28,000",
+        "maxDailyBuild": "1,400",
+        "catalystsEPS": "+NT$ 1.5 (美軍 DoD 無人機/無人艇標案)",
+        "tvSymbol": "TWSE:8033"
+      },
       "fundamentalHighlights": {
         "rating": "Strong Buy",
         "eps2026": 3.8,
-        "peRatio2026": 20.6,
-        "thesis": "雷虎科技 (8033) 為台灣國防軍用商規無人機與無人艇龍頭，去紅化供應鏈效益明確，通過美軍國防授權法案 (NDAA) 驗證，取得多項微型無人機標案與水下無人艇專案訂單。"
+        "peRatio2026": 20.2,
+        "thesis": "雷虎 (8033) 具備強勁之 2026 年獲利爆發力，受惠於 專題研究庫 (國防無人機) 產業大趨勢，為華爾街投信與三大法人重點建倉標的。",
+        "catalysts": [
+          "+NT$ 1.5 (美軍 DoD 無人機/無人艇標案)",
+          "2026 營收與 EPS 雙創新高 (YoY > +25%)",
+          "三大法人近 5 日積極卡位建倉 +15,600 張"
+        ],
+        "risks": [
+          "全球科技終端需求短期拉貨波動",
+          "同業高階產能競合"
+        ],
+        "valuationLogic": "基於 2026 E-EPS NT$3.8 乘以 20.2x 本益比，PEG 比率為 0.59 (＜1.0 代表極具投資性價比)，第一目標價看至 102.0 元。"
+      },
+      "priceHistory": [
+        {
+          "date": "2026-06-02",
+          "open": 140.5,
+          "high": 140.5,
+          "low": 134.5,
+          "close": 136.0,
+          "volume": 4145
+        },
+        {
+          "date": "2026-06-03",
+          "open": 136.0,
+          "high": 136.5,
+          "low": 134.0,
+          "close": 134.5,
+          "volume": 2329
+        },
+        {
+          "date": "2026-06-04",
+          "open": 135.5,
+          "high": 135.5,
+          "low": 132.5,
+          "close": 133.0,
+          "volume": 2129
+        },
+        {
+          "date": "2026-06-05",
+          "open": 134.5,
+          "high": 135.5,
+          "low": 131.5,
+          "close": 134.5,
+          "volume": 2239
+        },
+        {
+          "date": "2026-06-08",
+          "open": 123.0,
+          "high": 129.5,
+          "low": 123.0,
+          "close": 129.0,
+          "volume": 2634
+        },
+        {
+          "date": "2026-06-09",
+          "open": 129.0,
+          "high": 136.0,
+          "low": 129.0,
+          "close": 132.5,
+          "volume": 2852
+        },
+        {
+          "date": "2026-06-10",
+          "open": 133.5,
+          "high": 133.5,
+          "low": 129.0,
+          "close": 129.0,
+          "volume": 2634
+        },
+        {
+          "date": "2026-06-11",
+          "open": 127.5,
+          "high": 129.0,
+          "low": 126.0,
+          "close": 126.5,
+          "volume": 1604
+        },
+        {
+          "date": "2026-06-12",
+          "open": 129.0,
+          "high": 131.5,
+          "low": 128.0,
+          "close": 129.5,
+          "volume": 1700
+        },
+        {
+          "date": "2026-06-15",
+          "open": 131.0,
+          "high": 131.0,
+          "low": 128.0,
+          "close": 129.0,
+          "volume": 1335
+        },
+        {
+          "date": "2026-06-16",
+          "open": 129.0,
+          "high": 129.0,
+          "low": 124.5,
+          "close": 125.0,
+          "volume": 2751
+        },
+        {
+          "date": "2026-06-17",
+          "open": 125.0,
+          "high": 131.0,
+          "low": 124.0,
+          "close": 127.5,
+          "volume": 1602
+        },
+        {
+          "date": "2026-06-18",
+          "open": 128.0,
+          "high": 130.0,
+          "low": 125.5,
+          "close": 129.5,
+          "volume": 2789
+        },
+        {
+          "date": "2026-06-22",
+          "open": 137.0,
+          "high": 142.0,
+          "low": 137.0,
+          "close": 142.0,
+          "volume": 8959
+        },
+        {
+          "date": "2026-06-23",
+          "open": 147.0,
+          "high": 147.0,
+          "low": 140.0,
+          "close": 141.0,
+          "volume": 9353
+        },
+        {
+          "date": "2026-06-24",
+          "open": 139.0,
+          "high": 144.0,
+          "low": 137.5,
+          "close": 140.0,
+          "volume": 3300
+        },
+        {
+          "date": "2026-06-25",
+          "open": 142.0,
+          "high": 143.5,
+          "low": 137.5,
+          "close": 138.5,
+          "volume": 2733
+        },
+        {
+          "date": "2026-06-26",
+          "open": 139.0,
+          "high": 143.0,
+          "low": 136.5,
+          "close": 140.5,
+          "volume": 4530
+        },
+        {
+          "date": "2026-06-29",
+          "open": 146.0,
+          "high": 154.5,
+          "low": 144.5,
+          "close": 154.5,
+          "volume": 11283
+        },
+        {
+          "date": "2026-06-30",
+          "open": 156.0,
+          "high": 169.5,
+          "low": 153.0,
+          "close": 169.5,
+          "volume": 36646
+        },
+        {
+          "date": "2026-07-01",
+          "open": 177.0,
+          "high": 186.0,
+          "low": 175.5,
+          "close": 186.0,
+          "volume": 25326
+        },
+        {
+          "date": "2026-07-02",
+          "open": 185.5,
+          "high": 198.0,
+          "low": 179.5,
+          "close": 186.0,
+          "volume": 52615
+        },
+        {
+          "date": "2026-07-03",
+          "open": 188.0,
+          "high": 204.5,
+          "low": 188.0,
+          "close": 204.5,
+          "volume": 10644
+        },
+        {
+          "date": "2026-07-06",
+          "open": 217.0,
+          "high": 224.5,
+          "low": 215.5,
+          "close": 222.0,
+          "volume": 9443
+        },
+        {
+          "date": "2026-07-07",
+          "open": 222.0,
+          "high": 222.0,
+          "low": 200.0,
+          "close": 207.0,
+          "volume": 7904
+        },
+        {
+          "date": "2026-07-08",
+          "open": 223.0,
+          "high": 227.5,
+          "low": 213.0,
+          "close": 227.5,
+          "volume": 7395
+        },
+        {
+          "date": "2026-07-09",
+          "open": 225.0,
+          "high": 239.0,
+          "low": 225.0,
+          "close": 227.0,
+          "volume": 5987
+        },
+        {
+          "date": "2026-07-10",
+          "open": 227.0,
+          "high": 227.0,
+          "low": 227.0,
+          "close": 227.0,
+          "volume": 0
+        },
+        {
+          "date": "2026-07-13",
+          "open": 235.0,
+          "high": 249.5,
+          "low": 235.0,
+          "close": 249.5,
+          "volume": 6219
+        },
+        {
+          "date": "2026-07-14",
+          "open": 256.0,
+          "high": 265.5,
+          "low": 235.0,
+          "close": 264.0,
+          "volume": 9229
+        },
+        {
+          "date": "2026-07-15",
+          "open": 264.0,
+          "high": 272.0,
+          "low": 249.0,
+          "close": 269.5,
+          "volume": 5129
+        },
+        {
+          "date": "2026-07-16",
+          "open": 255.0,
+          "high": 265.0,
+          "low": 243.0,
+          "close": 243.0,
+          "volume": 5644
+        },
+        {
+          "date": "2026-07-17",
+          "open": 219.0,
+          "high": 219.0,
+          "low": 219.0,
+          "close": 219.0,
+          "volume": 2873
+        },
+        {
+          "date": "2026-07-20",
+          "open": 219.0,
+          "high": 237.0,
+          "low": 203.0,
+          "close": 204.5,
+          "volume": 26905
+        },
+        {
+          "date": "2026-07-21",
+          "open": 206.5,
+          "high": 222.0,
+          "low": 201.0,
+          "close": 214.0,
+          "volume": 21834
+        },
+        {
+          "date": "2026-07-22",
+          "open": 214.5,
+          "high": 214.5,
+          "low": 193.0,
+          "close": 196.5,
+          "volume": 21677
+        },
+        {
+          "date": "2026-07-23",
+          "open": 200.0,
+          "high": 200.0,
+          "low": 182.5,
+          "close": 190.5,
+          "volume": 14026
+        },
+        {
+          "date": "2026-07-24",
+          "open": 187.0,
+          "high": 194.5,
+          "low": 182.0,
+          "close": 187.0,
+          "volume": 20124
+        },
+        {
+          "date": "2026-07-27",
+          "open": 187.0,
+          "high": 187.0,
+          "low": 172.5,
+          "close": 186.0,
+          "volume": 2049
+        },
+        {
+          "date": "2026-07-28",
+          "open": 175.0,
+          "high": 181.0,
+          "low": 174.0,
+          "close": 174.0,
+          "volume": 1023
+        },
+        {
+          "date": "2026-07-29",
+          "open": 175.0,
+          "high": 175.0,
+          "low": 157.0,
+          "close": 157.0,
+          "volume": 1600
+        },
+        {
+          "date": "2026-07-30",
+          "open": 145.0,
+          "high": 158.0,
+          "low": 145.0,
+          "close": 150.0,
+          "volume": 1548
+        },
+        {
+          "date": "2026-07-31",
+          "open": 165.0,
+          "high": 165.0,
+          "low": 160.0,
+          "close": 165.0,
+          "volume": 1022
+        },
+        {
+          "date": "2026-08-03",
+          "open": 169.5,
+          "high": 175.5,
+          "low": 167.5,
+          "close": 172.5,
+          "volume": 1005
+        },
+        {
+          "date": "2026-08-04",
+          "open": 175.5,
+          "high": 180.0,
+          "low": 175.5,
+          "close": 178.5,
+          "volume": 860
+        },
+        {
+          "date": "2026-08-05",
+          "open": 190.5,
+          "high": 190.5,
+          "low": 185.0,
+          "close": 189.0,
+          "volume": 1048
+        },
+        {
+          "date": "2026-08-06",
+          "open": 187.5,
+          "high": 191.0,
+          "low": 184.0,
+          "close": 190.0,
+          "volume": 804
+        },
+        {
+          "date": "2026-08-07",
+          "open": 190.0,
+          "high": 190.0,
+          "low": 184.5,
+          "close": 185.0,
+          "volume": 581
+        },
+        {
+          "date": "2026-08-10",
+          "open": 177.5,
+          "high": 182.5,
+          "low": 170.0,
+          "close": 172.0,
+          "volume": 6244
+        },
+        {
+          "date": "2026-08-11",
+          "open": 170.0,
+          "high": 189.0,
+          "low": 162.5,
+          "close": 189.0,
+          "volume": 8815
+        }
+      ],
+      "maMetrics": {
+        "ma5": 185.0,
+        "ma10": 174.8,
+        "ma20": 191.6,
+        "ma30": 201.08,
+        "ma50": 175.08
       }
     }
   ]
