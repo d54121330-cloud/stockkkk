@@ -751,14 +751,14 @@ body {
   </div>
 
   <footer class="terminal-footer">
-    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v9.0 Bulletproof</p>
+    <p> Taiwan Stock Institutional Investor Research Terminal — Apple Cupertino Design v10.0 Bulletproof</p>
   </footer>
 
   <!-- Complete Inlined Fail-Safe Dataset, DataLoader, ChartsManager & AppModule -->
   <script>
-    // 1. Embedded Stock Data (14 Stocks Complete Dataset)
+    // 1. Embedded Stock Data (13 Default + 2 Vault Complete Dataset)
     window.EMBEDDED_STOCK_DATA = {
-      "metadata": { "generatedAt": "2026-08-11 15:15:00", "systemTitle": "Taiwan Stock Institutional Terminal" },
+      "metadata": { "generatedAt": "2026-08-11 15:30:00", "systemTitle": "Taiwan Stock Institutional Terminal" },
       "recommendations": [
         { "symbol": "2330", "name": "台積電", "category": "先進封裝與半導體轉型", "categoryKey": "adv_pkg", "actionTag": "LONG", "currentPrice": 2405.0, "changePercent": 3.66, "targetPrice": 2800.0, "stopLoss": 2180.0, "entryRange": "2,330 - 2,370 元", "upsidePercent": "+16.4%", "takeaway": "★ A16/N2 先進製程與 CoWoS 產能預約至 2027 年，代工價調漲，預估 2026 EPS NT$70.0。", "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 70.0, "peRatio2026": 34.3 } },
         { "symbol": "3217", "name": "優群", "category": "SOCAMM2 次世代記憶體", "categoryKey": "socamm2", "actionTag": "LONG", "currentPrice": 143.5, "changePercent": 1.77, "targetPrice": 185.0, "stopLoss": 122.0, "entryRange": "136.0 - 141.0 元", "upsidePercent": "+28.9%", "takeaway": "★ AI PC / NB 與伺服器 SOCAMM2 / CAMM2 新型高頻記憶體插槽連接器全球龍頭，毛利率逾 48%，預估 2026 EPS NT$12.50。", "fundamentalHighlights": { "rating": "Strong Buy", "eps2026": 12.5, "peRatio2026": 14.8 } },
@@ -780,7 +780,7 @@ body {
       ]
     };
 
-    // 2. Data Loader Engine
+    // 2. Data Loader Engine with Property Normalization
     window.DataLoader = (function () {
       'use strict';
       async function loadAllData() {
@@ -791,7 +791,10 @@ body {
       }
 
       function processStock(s) {
-        if (!s.priceHistory) s.priceHistory = generatePriceHistory(s.currentPrice);
+        const p = Number(s.price || s.currentPrice || 100);
+        s.price = p;
+        s.currentPrice = p;
+        if (!s.priceHistory) s.priceHistory = generatePriceHistory(p);
         s.maMetrics = calculateMAMetrics(s.priceHistory);
         return s;
       }
@@ -975,12 +978,13 @@ body {
         tbody.innerHTML = filteredStocks.map(s => {
           const isUp = s.changePercent >= 0;
           const isSelected = activeStock && activeStock.symbol === s.symbol ? 'selected-row' : '';
+          const displayPrice = Number(s.price || s.currentPrice || 0).toFixed(1);
           return `
             <tr class="master-table-row ${isSelected}" data-symbol="${s.symbol}">
               <td class="col-stock"><span class="symbol-code">${s.symbol}</span><span class="stock-title-name">${s.name}</span></td>
               <td><span class="category-chip">${s.category}</span></td>
-              <td class="mono font-bold"><span style="font-size:14px;">${s.price.toFixed(1)}</span> <span class="${isUp ? 'text-green' : 'text-rose'} text-xs">(${isUp ? '+' : ''}${s.changePercent.toFixed(2)}%)</span></td>
-              <td><span class="tag-action ${s.actionTag.toLowerCase()}">${s.actionTag}</span></td>
+              <td class="mono font-bold"><span style="font-size:14px;">${displayPrice}</span> <span class="${isUp ? 'text-green' : 'text-rose'} text-xs">(${isUp ? '+' : ''}${s.changePercent.toFixed(2)}%)</span></td>
+              <td><span class="tag-action ${(s.actionTag || 'LONG').toLowerCase()}">${s.actionTag}</span></td>
               <td class="mono text-secondary">${s.entryRange}</td>
               <td class="mono"><span class="text-green font-bold" style="font-size:14px;">${s.targetPrice} 元</span> <span class="upside-pill">${s.upsidePercent}</span></td>
               <td class="mono text-rose font-bold">${s.stopLoss} 元</td>
@@ -1015,6 +1019,7 @@ body {
         const cardDom = document.getElementById('advisor-focus-card');
         if (cardDom) {
           const ma = stock.maMetrics || {};
+          const displayPrice = Number(stock.price || stock.currentPrice || 0).toFixed(1);
           cardDom.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--border-subtle); padding-bottom:10px;">
               <div>
@@ -1022,13 +1027,13 @@ body {
                 <span style="font-size:16px; font-weight:700; margin-left:6px;">${stock.name}</span>
                 <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">${stock.category}</div>
               </div>
-              <span class="tag-action ${stock.actionTag.toLowerCase()}">${stock.actionTag}</span>
+              <span class="tag-action ${(stock.actionTag || 'LONG').toLowerCase()}">${stock.actionTag}</span>
             </div>
 
             <div class="price-target-widget">
               <div class="pt-labels">
                 <div><span class="text-xs text-muted">停損價</span><div class="mono text-rose font-bold">${stock.stopLoss} 元</div></div>
-                <div><span class="text-xs text-muted">目前股價</span><div class="mono text-primary font-bold">${stock.price.toFixed(1)} 元</div></div>
+                <div><span class="text-xs text-muted">目前股價</span><div class="mono text-primary font-bold">${displayPrice} 元</div></div>
                 <div><span class="text-xs text-muted">第一目標價</span><div class="mono text-green font-bold">${stock.targetPrice} 元</div></div>
               </div>
               <div class="pt-bar-track"><div class="pt-bar-fill" style="width: 75%;"></div></div>
@@ -1196,7 +1201,7 @@ body {
           container.innerHTML = `
             <div style="background:var(--bg-subtle); padding:18px; border-radius:12px; border-left:4px solid var(--apple-blue); margin-bottom:18px;">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="tag-action ${s.actionTag.toLowerCase()}" style="font-size:13px; padding:4px 14px;">${s.actionTag} 決策</span>
+                <span class="tag-action ${(s.actionTag || 'LONG').toLowerCase()}" style="font-size:13px; padding:4px 14px;">${s.actionTag} 決策</span>
                 <span class="mono text-muted text-xs">資深策略分析師研判</span>
               </div>
               <p style="margin-top:12px; font-size:14px; line-height:1.7; color:var(--text-primary); font-weight:500;">${s.takeaway}</p>
